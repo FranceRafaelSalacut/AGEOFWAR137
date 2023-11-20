@@ -5,5 +5,8 @@ To run client.py:
 2. do `pip install pygame`
 3. run client.py file
 
-check out https://www.pygame.org/docs/ when you have the time.
+check out the links below when you have the time.
+https://www.datacamp.com/tutorial/a-complete-guide-to-socket-programming-in-python
+https://www.pygame.org/docs/
+
 P.S. remember to add the `__pycache__` directory to your .gitignore
