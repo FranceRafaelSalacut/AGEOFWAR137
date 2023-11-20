@@ -1,0 +1,2 @@
+class baseBase():
+    pass
