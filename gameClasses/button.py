@@ -14,7 +14,7 @@ class Button():
         self.rect = pygame.Rect(self.position, self.size)
         self.clicked = False
 
-    def draw(self, screen,  ):
+    def draw(self, screen):
         on_top = False
         #Drawing the colored rectangle on the screen
         pygame.draw.rect(screen, self.color, self.rect )
