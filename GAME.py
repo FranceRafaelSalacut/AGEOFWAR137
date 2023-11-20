@@ -1,11 +1,9 @@
 import pygame
 from gameClasses.button import *
 from src.CONSTANTS import *
+import src.startmenu as START_MENU
 
 pygame.init()
-
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('AGE_OF_WAR')
 
 run = True
 
@@ -16,11 +14,11 @@ client = Button("Client", Light_Grey, 50, 150, 100, 50)
 
 
 while run:
-    screen.fill((202, 228, 241))    
+    current_screen = START_MENU.screen.returnScreen()
 
     #See Button.py for documentation
-    host.draw(screen)
-    client.draw(screen)
+    host.draw(current_screen)
+    client.draw(current_screen)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
