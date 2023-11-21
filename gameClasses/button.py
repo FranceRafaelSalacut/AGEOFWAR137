@@ -15,6 +15,7 @@ class Button():
         self.clicked = False
 
     def draw(self, screen):
+        action = False
         #Drawing the colored rectangle on the screen
         pygame.draw.rect(screen, self.color, self.rect )
 
@@ -28,7 +29,9 @@ class Button():
         if self.rect.collidepoint(mouse): 
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
                 self.clicked = True
-                print("Here on " + str(self.text))
-
+                print("clicked " + self.text)
+                action = True
         if pygame.mouse.get_pressed()[0] == 0:
             self.clicked = False
+        
+        return action

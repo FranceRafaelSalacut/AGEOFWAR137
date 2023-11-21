@@ -1,10 +1,23 @@
 import pygame
 from src.CONSTANTS import *
 from gameClasses.screen import *
+from gameClasses.button import *
 pygame.init
 
+# Initializing Buttons
+# parameters are text, color, pos_x, pos_y, height, width
+host = Button("Host", Light_Grey, 50, 50, 100, 50)
+client = Button("Client", Light_Grey, 50, 150, 100, 50)
 
-screen = Screen(SCREEN_HEIGHT, SCREEN_WIDTH, Baby_Blue)
-screen.createScreen()
-surface = screen.returnScreen()
-print(surface)
+class START_MENU():
+    def __init__(self) -> None:
+        pass
+
+    def screen_to_display(self):
+        # Initializing Screen
+        # parameters are height, width, color
+        return Screen(SCREEN_HEIGHT, SCREEN_WIDTH, Baby_Blue)
+    
+    def display(self):
+        
+        return [host, client]

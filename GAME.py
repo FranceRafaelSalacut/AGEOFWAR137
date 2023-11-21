@@ -1,28 +1,33 @@
 import pygame
 from gameClasses.button import *
 from src.CONSTANTS import *
-import src.startmenu as START_MENU
+from src.startmenu import *
 
 pygame.init()
 
+# screen = Screen(SCREEN_HEIGHT, SCREEN_WIDTH, Baby_Blue)
+# surface = screen.returnScreen()
+
 run = True
 
-# Initializing Buttons
-# parameters are text, color, pos_x, pos_y, height, width
-host = Button("Host", Light_Grey, 50, 50, 100, 50)
-client = Button("Client", Light_Grey, 50, 150, 100, 50)
+STATE = START_MENU()
 
+screen_updated = False
 
 while run:
-    current_screen = START_MENU.screen.returnScreen()
 
-    #See Button.py for documentation
-    host.draw(current_screen)
-    client.draw(current_screen)
+    if not screen_updated:
+        current_screen = STATE.screen_to_display()
+        surface = current_screen.returnScreen()
+        screen_updated = True
 
+    for x in STATE.display():
+        x.draw(surface)
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
 
     pygame.display.update()
+        
 pygame.quit()
