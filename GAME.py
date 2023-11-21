@@ -18,11 +18,11 @@ while run:
 
     if not screen_updated:
         current_screen = STATE.screen_to_display()
-        surface = current_screen.returnScreen()
         screen_updated = True
 
-    for x in STATE.display():
-        x.draw(surface)
+    for display in STATE.display():
+        if display.draw(current_screen):
+            print(display.getText())
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

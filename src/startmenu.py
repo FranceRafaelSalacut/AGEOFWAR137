@@ -16,8 +16,9 @@ class START_MENU():
     def screen_to_display(self):
         # Initializing Screen
         # parameters are height, width, color
-        return Screen(SCREEN_HEIGHT, SCREEN_WIDTH, Baby_Blue)
+        screen = Screen(SCREEN_HEIGHT, SCREEN_WIDTH, Baby_Blue)
+        surface = screen.returnScreen()
+        return surface
     
-    def display(self):
-        
+    def display(self):      
         return [host, client]
