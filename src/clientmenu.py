@@ -6,11 +6,9 @@ pygame.init
 
 # Initializing Buttons
 # parameters are text, color, pos_x, pos_y, height, width
-host = Button("Host", Light_Grey, 50, 50, 100, 50)
-client = Button("Client", Light_Grey, 50, 150, 100, 50)
-exit = Button("Exit", Light_Grey, 50, 250, 100, 50)
+back = Button("Back", Light_Grey, 150, 50, 100, 50)
 
-class START_MENU():
+class CLIENT_MENU():
     def __init__(self) -> None:
         pass
 
@@ -22,4 +20,4 @@ class START_MENU():
         return surface
     
     def display(self):      
-        return [host, client, exit]
+        return [back]
