@@ -1,4 +1,5 @@
 import pygame as pg
+vec = pg.math.Vector2
 
 class baseUnit(pg.sprite.Sprite):
     def __init__(self, id, hp, mspd, aspd, arng, dmg, bounty):
@@ -10,7 +11,6 @@ class baseUnit(pg.sprite.Sprite):
         self.arng = arng # Attack range
         self.dmg = dmg # Damage
         self.bounty = bounty # Gold dropped when unit dies
-        self.pos_x = 0
-        self.pos_y = 0
+        self.pos = vec(0,0) # Unit position
     def attack(self):
         pass
