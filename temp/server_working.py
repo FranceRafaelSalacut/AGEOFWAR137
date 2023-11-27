@@ -19,10 +19,13 @@ print(f"Server at {address}")
 
 while True:
     message, address = server_socket.recvfrom(1024)
-    client+=1
-    print(f"Received broadcast message from {address}: {message.decode()}")
+    if message == "Discovering":
+         print(f"Received broadcast message from {address}: {message.decode()}")
+    else:
+        client+=6
+        print(f"Client Connected from {address}: {message.decode()}")
 
-    message = "HI welcome to server!"
+    message = "I am a server!"
     server_socket.sendto(message.encode(), address)
     if client == 1:
         break
