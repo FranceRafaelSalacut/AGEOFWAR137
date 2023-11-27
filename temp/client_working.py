@@ -4,13 +4,18 @@ from get_ipaddress import *
 
 
 servers = []
-client_address = getIPAdress()
+# Server configuration
+ip_address = getIPAdress()[0]
+port = 5555
+address = (ip_address, port)
 
 # Create a UDP socket
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-client_socket.bind(client_address)
+client_socket.bind(address)
 client_socket.settimeout(1)
+
+print(f"Client at {address}")
 
 def listen_for_servers():
     for x in range(0,3):

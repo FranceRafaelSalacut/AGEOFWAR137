@@ -7,19 +7,14 @@ client = 0
 # Server configuration
 ip_address = getIPAdress()[0]
 port = 5555
-
-print(type(ip_address), type(port))
-
-adress = getIPAdress()
-
-print(ip_address, port)
+address = (ip_address, port)
 
 # Create a UDP socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-server_socket.bind(adress)
+server_socket.bind(address)
 
-print(f"Listening on {adress}")
+print(f"Server at {address}")
 
 
 while True:
