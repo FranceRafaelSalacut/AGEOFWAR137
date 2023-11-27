@@ -14,6 +14,7 @@ client_socket.settimeout(1)
 def listen_for_servers():
     for x in range(0,3):
         print(x)
+        # Placing a try catch here to catch timeout error by socket.timout
         try:
             message, address = client_socket.recvfrom(1024)    
             if address == client_address:
@@ -33,6 +34,7 @@ server_listener_thread.start()
 broadcast_message = "Client discovering servers"
 client_socket.sendto(broadcast_message.encode(), ('<broadcast>', 5555))
 
+# Placing a try catch here to catch timeout error by sccket timeout
 try:
     received_message = client_socket.recv(1024).decode()
     if received_message == broadcast_message:
