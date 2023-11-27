@@ -1,15 +1,26 @@
 import socket
+from get_ipaddress import *
+
 
 client = 0
 
 # Server configuration
-host = '192.168.1.4'
+ip_address = getIPAdress()[0]
 port = 5555
+
+print(type(ip_address), type(port))
+
+adress = getIPAdress()
+
+print(ip_address, port)
 
 # Create a UDP socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-server_socket.bind(('', port))
+server_socket.bind(adress)
+
+print(f"Listening on {adress}")
+
 
 while True:
     message, address = server_socket.recvfrom(1024)

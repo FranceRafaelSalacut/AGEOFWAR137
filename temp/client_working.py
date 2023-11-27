@@ -1,9 +1,10 @@
 import socket
 import threading
+from get_ipaddress import *
 
 
 servers = []
-client_address = ('192.168.1.3', 5555)
+client_address = getIPAdress()
 
 # Create a UDP socket
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
