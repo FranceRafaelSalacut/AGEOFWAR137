@@ -5,8 +5,11 @@ from get_ipaddress import *
 
 
 #Global Variables
-stop_flag = False
 servers = []
+
+def broadcast_message():
+    broadcast_message = "Discovering"
+    client_socket.sendto(broadcast_message.encode(), ('<broadcast>', port))
 
 # Server configuration
 ip_address = getIPAdress()[0]
@@ -24,9 +27,15 @@ client_socket.settimeout(1)
 print(f"Client at {client_address}")
 
 def listen_for_servers():
-    for x in range(0, 10):
+    broadcast = True
+    for x in range(0, 30):
         print(f"{x} - running", end = " - ")
         # Placing a try catch here to catch timeout error by socket.timout
+
+        if broadcast: 
+            broadcast_message()
+            broadcast = False
+
         try:
             message, address = client_socket.recvfrom(1024)    
             if address == client_address:
@@ -37,10 +46,11 @@ def listen_for_servers():
                 servers.append(address)
             else:
                 print(f"{address} is already discovered")
+                continue
         except:
             print("Time out")
+            broadcast = True
             continue
-
     print("stoppping")
 
 
@@ -48,10 +58,8 @@ def listen_for_servers():
 server_listener_thread = threading.Thread(target=listen_for_servers)
 server_listener_thread.start()
 
-for x in range(0,20):
-    # Broadcast a message to discover servers
-    broadcast_message = "Discovering"
-    client_socket.sendto(broadcast_message.encode(), ('<broadcast>', port))
+
+
 
 
 server_listener_thread.join()
