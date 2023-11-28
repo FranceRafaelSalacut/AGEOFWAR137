@@ -22,7 +22,7 @@ class Server():
     def Backgroundrun(self):
         global client, c_clients
         while self.running:
-            print("Running")
+            print("Running", end = " - ")
             # Waiting to recieve a message anonymously
             try:
                 message, address = self.socket.recvfrom(1024)
@@ -57,7 +57,6 @@ class Server():
         self.background_thread.start()
 
     def stopServer(self):
-        print("Im hererer")
         self.running = False
         if self.background_thread:
             self.background_thread.join()

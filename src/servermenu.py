@@ -38,5 +38,4 @@ class SERVER_MENU():
         self.server.startServer()
 
     def server_stop(self):
-        print("Im here in servermenu")
         self.server.stopServer()
