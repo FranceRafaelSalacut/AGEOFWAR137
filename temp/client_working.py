@@ -59,4 +59,5 @@ for x in range(0,3):
 
 print(servers)
 
-client_socket.sendto(broadcast_message.encode(), servers[0])
+connect_message = "Connect"
+client_socket.sendto(connect_message.encode(), servers[0])
