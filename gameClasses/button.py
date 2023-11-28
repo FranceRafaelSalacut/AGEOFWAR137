@@ -1,13 +1,12 @@
 import pygame
+from gameClasses.text import *
 pygame.init()
 
-#Text Renderer
-def render(text):
-    return pygame.font.SysFont('Corbel', 35).render(text, True, (0,0,0))
+
 
 class Button():
     def __init__(self, text, color, pos_x, pos_y, height, width):
-        self.text = text
+        self.text = Text(text, 0, 0)
         self.color = color
         self.position = (pos_x, pos_y)
         self.size = (height, width)
@@ -20,7 +19,7 @@ class Button():
         pygame.draw.rect(screen, self.color, self.rect )
 
         #Drawing the text over the rectangle
-        screen.blit(render(self.text), (self.position))
+        screen.blit(self.text.render(), (self.position))
 
         #Tracking the mouse movement
         mouse = pygame.mouse.get_pos()
@@ -36,4 +35,4 @@ class Button():
         return action
     
     def getText(self):
-        return self.text
+        return self.text.get_text()

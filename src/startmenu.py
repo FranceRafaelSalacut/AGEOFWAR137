@@ -6,9 +6,9 @@ pygame.init
 
 # Initializing Buttons
 # parameters are text, color, pos_x, pos_y, height, width
-host = Button("Host", Light_Grey, 50, 50, 100, 50)
-client = Button("Client", Light_Grey, 50, 150, 100, 50)
-exit = Button("Exit", Light_Grey, 50, 250, 100, 50)
+host = Button("Host", Light_Grey, 350, 50, 100, 50)
+client = Button("Client", Light_Grey, 350, 150, 100, 50)
+exit = Button("Exit", Light_Grey, 350, 250, 100, 50)
 
 class START_MENU():
     def __init__(self) -> None:
@@ -17,7 +17,7 @@ class START_MENU():
     def screen_to_display(self):
         # Initializing Screen
         # parameters are height, width, color
-        screen = Screen(SCREEN_HEIGHT, SCREEN_WIDTH, Baby_Blue)
+        screen = Screen(SCREEN_WIDTH, SCREEN_HEIGHT, Baby_Blue)
         surface = screen.returnScreen()
         return surface
     
