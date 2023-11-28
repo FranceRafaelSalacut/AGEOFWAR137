@@ -3,6 +3,7 @@ from get_ipaddress import *
 
 
 client = 0
+c_clients = []
 
 # Server configuration
 ip_address = getIPAdress()[0]
@@ -22,11 +23,17 @@ while True:
     message = message.decode()
     if message == "Discovering":
          print(f"Received broadcast message from {address}: {message}")
+         message = "I am a server!"
+         server_socket.sendto(message.encode(), address)
     else:
         client+=1
         print(f"Client Connected from {address}: {message}")
+        c_clients.append(address)
 
-    message = "I am a server!"
-    server_socket.sendto(message.encode(), address)
+    
     if client == 1:
+        print("I am Full")
         break
+
+
+print(c_clients)

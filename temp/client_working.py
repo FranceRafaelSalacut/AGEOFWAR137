@@ -58,3 +58,5 @@ for x in range(0,3):
     server_listener_thread.join()
 
 print(servers)
+
+client_socket.sendto(broadcast_message.encode(), servers[0])
