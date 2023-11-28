@@ -20,19 +20,26 @@ while run:
 
     for display in STATE.display():
         if display.draw(current_screen):
-            if display.getText() == "Client":
+            action = display.getText()
+            if action == "Client":
                 STATE = CLIENT_MENU() 
 
-            if display.getText() == "Host":
+            if action == "Host":
                 STATE = SERVER_MENU()
 
-            if display.getText() == "Back":
+            if action == "Back":
                 STATE = START_MENU()
 
-            if display.getText() == "Exit":
+            if action == "Start_Server":
+                STATE.server_start()
+
+            if action == "Stop_Server":
+                STATE.server_stop()
+
+            if action == "Exit":
                 run = False
 
-            print(display.getText())
+            print(action)
             screen_updated = False
     
     for event in pygame.event.get():
