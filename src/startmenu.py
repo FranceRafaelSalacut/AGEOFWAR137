@@ -5,10 +5,10 @@ from gameClasses.button import *
 pygame.init
 
 # Initializing Buttons
-# parameters are text, color, pos_x, pos_y, height, width
-host = Button("Host", Light_Grey, 350, 50, 100, 50)
-client = Button("Client", Light_Grey, 350, 150, 100, 50)
-exit = Button("Exit", Light_Grey, 350, 250, 100, 50)
+# parameters are text, color, pos_x, pos_y, width, height
+host = Button("Host", Light_Grey, 350, 50, 100, 50, 35)
+client = Button("Client", Light_Grey, 350, 150, 100, 50, 35)
+exit = Button("Exit", Light_Grey, 350, 250, 100, 50, 35)
 
 class START_MENU():
     def __init__(self) -> None:

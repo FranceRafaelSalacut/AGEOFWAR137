@@ -62,8 +62,8 @@ class Server():
             display.changeText("Server not Running")
             return
 
-        display.changeText("Stopping Server")
         self.running = False
         if self.background_thread:
             self.background_thread.join()
         
+        display.changeText("Server Stopped")

@@ -1,6 +1,7 @@
 import socket 
 import threading 
 from src.get_ipaddress import * 
+from gameClasses.text import *
 
 class Client():
     def __init__(self) -> None:
@@ -15,46 +16,32 @@ class Client():
         self.running = False
         self.found_servers = []
 
-    def Backgroundrun(self):
-        broadcast = True
-        while self.running:
-            print("running", end = " - ")
-            
-            # Broadcast message again after time out
-            if broadcast: 
-                broadcast_message = "Discovering"
-                self.socket.sendto(broadcast_message.encode(), ('<broadcast>', self.port))
-                broadcast = False
+    def startFinding(self, display:[], connect:[]):
+        self.found_servers = []
 
-            # Placing a try catch here to catch timeout error by socket.timout
-            try:
-                message, address = self.socket.recvfrom(1024)    
-                if address == self.address:
-                    print("I found myself")
-                    continue        
-                if address not in self.found_servers: 
-                    print(f"Discovered server at {address}: {message.decode()}")
-                    self.found_servers.append(address)
-                else:
-                    print(f"{address} is already discovered")
-                    continue
-            except:
-                print("Time out")
-                broadcast = True
-                continue
-        print("stoppping")
-
-    def startFinding(self):
-        if self.running == True:
-            print("Server Already Running")
-            return
-        
         print(f"Client at {self.address}")
 
-        self.running = True
-        self.background_thread = threading.Thread(target=self.Backgroundrun)
-        self.background_thread.start()
+        broadcast_message = "Discovering"
+        self.socket.sendto(broadcast_message.encode(), ('<broadcast>', self.port))
 
+        message, address = self.socket.recvfrom(1024)    
+        if address != self.address:
+            #print("I found myself")
+            if address not in self.found_servers: 
+                print(f"Discovered server at {address}: {message.decode()}")
+                self.found_servers.append(address)
+            else:
+                print(f"{address} is already discovered")
+
+        for index, address in enumerate(self.found_servers):
+            connect[index+3].changeText(f"{address}")
+            display.append(connect[index])
+            display.append(connect[index+3])
+        print(self.found_servers)
+
+        if len(self.found_servers) == 0:
+            connect[3].changeText("Cant find any Servers :(")
+            display.append(connect[3])
     def stopFinding(self):
         print("Im hererer")
         self.running = False

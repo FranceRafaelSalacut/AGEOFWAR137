@@ -18,7 +18,7 @@ while run:
         current_screen = STATE.screen_to_display()
         screen_updated = True
 
-    for display in STATE.display():
+    for index, display in enumerate(STATE.display()):
         if display.draw(current_screen):
             action = display.getText()
             if action == "Client":
@@ -39,8 +39,11 @@ while run:
             if action == "Find_Servers":
                 STATE.find_start()
 
-            if action == "Stop_Find":
+            if action == "Reset":
                 STATE.find_stop()
+
+            if action == "Connect":
+                STATE.connect(index)
 
             if action == "Exit":
                 run = False
