@@ -1,5 +1,6 @@
 import pygame
 import threading
+import time
 from src.CONSTANTS import *
 from gameClasses.screen import *
 from gameClasses.button import *
@@ -8,8 +9,6 @@ from gameClasses.serverclass import *
 pygame.init
 
 
-print("Im already being run biths")
-
 # Initializing Buttons
 # parameters are text, color, pos_x, pos_y, height, width
 back = Button("Back", Light_Grey, 600, 50, 100, 50)
@@ -17,12 +16,12 @@ start_server = Button("Start_Server", Light_Grey, 550, 150, 175, 50)
 stop_server = Button("Stop_Server", Light_Grey, 550, 250, 175, 50)
 
 # parameters are text, center x, center y, Fontsize
-starting = Text("Starting server", 100, 75, 20)
+Display_Text = Text("", 100, 75, 20)
 
 class SERVER_MENU():
     def __init__(self) -> None:
         self.server = Server()
-        pass
+        self.to_display = [back, Display_Text, start_server, stop_server]
 
     def screen_to_display(self):
         # Initializing Screen
@@ -32,10 +31,13 @@ class SERVER_MENU():
         return surface
     
     def display(self):      
-        return [back, starting, start_server, stop_server]
+        return self.to_display
     
     def server_start(self):
-        self.server.startServer()
+        self.server.startServer(Display_Text)
 
     def server_stop(self):
-        self.server.stopServer()
+        self.server.stopServer(Display_Text)
+        
+
+        

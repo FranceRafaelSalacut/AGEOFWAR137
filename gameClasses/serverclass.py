@@ -1,6 +1,7 @@
 import socket 
 import threading
 from src.get_ipaddress import * 
+from gameClasses.text import *
 
 
 client = 0
@@ -45,18 +46,23 @@ class Server():
                 continue
         print("Stopping")
 
-    def startServer(self):
+    def startServer(self, display:Text):
         if self.running == True:
-            print("Server Already Running")
+            display.changeText("Server Already Running")
             return
         
-        print(f"Server at {self.address}")
+        display.changeText(f"Server at {self.address}")
 
         self.running = True
         self.background_thread = threading.Thread(target=self.Backgroundrun)
         self.background_thread.start()
 
-    def stopServer(self):
+    def stopServer(self, display:Text):
+        if self.running == False:
+            display.changeText("Server not Running")
+            return
+
+        display.changeText("Stopping Server")
         self.running = False
         if self.background_thread:
             self.background_thread.join()

@@ -36,3 +36,7 @@ class Button():
     
     def getText(self):
         return self.text.get_text()
+    
+    def changeText(self, text):
+        self.text = Text(text, 0, 0, 35)
+
