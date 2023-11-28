@@ -13,17 +13,19 @@ ip_address = getIPAdress()[0]
 port = 5555
 client_address = (ip_address, port)
 
-# Create a UDP socket
+# Create a UDP socket so that it can send and recieve messages without a connection
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 client_socket.bind(client_address)
+
+# Setting a timeout so that socket doesnt wait for message indefinitely
 client_socket.settimeout(1)
 
 print(f"Client at {client_address}")
 
 def listen_for_servers():
-    while not stop_flag:
-        print("running", end = " - ")
+    for x in range(0, 10):
+        print(f"{x} - running", end = " - ")
         # Placing a try catch here to catch timeout error by socket.timout
         try:
             message, address = client_socket.recvfrom(1024)    
@@ -38,29 +40,20 @@ def listen_for_servers():
         except:
             print("Time out")
             continue
-        time.sleep(1)
 
     print("stoppping")
 
-for x in range(0,3):
-    stop_flag = False
 
-    # Start a thread to listen for servers
-    server_listener_thread = threading.Thread(target=listen_for_servers)
-    server_listener_thread.start()
+# Start a thread to listen for servers
+server_listener_thread = threading.Thread(target=listen_for_servers)
+server_listener_thread.start()
 
+for x in range(0,20):
     # Broadcast a message to discover servers
     broadcast_message = "Discovering"
     client_socket.sendto(broadcast_message.encode(), ('<broadcast>', port))
 
-    time.sleep(5)
 
-    stop_flag = True
-
-    # Wait for the client to finish
-    server_listener_thread.join()
+server_listener_thread.join()
 
 print(servers)
-
-connect_message = "Connect"
-client_socket.sendto(connect_message.encode(), servers[0])

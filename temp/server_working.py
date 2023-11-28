@@ -1,7 +1,7 @@
 import socket
 from get_ipaddress import *
 
-
+#Global Variables
 client = 0
 c_clients = []
 
@@ -10,7 +10,7 @@ ip_address = getIPAdress()[0]
 port = 5555
 address = (ip_address, port)
 
-# Create a UDP socket
+# Create a UDP socket so that it can send and recieve messages without a connection
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 server_socket.bind(address)
