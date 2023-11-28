@@ -20,3 +20,6 @@ PORT = 8000
 # COLORS
 Light_Grey = (170,170,170)
 Baby_Blue = (202, 228, 241)
+
+# FONT
+FONT = 'Corbel'

@@ -6,7 +6,7 @@ pygame.init()
 
 class Button():
     def __init__(self, text, color, pos_x, pos_y, height, width):
-        self.text = Text(text, 0, 0)
+        self.text = Text(text, 0, 0, 35)
         self.color = color
         self.position = (pos_x, pos_y)
         self.size = (height, width)
