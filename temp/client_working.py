@@ -30,8 +30,11 @@ def listen_for_servers():
             if address == client_address:
                 print("I found myself")
                 continue        
-            print(f"Discovered server at {address}: {message.decode()}")
-            servers.append(address)
+            if address not in servers: 
+                print(f"Discovered server at {address}: {message.decode()}")
+                servers.append(address)
+            else:
+                print(f"{address} is already discovered")
         except:
             print("Time out")
             continue
