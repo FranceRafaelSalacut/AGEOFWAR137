@@ -19,6 +19,7 @@ print(f"Server at {address}")
 
 
 while True:
+    # Waiting to recieve a message anonymously
     message, address = server_socket.recvfrom(1024)
     message = message.decode()
     if message == "Discovering":
@@ -26,6 +27,7 @@ while True:
          message = "I am a server!"
          server_socket.sendto(message.encode(), address)
     else:
+        #Limiting the number of clients that connects with server.
         client+=1
         print(f"Client Connected from {address}: {message}")
         c_clients.append(address)

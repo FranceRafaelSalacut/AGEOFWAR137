@@ -1,6 +1,5 @@
 import socket
 import threading
-import time
 from get_ipaddress import *
 
 
@@ -24,18 +23,21 @@ client_socket.bind(client_address)
 # Setting a timeout so that socket doesnt wait for message indefinitely
 client_socket.settimeout(1)
 
+# Displaying Status
 print(f"Client at {client_address}")
 
+# Function for the thread
 def listen_for_servers():
     broadcast = True
     for x in range(0, 30):
         print(f"{x} - running", end = " - ")
-        # Placing a try catch here to catch timeout error by socket.timout
-
+        
+        # Broadcast message again after time out
         if broadcast: 
             broadcast_message()
             broadcast = False
 
+        # Placing a try catch here to catch timeout error by socket.timout
         try:
             message, address = client_socket.recvfrom(1024)    
             if address == client_address:
@@ -58,10 +60,7 @@ def listen_for_servers():
 server_listener_thread = threading.Thread(target=listen_for_servers)
 server_listener_thread.start()
 
-
-
-
-
+#Waiting for thread to end
 server_listener_thread.join()
 
 print(servers)
