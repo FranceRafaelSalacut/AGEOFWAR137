@@ -1,16 +1,54 @@
 from baseUnit import baseUnit
+import pygame as pg
 
 class tankUnit(baseUnit):
-    pass
+    def __init__(self, id, x, y):
+        self.id = id
+        self.x = x
+        self.y = y
+    def move(self):
+        pass
+    def attack(self):
+        pass
+    def die(self):
+        pass
+    
+class dinoRider(pg.sprite.Sprit, tankUnit):
+    def __init__(self):
+        super().__init__()
+        self.hp = 0
+        self.mspd = 0
+        self.aspd = 0
+        self.dmg = 0
+        self.bounty = 0
+        self.exp = 0
+        
+class Cavalier(pg.sprite.Sprit, tankUnit):
+    def __init__(self):
+        super().__init__()
+        self.hp = 0
+        self.mspd = 0
+        self.aspd = 0
+        self.dmg = 0
+        self.bounty = 0
+        self.exp = 0
 
-class dinoRider(tankUnit):
-    pass
+class Tank(pg.sprite.Sprit, tankUnit):
+    def __init__(self):
+        super().__init__()
+        self.hp = 0
+        self.mspd = 0
+        self.aspd = 0
+        self.dmg = 0
+        self.bounty = 0
+        self.exp = 0
 
-class Cavalier(tankUnit):
-    pass
-
-class Tank(tankUnit):
-    pass
-
-class Mecha(tankUnit):
-    pass
+class Mecha(pg.sprite.Sprit, tankUnit):
+    def __init__(self):
+        super().__init__()
+        self.hp = 0
+        self.mspd = 0
+        self.aspd = 0
+        self.dmg = 0
+        self.bounty = 0
+        self.exp = 0
