@@ -13,7 +13,7 @@ class tankUnit(baseUnit):
     def die(self):
         pass
     
-class dinoRider(pg.sprite.Sprit, tankUnit):
+class dinoRider(pg.sprite.Sprite, tankUnit):
     def __init__(self):
         super().__init__()
         self.hp = 0
@@ -23,7 +23,7 @@ class dinoRider(pg.sprite.Sprit, tankUnit):
         self.bounty = 0
         self.exp = 0
         
-class Cavalier(pg.sprite.Sprit, tankUnit):
+class Cavalier(pg.sprite.Sprite, tankUnit):
     def __init__(self):
         super().__init__()
         self.hp = 0
@@ -33,7 +33,7 @@ class Cavalier(pg.sprite.Sprit, tankUnit):
         self.bounty = 0
         self.exp = 0
 
-class Tank(pg.sprite.Sprit, tankUnit):
+class Tank(pg.sprite.Sprite, tankUnit):
     def __init__(self):
         super().__init__()
         self.hp = 0
@@ -43,7 +43,7 @@ class Tank(pg.sprite.Sprit, tankUnit):
         self.bounty = 0
         self.exp = 0
 
-class Mecha(pg.sprite.Sprit, tankUnit):
+class Mecha(pg.sprite.Sprite, tankUnit):
     def __init__(self):
         super().__init__()
         self.hp = 0

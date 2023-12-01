@@ -13,7 +13,18 @@ class meleeUnit(baseUnit):
     def die(self):
         pass
 
-class Caveman(pg.sprite.Sprit, meleeUnit):
+class Caveman(pg.sprite.Sprite, meleeUnit):
+    def __init__(self):
+        super().__init__()
+        self.image = pg.image.surface()
+        self.hp = 0
+        self.mspd = 0
+        self.aspd = 0
+        self.dmg = 0
+        self.bounty = 0
+        self.exp = 0
+
+class Footman(pg.sprite.Sprite, meleeUnit):
     def __init__(self):
         super().__init__()
         self.hp = 0
@@ -23,7 +34,7 @@ class Caveman(pg.sprite.Sprit, meleeUnit):
         self.bounty = 0
         self.exp = 0
 
-class Footman(pg.sprite.Sprit, meleeUnit):
+class Soldier(pg.sprite.Sprite, meleeUnit):
     def __init__(self):
         super().__init__()
         self.hp = 0
@@ -33,17 +44,7 @@ class Footman(pg.sprite.Sprit, meleeUnit):
         self.bounty = 0
         self.exp = 0
 
-class Soldier(pg.sprite.Sprit, meleeUnit):
-    def __init__(self):
-        super().__init__()
-        self.hp = 0
-        self.mspd = 0
-        self.aspd = 0
-        self.dmg = 0
-        self.bounty = 0
-        self.exp = 0
-
-class Robot(pg.sprite.Sprit, meleeUnit):
+class Robot(pg.sprite.Sprite, meleeUnit):
     def __init__(self):
         super().__init__()
         self.hp = 0

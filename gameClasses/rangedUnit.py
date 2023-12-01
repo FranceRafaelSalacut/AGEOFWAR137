@@ -14,7 +14,7 @@ class rangedUnit(baseUnit):
     def die(self):
         pass
     
-class Slingshotter(pg.sprite.Sprit, rangedUnit):
+class Slingshotter(pg.sprite.Sprite, rangedUnit):
     def __init__(self):
         super().__init__()
         self.hp = 0
@@ -24,7 +24,7 @@ class Slingshotter(pg.sprite.Sprit, rangedUnit):
         self.bounty = 0
         self.exp = 0
         
-class Archer(pg.sprite.Sprit, rangedUnit):
+class Archer(pg.sprite.Sprite, rangedUnit):
     def __init__(self):
         super().__init__()
         self.hp = 0
@@ -34,7 +34,7 @@ class Archer(pg.sprite.Sprit, rangedUnit):
         self.bounty = 0
         self.exp = 0
 
-class Sniper(pg.sprite.Sprit, rangedUnit):
+class Sniper(pg.sprite.Sprite, rangedUnit):
     def __init__(self):
         super().__init__()
         self.hp = 0
@@ -44,7 +44,7 @@ class Sniper(pg.sprite.Sprit, rangedUnit):
         self.bounty = 0
         self.exp = 0
         
-class Stormtrooper(pg.sprite.Sprit, rangedUnit):
+class Stormtrooper(pg.sprite.Sprite, rangedUnit):
     def __init__(self):
         super().__init__()
         self.hp = 0
