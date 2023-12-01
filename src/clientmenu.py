@@ -57,4 +57,4 @@ class CLIENT_MENU():
         self.client.stopFinding()
 
     def connect(self, index):
-        self.client.connect(index)
+        self.client.connect(index-1)
