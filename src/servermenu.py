@@ -14,6 +14,7 @@ pygame.init
 back = Button("Back", Light_Grey, 600, 50, 100, 50, 35)
 start_server = Button("Start_Server", Light_Grey, 550, 150, 175, 50, 35)
 stop_server = Button("Stop_Server", Light_Grey, 550, 250, 175, 50, 35)
+start_game = Button("Start_Game", Light_Grey, 550, 350, 175, 50, 35)
 
 # parameters are text, center x, center y, Fontsize
 Display_Text = Text("", 100, 75, 20)
@@ -21,7 +22,7 @@ Display_Text = Text("", 100, 75, 20)
 class SERVER_MENU():
     def __init__(self) -> None:
         self.server = Server()
-        self.to_display = [back, Display_Text, start_server, stop_server]
+        self.to_display = [back, Display_Text, start_server, stop_server, start_game]
 
     def screen_to_display(self):
         # Initializing Screen
@@ -33,10 +34,10 @@ class SERVER_MENU():
     def display(self):      
         return self.to_display
     
-    def server_start(self):
+    def start(self):
         self.server.startServer(Display_Text)
 
-    def server_stop(self):
+    def stop(self):
         self.server.stopServer(Display_Text)
         
 

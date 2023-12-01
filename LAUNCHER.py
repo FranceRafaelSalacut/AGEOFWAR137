@@ -28,19 +28,20 @@ while run:
                 STATE = SERVER_MENU()
 
             if action == "Back":
+                STATE.stop()
                 STATE = START_MENU()
 
             if action == "Start_Server":
-                STATE.server_start()
+                STATE.start()
 
             if action == "Stop_Server":
-                STATE.server_stop()
+                STATE.stop()
 
             if action == "Find_Servers":
-                STATE.find_start()
+                STATE.start()
 
             if action == "Reset":
-                STATE.find_stop()
+                STATE.stop()
 
             if action == "Connect":
                 STATE.connect(index)
@@ -53,6 +54,10 @@ while run:
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            try : STATE.stop()
+            except:
+                print("HEHEHE")
+                pass
             run = False
 
     pygame.display.update()

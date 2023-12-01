@@ -14,6 +14,7 @@ class Server():
         self.address = (self.ip_address, self.port)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+        self.socket.settimeout(1)
         self.socket.bind(self.address)
         self.background_thread = None
         self.running = False

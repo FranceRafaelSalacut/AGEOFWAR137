@@ -48,11 +48,11 @@ class CLIENT_MENU():
     def display(self):      
         return self.to_display
     
-    def find_start(self):
+    def start(self):
         self.resetDisplay()
         self.client.startFinding(self.to_display, connect)
 
-    def find_stop(self):
+    def stop(self):
         self.resetDisplay()
         self.client.stopFinding()
 

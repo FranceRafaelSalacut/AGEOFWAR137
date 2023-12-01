@@ -51,7 +51,4 @@ class Client():
             connect[3].changeText("Cant find any Servers :(")
             display.append(connect[3])
     def stopFinding(self):
-        print("Im hererer")
-        self.running = False
-        if self.background_thread:
-            self.background_thread.join()
+        print("unused function")
