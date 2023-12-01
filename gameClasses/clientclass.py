@@ -60,4 +60,6 @@ class Client():
 
     def connect(self, index):
         connect_message = "connect"
-        self.socket.sendto(connect_message.encode, self.found_servers[index])
+        print(f"{self.found_servers} == {index}")
+        print(f"{self.found_servers[index]}, {type(self.found_servers[index])}")
+        self.socket.sendto(connect_message.encode(), self.found_servers[index])

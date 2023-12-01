@@ -3,10 +3,6 @@ import threading
 from src.get_ipaddress import * 
 from gameClasses.text import *
 
-
-client = 0
-c_clients = []
-
 class Server():
     def __init__(self) -> None:
         self.ip_address = getIPAdress()[0]
@@ -18,6 +14,7 @@ class Server():
         self.socket.bind(self.address)
         self.background_thread = None
         self.running = False
+        self.client_list = []
 
 
     def Backgroundrun(self):
@@ -34,12 +31,11 @@ class Server():
                     self.socket.sendto(message.encode(), address)
                 else:
                     #Limiting the number of clients that connects with server.
-                    client+=1
                     print(f"Client Connected from {address}: {message}")
-                    c_clients.append(address)
+                    self.client_list.append(address)
 
-                if client == 1:
-                    print("I am Full")
+                if len(self.client_list) == 1:
+                    print(f"I am Full, {self.client_list}")
                     break
             except:
                 print("Timeout")
