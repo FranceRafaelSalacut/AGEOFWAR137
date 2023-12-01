@@ -3,10 +3,12 @@ from projectile import Projectile
 import pygame as pg
 
 class rangedUnit(baseUnit):
-    def __init__(self, id, x, y):
+    def __init__(self, id, x, y, width, height):
         self.id = id
         self.x = x
         self.y = y
+        self.width = width
+        self.height = height
     def move(self):
         pass
     def attack(self):
@@ -15,8 +17,8 @@ class rangedUnit(baseUnit):
         pass
     
 class Slingshotter(pg.sprite.Sprite, rangedUnit):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, id, x, y, width, height):
+        super(Slingshotter, self).__init__()
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
@@ -25,8 +27,8 @@ class Slingshotter(pg.sprite.Sprite, rangedUnit):
         self.exp = 0
         
 class Archer(pg.sprite.Sprite, rangedUnit):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, id, x, y, width, height):
+        super(Archer, self).__init__()
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
@@ -35,8 +37,8 @@ class Archer(pg.sprite.Sprite, rangedUnit):
         self.exp = 0
 
 class Sniper(pg.sprite.Sprite, rangedUnit):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, id, x, y, width, height):
+        super(Sniper, self).__init__()
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
@@ -45,8 +47,8 @@ class Sniper(pg.sprite.Sprite, rangedUnit):
         self.exp = 0
         
 class Stormtrooper(pg.sprite.Sprite, rangedUnit):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, id, x, y, width, height):
+        super(Stormtrooper, self).__init__()
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
