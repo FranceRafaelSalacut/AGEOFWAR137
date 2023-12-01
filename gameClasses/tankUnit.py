@@ -18,6 +18,10 @@ class tankUnit(baseUnit):
 class dinoRider(pg.sprite.Sprite, tankUnit):
     def __init__(self, id, x, y, width, height):
         super(dinoRider, self).__init__()
+        self.image = pg.Surface([width, height])
+        self.image.fill((0,0,0))
+        self.rect = self.image.get_rect()
+        self.rect.center = [x,y]
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
@@ -28,6 +32,10 @@ class dinoRider(pg.sprite.Sprite, tankUnit):
 class Cavalier(pg.sprite.Sprite, tankUnit):
     def __init__(self, id, x, y, width, height):
         super(Cavalier, self).__init__()
+        self.image = pg.Surface([width, height])
+        self.image.fill((0,0,0))
+        self.rect = self.image.get_rect()
+        self.rect.center = [x,y]
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
@@ -38,6 +46,10 @@ class Cavalier(pg.sprite.Sprite, tankUnit):
 class Tank(pg.sprite.Sprite, tankUnit):
     def __init__(self, id, x, y, width, height):
         super(Tank, self).__init__()
+        self.image = pg.Surface([width, height])
+        self.image.fill((0,0,0))
+        self.rect = self.image.get_rect()
+        self.rect.center = [x,y]
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
@@ -48,6 +60,10 @@ class Tank(pg.sprite.Sprite, tankUnit):
 class Mecha(pg.sprite.Sprite, tankUnit):
     def __init__(self, id, x, y, width, height):
         super(Mecha, self).__init__()
+        self.image = pg.Surface([width, height])
+        self.image.fill((0,0,0))
+        self.rect = self.image.get_rect()
+        self.rect.center = [x,y]
         self.hp = 0
         self.mspd = 0
         self.aspd = 0

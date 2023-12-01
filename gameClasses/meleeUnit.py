@@ -1,6 +1,5 @@
 from gameClasses.baseUnit import baseUnit
 import pygame as pg
-from abc import ABC, abstractmethod
 
 
 class meleeUnit(baseUnit):
@@ -20,6 +19,10 @@ class meleeUnit(baseUnit):
 class Caveman(pg.sprite.Sprite, meleeUnit):
     def __init__(self, id, x, y, width, height):
         super(Caveman, self).__init__()
+        self.image = pg.Surface([width, height])
+        self.image.fill((0,0,0))
+        self.rect = self.image.get_rect()
+        self.rect.center = [x,y]
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
@@ -30,6 +33,10 @@ class Caveman(pg.sprite.Sprite, meleeUnit):
 class Footman(pg.sprite.Sprite, meleeUnit):
     def __init__(self, id, x, y, width, height):
         super(Footman, self).__init__()
+        self.image = pg.Surface([width, height])
+        self.image.fill((0,0,0))
+        self.rect = self.image.get_rect()
+        self.rect.center = [x,y]
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
@@ -40,6 +47,10 @@ class Footman(pg.sprite.Sprite, meleeUnit):
 class Soldier(pg.sprite.Sprite, meleeUnit):
     def __init__(self, id, x, y, width, height):
         super(Soldier, self).__init__()
+        self.image = pg.Surface([width, height])
+        self.image.fill((0,0,0))
+        self.rect = self.image.get_rect()
+        self.rect.center = [x,y]
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
@@ -50,6 +61,10 @@ class Soldier(pg.sprite.Sprite, meleeUnit):
 class Robot(pg.sprite.Sprite, meleeUnit):
     def __init__(self, id, x, y, width, height):
         super(Robot, self).__init__()
+        self.image = pg.Surface([width, height])
+        self.image.fill((0,0,0))
+        self.rect = self.image.get_rect()
+        self.rect.center = [x,y]
         self.hp = 0
         self.mspd = 0
         self.aspd = 0

@@ -19,6 +19,10 @@ class rangedUnit(baseUnit):
 class Slingshotter(pg.sprite.Sprite, rangedUnit):
     def __init__(self, id, x, y, width, height):
         super(Slingshotter, self).__init__()
+        self.image = pg.Surface([width, height])
+        self.image.fill((0,0,0))
+        self.rect = self.image.get_rect()
+        self.rect.center = [x,y]
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
@@ -29,6 +33,10 @@ class Slingshotter(pg.sprite.Sprite, rangedUnit):
 class Archer(pg.sprite.Sprite, rangedUnit):
     def __init__(self, id, x, y, width, height):
         super(Archer, self).__init__()
+        self.image = pg.Surface([width, height])
+        self.image.fill((0,0,0))
+        self.rect = self.image.get_rect()
+        self.rect.center = [x,y]
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
@@ -39,6 +47,10 @@ class Archer(pg.sprite.Sprite, rangedUnit):
 class Sniper(pg.sprite.Sprite, rangedUnit):
     def __init__(self, id, x, y, width, height):
         super(Sniper, self).__init__()
+        self.image = pg.Surface([width, height])
+        self.image.fill((0,0,0))
+        self.rect = self.image.get_rect()
+        self.rect.center = [x,y]
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
@@ -49,6 +61,10 @@ class Sniper(pg.sprite.Sprite, rangedUnit):
 class Stormtrooper(pg.sprite.Sprite, rangedUnit):
     def __init__(self, id, x, y, width, height):
         super(Stormtrooper, self).__init__()
+        self.image = pg.Surface([width, height])
+        self.image.fill((0,0,0))
+        self.rect = self.image.get_rect()
+        self.rect.center = [x,y]
         self.hp = 0
         self.mspd = 0
         self.aspd = 0
