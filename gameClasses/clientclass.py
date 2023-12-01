@@ -31,6 +31,10 @@ class Client():
                 if address == self.address:
                     print("I found myself")
 
+                if message.decode() == "Discovering":
+                    print("Another Client")
+                    continue
+
                 if address != self.address:
                     #print("I found myself")
                     if address not in self.found_servers: 
@@ -52,3 +56,8 @@ class Client():
             display.append(connect[3])
     def stopFinding(self):
         print("unused function")
+
+
+    def connect(self, index):
+        connect_message = "connect"
+        self.socket.sendto(connect_message.encode, self.found_servers[index])

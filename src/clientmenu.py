@@ -57,9 +57,4 @@ class CLIENT_MENU():
         self.client.stopFinding()
 
     def connect(self, index):
-        if index == 3:
-            print("Connect 1")
-        elif index == 4:
-            print("Connect 2")
-        if index == 5:
-            print("Connect 3")
+        self.client.connect(index)
