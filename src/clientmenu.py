@@ -1,4 +1,5 @@
 import pygame
+import time
 from src.CONSTANTS import *
 from gameClasses.screen import *
 from gameClasses.button import *
@@ -41,6 +42,8 @@ class CLIENT_MENU():
                            #connect[0], connect[1], connect[2],
                            #connect[3], connect[4], connect[5]
                            ]
+        for x in range(3, len(connect)):
+            connect[x].changeText("")
 
     def display(self):      
         return self.to_display

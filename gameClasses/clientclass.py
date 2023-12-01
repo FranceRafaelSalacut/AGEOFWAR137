@@ -24,14 +24,22 @@ class Client():
         broadcast_message = "Discovering"
         self.socket.sendto(broadcast_message.encode(), ('<broadcast>', self.port))
 
-        message, address = self.socket.recvfrom(1024)    
-        if address != self.address:
-            #print("I found myself")
-            if address not in self.found_servers: 
-                print(f"Discovered server at {address}: {message.decode()}")
-                self.found_servers.append(address)
-            else:
-                print(f"{address} is already discovered")
+        # Turn this into a thread later
+        while True:
+            try:
+                message, address = self.socket.recvfrom(1024)    
+                if address == self.address:
+                    print("I found myself")
+
+                if address != self.address:
+                    #print("I found myself")
+                    if address not in self.found_servers: 
+                        print(f"Discovered server at {address}: {message.decode()}")
+                        self.found_servers.append(address)
+                    else:
+                        print(f"{address} is already discovered")
+            except:
+                break
 
         for index, address in enumerate(self.found_servers):
             connect[index+3].changeText(f"{address}")
