@@ -39,6 +39,8 @@ class SERVER_MENU():
 
     def stop(self):
         self.server.stopServer(Display_Text)
-        
+    
+    def startGame(self):
+        self.server.startGame()
 
         

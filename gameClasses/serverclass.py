@@ -63,3 +63,6 @@ class Server():
             self.background_thread.join()
         
         display.changeText("Server Stopped")
+
+    def startGame(self):
+        pass
