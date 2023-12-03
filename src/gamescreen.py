@@ -13,12 +13,16 @@ pygame.init
 
 # UI
 
-
 Display_Text = Text("GAME STARTED", 100, 75, 20)
 
 class GAME_SCREEN():
     def __init__(self) -> None:
         self.to_display = [Display_Text]
+
+    def loadImages(self):
+        self.images = {
+            
+        }
 
     def screen_to_display(self):
         # Initializing Screen
