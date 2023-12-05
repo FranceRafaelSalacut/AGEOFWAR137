@@ -7,6 +7,8 @@ import pygame as pg
 
 from CONSTANTS import *
 
+# TODO: Find a better way of assigning the group/s to the units (Not sure, but I think this should not be one of the factories' responsibilities(?))
+
 class UnitFactory(ABC):
 
     @abstractmethod
