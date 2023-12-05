@@ -1,8 +1,11 @@
 from abc import ABC, abstractmethod
-from meleeUnit import Caveman, Footman, Soldier, Robot
-from rangedUnit import Slingshotter, Archer, Sniper, Stormtrooper
-from tankUnit import dinoRider, Cavalier, Tank, Mecha
+from gameClasses.baseUnit import baseUnit
+from gameClasses.meleeUnit import MeleeUnit, Caveman, Footman, Soldier, Robot
+from gameClasses.rangedUnit import Slingshotter, Archer, Sniper, Stormtrooper
+from gameClasses.tankUnit import dinoRider, Cavalier, Tank, Mecha
+import pygame as pg
 
+from CONSTANTS import *
 
 class UnitFactory(ABC):
 
@@ -18,13 +21,19 @@ class UnitFactory(ABC):
     def create_tank_unit(self):
         pass
 
-class PrehistoricUnitFactory(UnitFactory):
+class PrehistoricUnitFactory(pg.sprite.Sprite, UnitFactory):
+    def __init__(self, groups):
+        super().__init__()
+        self.x = 0
+        self.y = SCREEN_HEIGHT
+        self.hp = 0
+        self.groups = groups
 
-    def create_melee_unit(self) -> Caveman:
-        return Caveman()
+    def create_melee_unit(self):
+        Caveman(1, (self.x + 20), (self.y - 10), 100, 100, 1, self.groups)
     
     def create_ranged_unit(self) -> Slingshotter:
-        return Slingshotter()
+        return Slingshotter(1, (self.x + 20), (self.y - 10), 100, 100, 1, self.groups)
 
     def create_tank_unit(self) -> dinoRider:
         return dinoRider() 
@@ -32,7 +41,7 @@ class PrehistoricUnitFactory(UnitFactory):
 class MedievalUnitFactory(UnitFactory):
 
     def create_melee_unit(self) -> Footman:
-        return Footman()
+        Footman(1, (self.x + 20), (self.y - 10), 100, 100, 1, self.groups)
     
     def create_ranged_unit(self) -> Archer:
         return Archer()
@@ -43,7 +52,7 @@ class MedievalUnitFactory(UnitFactory):
 class ModernUnitFactory(UnitFactory):
     
     def create_melee_unit(self) -> Soldier:
-        return Soldier()
+        Soldier(1, (self.x + 20), (self.y - 10), 100, 100, 1, self.groups)
     
     def create_ranged_unit(self) -> Sniper:
         return Sniper()
@@ -54,7 +63,7 @@ class ModernUnitFactory(UnitFactory):
 class ScifiUnitFactory(UnitFactory):
 
     def create_melee_unit(self) -> Robot:
-        return Robot()
+        Robot(1, (self.x + 20), (self.y - 10), 100, 100, 1, self.groups)
     
     def create_ranged_unit(self) -> Stormtrooper:
         return Stormtrooper()
