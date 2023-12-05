@@ -36,11 +36,9 @@ class Caveman(pg.sprite.Sprite, MeleeUnit):
 
     def update(self):
         self.rect.centerx += self.mspd
-        # 
+        # Kill sprite if it leaves screen
         if self.rect.left > SCREEN_WIDTH + 100:
             self.kill()
-        else:
-            print(self.rect.centerx)
 
 class Footman(pg.sprite.Sprite, MeleeUnit):
     def __init__(self, id, x, y, width, height, direction, groups):
@@ -60,11 +58,9 @@ class Footman(pg.sprite.Sprite, MeleeUnit):
         
     def update(self):
         self.rect.centerx += self.mspd
-        # 
+        # Kill sprite if it leaves screen
         if self.rect.left > SCREEN_WIDTH + 100:
             self.kill()
-        else:
-            print(self.rect.centerx)
 
 class Soldier(pg.sprite.Sprite, MeleeUnit):
     def __init__(self, id, x, y, width, height, direction, groups):
@@ -84,11 +80,9 @@ class Soldier(pg.sprite.Sprite, MeleeUnit):
         
     def update(self):
         self.rect.centerx += self.mspd
-        # 
+        # Kill sprite if it leaves screen 
         if self.rect.left > SCREEN_WIDTH + 100:
             self.kill()
-        else:
-            print(self.rect.centerx)
 
 class Robot(pg.sprite.Sprite, MeleeUnit):
     def __init__(self, id, x, y, width, height, direction, groups):
@@ -108,8 +102,6 @@ class Robot(pg.sprite.Sprite, MeleeUnit):
         
     def update(self):
         self.rect.centerx += self.mspd
-        # 
+        # Kill sprite if it leaves screen
         if self.rect.left > SCREEN_WIDTH + 100:
             self.kill()
-        else:
-            print(self.rect.centerx)
