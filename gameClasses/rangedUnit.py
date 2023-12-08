@@ -1,5 +1,5 @@
-from baseUnit import baseUnit
-from projectile import Projectile
+from .baseUnit import baseUnit
+from .projectile import Projectile
 import pygame as pg
 
 class rangedUnit(baseUnit):
