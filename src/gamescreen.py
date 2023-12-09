@@ -14,6 +14,7 @@ pygame.init
 # UI
 
 Display_Text = Text("GAME STARTED", 100, 75, 20)
+button_trainUnit = Button("Train", Light_Grey, 600, 50, 100, 50, 35)
 
 class GAME_SCREEN():
     def __init__(self) -> None:
@@ -25,6 +26,6 @@ class GAME_SCREEN():
         screen = Screen(GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT, Baby_Blue)
         surface = screen.returnScreen()
         return surface
-    
-    def display(self):      
+
+    def display(self):
         return self.to_display

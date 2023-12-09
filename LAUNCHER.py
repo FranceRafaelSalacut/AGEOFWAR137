@@ -1,10 +1,9 @@
 import pygame
-from gameClasses.button import *
+from mainClasses.button import *
 from src.CONSTANTS import *
 from src.startmenu import *
 from src.clientmenu import *
 from src.servermenu import *
-from src.gamescreen import *
 pygame.init()
 
 run = True
@@ -48,10 +47,7 @@ while run:
                 STATE.connect(index)
             
             if action == "Start_Game":
-                STATE.startGame()
-                if type(STATE) == SERVER_MENU:
-                    STATE = GAME_SCREEN()
-                    print('ayoo')
+                pass
 
             if action == "Exit":
                 run = False

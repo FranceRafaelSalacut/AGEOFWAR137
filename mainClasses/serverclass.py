@@ -5,7 +5,7 @@ from mainClasses.text import *
 
 class Server():
     def __init__(self) -> None:
-        self.ip_address, self.port = getIPAddressAndPort
+        self.ip_address, self.port = getIPAddressAndPort()
         self.address = (self.ip_address, self.port)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
