@@ -5,12 +5,13 @@ pygame.init()
 
 
 class Button():
-    def __init__(self, text, color, pos_x, pos_y, height, width, font_size):
+    def __init__(self, text, color, pos_x, pos_y, height, width, font_size, value = None):
         self.text = Text(text, 0, 0, font_size)
         self.color = color
         self.position = (pos_x, pos_y)
         self.size = (height, width)
         self.rect = pygame.Rect(self.position, self.size)
+        self.value = value
         self.clicked = False
 
     def draw(self, screen):
@@ -36,6 +37,9 @@ class Button():
     
     def getText(self):
         return self.text.get_text()
+    
+    def getValue(self):
+        return self.getValue()
     
     def changeText(self, text):
         self.text = Text(text, 0, 0, 35)
