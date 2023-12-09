@@ -16,6 +16,7 @@ targets = [
     ('Dustin','192.168.68.103',6490),
     ('Jav','192.168.68.103',8203)
 ]
+NONE = ('NONE','0',0)
 
 class GameClass():
     def __init__(self) -> None:
@@ -24,7 +25,7 @@ class GameClass():
         self.techLevel = 1
         self.gold = 0
         self.exp = 0
-        self.currentTarget = ('NONE','0',0)
+        self.currentTarget = NONE
         self.fetchTargets()
 
     def fetchTargets(self):
@@ -68,7 +69,7 @@ class GameClass():
         return self.train_unit(unit)
     
     def train_unit(self, unit:baseUnit):
-        if self.currentTarget and self.get_gold() >= unit.cost:
+        if self.currentTarget != NONE and self.get_gold() >= unit.cost:
             self.gold -= unit.cost
             unit.rect.bottomleft = (0, GAME_SCREEN_HEIGHT)
             return unit
