@@ -2,6 +2,7 @@ from CONSTANTS import *
 from gameClasses.meleeUnit import *
 from gameClasses.playerButtons import *
 from gameClasses.unitFactory import *
+from gameClasses.bases import *
 import pygame
 import socket
 import threading
@@ -60,12 +61,15 @@ thread.start()
 # Initializing sprite groups
 prehistoric_group = pygame.sprite.Group()
 button_group = pygame.sprite.Group()
+base_group = pygame.sprite.Group()
 
 while run:
     # polling for events
+    test_base = prehistoricBase(1, 0, SCREEN_HEIGHT, 300, 200, base_group, screen)
     test_factory = PrehistoricUnitFactory(prehistoric_group, screen)
     test_button = trainButton(SCREEN_WIDTH-200, SCREEN_HEIGHT-600, True, 0.8, 'gameClasses/class_assets/test_button.png', test_factory, 1)
-
+    
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -77,8 +81,10 @@ while run:
     # vv===========================================vv
     
     # (FOR TESTING MOVEMENT, COMMENT OUT IF UNNECESSARY)
-    button_group.add(test_button)
+    base_group.update()
+    base_group.draw(screen)
     
+    button_group.add(test_button)
     button_group.update()
     button_group.draw(screen)
     
