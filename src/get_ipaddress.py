@@ -1,5 +1,4 @@
 import socket
-import subprocess
 
 # Getting the Local IP address
 def getIPAdress():
@@ -7,7 +6,7 @@ def getIPAdress():
     s.connect(("8.8.8.8", 80))
     s.settimeout(0)
     ip_address = s.getsockname()
-    s.close()     
+    s.close()
     return ip_address
 
 # Getting both IP address and Port
