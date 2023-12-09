@@ -12,3 +12,6 @@ Baby_Blue = (202, 228, 241)
 
 # FONT
 FONT = 'Corbel'
+
+# PATH
+MUSIC_GLORIOUS_MORNING = 'music/gloriousMorning.mp3'

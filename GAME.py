@@ -2,7 +2,6 @@ import pygame
 from mainClasses.button import *
 from src.CONSTANTS import *
 from src.gamescreen import *
-from gameClasses.meleeUnit import *
 from gameClasses.unitFactory import *
 
 
@@ -14,11 +13,17 @@ pygame.init()
 screen = pygame.display.set_mode([GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT])
 clock = pygame.time.Clock()
 pygame.display.set_caption('TEST') # game/window title
+
+# loop
 dt = 0 # deltaTime
 run = True
 screen_updated = False
-
 all_units = pygame.sprite.Group()
+
+# music
+pygame.mixer.music.load(MUSIC_GLORIOUS_MORNING)
+pygame.mixer.music.play()
+
 
 while run:
     # polling for events
@@ -35,6 +40,9 @@ while run:
     for entity in all_units:
         entity.move()
         screen.blit(entity.image, entity.rect)
+        
+        if entity.rect.left >= GAME_SCREEN_WIDTH:
+            del entity
     
     # GUI
     for index, display in enumerate(STATE.display()):
