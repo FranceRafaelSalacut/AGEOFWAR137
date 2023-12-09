@@ -46,6 +46,10 @@ while run:
             if action == "Connect":
                 STATE.connect(index)
 
+            if action == "Start_Game":
+                print("HERE")
+                STATE.getList()
+
             if action == "Exit":
                 run = False
 

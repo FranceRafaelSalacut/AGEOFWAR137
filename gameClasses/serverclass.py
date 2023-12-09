@@ -14,7 +14,7 @@ class Server():
         self.socket.bind(self.address)
         self.background_thread = None
         self.running = False
-        self.client_list = []
+        self.client_list = {}
 
 
     def Backgroundrun(self):
@@ -32,9 +32,9 @@ class Server():
                 else:
                     #Limiting the number of clients that connects with server.
                     print(f"Client Connected from {address}: {message}")
-                    self.client_list.append(address)
+                    self.client_list[message] = address
 
-                if len(self.client_list) == 1:
+                if len(self.client_list) == 6:
                     print(f"I am Full, {self.client_list}")
                     break
             except:
@@ -63,3 +63,6 @@ class Server():
             self.background_thread.join()
         
         display.changeText("Server Stopped")
+
+    def getAdress_list(self):
+        print(self.client_list)
