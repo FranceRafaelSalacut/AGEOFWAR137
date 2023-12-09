@@ -63,7 +63,7 @@ button_group = pygame.sprite.Group()
 
 while run:
     # polling for events
-    test_factory = PrehistoricUnitFactory(prehistoric_group)
+    test_factory = PrehistoricUnitFactory(prehistoric_group, screen)
     test_button = trainButton(SCREEN_WIDTH-200, SCREEN_HEIGHT-600, True, 0.8, 'gameClasses/class_assets/test_button.png', test_factory, 1)
 
     for event in pygame.event.get():
