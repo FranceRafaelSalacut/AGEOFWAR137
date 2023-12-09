@@ -1,11 +1,11 @@
 from gameClasses.unitFactory import *
+from gameClasses.baseUnit import *
 from src.CONSTANTS import *
 from src.get_ipaddress import *
 class GameClass():
     def __init__(self) -> None:
         self.factory:UnitFactory = PrehistoricUnitFactory()
         self.unitNumber = 0
-    
     def generateUnitID(self):
         id = '//'.join([str(x) for x in getIPAddressAndPort()])
         id += f'//{self.unitNumber}'

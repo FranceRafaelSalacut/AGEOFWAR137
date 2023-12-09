@@ -43,7 +43,8 @@ while run:
 
             if type(STATE) == GAME_SCREEN:
                 if action == 'train_unit':
-                    all_units.add(STATE.train_unit())
+                    unit = STATE.train_unit()
+                    all_units.add(unit)
 
             if action == "Exit":
                 run = False
