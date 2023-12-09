@@ -66,7 +66,7 @@ class GAME_SCREEN():
     def train_tank_unit(self):
         return self._game.train_tank_unit()
     def upgrade(self):
-        self._game.upgrade()
+        return self._game.upgrade()
     def change_target(self):
         for button in self.dropDownTargets:
             button.show = not button.show

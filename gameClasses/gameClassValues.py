@@ -109,11 +109,34 @@ UNITS = {
 
 Base_Cave = {
     "hp" : 30,
-    "img" : 'graphics/bases/cave.png'
+    "expCost" : 100,
+    "img" : 'graphics/bases/cave.png',
+    "imgScale" : (100,100)
+}
+Base_Castle = {
+    "hp" : 40,
+    "expCost" : 100,
+    "img" : 'graphics/bases/cave.png',
+    "imgScale" : (100,100)
+}
+Base_Camp = {
+    "hp" : 50,
+    "expCost" : 100,
+    "img" : 'graphics/bases/cave.png',
+    "imgScale" : (100,100)
+}
+Base_Citadel = {
+    "hp" : 60,
+    "expCost" : 100,
+    "img" : 'graphics/bases/cave.png',
+    "imgScale" : (100,100)
 }
 
 
 
 BUILDINGS = {
-    "Cave" : Base_Cave
+    "Cave" : Base_Cave,
+    "Castle" : Base_Castle,
+    "Camp" : Base_Camp,
+    "Citadel" : Base_Citadel
 }

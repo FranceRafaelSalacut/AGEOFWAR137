@@ -42,11 +42,17 @@ class GameClass():
         return id
     
     def get_base(self):
-        if self.techLevel == 1:
-            base = Cave(0)
-            base.rect.bottomleft = (0, GAME_SCREEN_HEIGHT)
-            return base
-    
+        base = Cave(0)
+        print(self.techLevel)
+        if self.techLevel == 2:
+            base = Castle(0)
+        if self.techLevel == 3:
+            base = Camp(0)
+        if self.techLevel == 4:
+            base = Citadel(0)
+        base.rect.bottomleft = (0, GAME_SCREEN_HEIGHT)
+        return base
+        
     def get_exp(self):
         return math.floor(self.exp)
     def get_gold(self):
@@ -79,7 +85,9 @@ class GameClass():
 
     
     def upgrade(self):
-        self.techLevel += 1
+        if self.get_exp() >= self.get_base().expCost:
+            self.techLevel += 1
+        return self.get_base()
 
     def passiveGain(self):
         self.gold += (1 / 60)

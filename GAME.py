@@ -40,6 +40,7 @@ while run:
     # vv===========================================vv
     if type(STATE) == GAME_SCREEN:
         screen.blit(base.image, base.rect)
+        STATE.passiveGain()
 
     for entity in all_units:
         entity.move()
@@ -52,9 +53,6 @@ while run:
             entity_id = f'{entity.id}//{type(entity).__name__}'
             print(entity_id)
             entity.kill()
-
-    if type(STATE) == GAME_SCREEN:
-        STATE.passiveGain()
 
     # GUI
     for index, display in enumerate(STATE.display()):
@@ -69,8 +67,6 @@ while run:
                     STATE.selectTarget(action.split('_')[1])
                     STATE.change_target()
 
-
-
                 unit = None
                 if action == 'train_melee_unit':
                     unit = STATE.train_melee_unit()
@@ -82,14 +78,12 @@ while run:
                     all_units.add(unit)
 
                 if action == 'upgrade':
-                    STATE.upgrade()
-
+                    base = STATE.upgrade()
 
             if action == "Exit":
                 run = False
 
             print(action)
-
 
     # ^^===========================================^^
     # flip() the display to put your work on screen
