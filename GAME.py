@@ -46,7 +46,10 @@ while run:
         
         if entity.rect.left >= GAME_SCREEN_WIDTH:
             # TODO: put something here to send entity over to server
-            print(entity.id)
+            # current IDs are {IP ADDRESS}//{PORT}//{UNIQUE NUMBER}//{UNIT CLASS}
+            # Ex. 192.168.68.103//51546//1//Slingshotter
+            entity_id = f'{entity.id}//{type(entity).__name__}'
+            print(entity_id)
             entity.kill()
 
     # GUI
@@ -57,6 +60,12 @@ while run:
             if type(STATE) == GAME_SCREEN:
                 if action == 'train_melee_unit':
                     unit = STATE.train_melee_unit()
+                    all_units.add(unit)
+                if action == 'train_ranged_unit':
+                    unit = STATE.train_ranged_unit()
+                    all_units.add(unit)
+                if action == 'train_tank_unit':
+                    unit = STATE.train_tank_unit()
                     all_units.add(unit)
 
             if action == "Exit":

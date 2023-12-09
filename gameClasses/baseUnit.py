@@ -15,13 +15,14 @@ class baseUnit(baseModel):
         self.bounty = val["bounty"]
         self.exp = val["exp"]
         self.image = pg.image.load(val["img"]).convert_alpha()
-        self.image = pg.transform.scale(self.image, (75,75))
+        self.image = pg.transform.scale(self.image, val["imgScale"])
         self.rect = self.image.get_rect()
     def getListValues(self):
         return [self.hp, self.mspd, self.aspd, self.dmg, self.bounty, self.exp]
 
     def move(self):
         self.rect.centerx += self.mspd
+
     @abstractmethod
     def attack(self):
         pass

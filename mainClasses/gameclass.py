@@ -24,5 +24,15 @@ class GameClass():
 
     def train_melee_unit(self):
         unit = self.factory.create_melee_unit()(self.generateUnitID())
-        unit.rect.center = (0, GAME_SCREEN_HEIGHT - unit.rect.height)
+        unit.rect.bottomleft = (0, GAME_SCREEN_HEIGHT)
+        return unit
+    
+    def train_ranged_unit(self):
+        unit = self.factory.create_ranged_unit()(self.generateUnitID())
+        unit.rect.bottomleft = (0, GAME_SCREEN_HEIGHT)
+        return unit
+    
+    def train_tank_unit(self):
+        unit = self.factory.create_tank_unit()(self.generateUnitID())
+        unit.rect.bottomleft = (0, GAME_SCREEN_HEIGHT)
         return unit
