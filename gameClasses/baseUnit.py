@@ -3,9 +3,9 @@ from baseModel import baseModel
 from gameClassValues import UNITS
 
 class baseUnit(baseModel):
-    def __init__(self, id, x = 0, y = 0, width = 0, height = 0):
-        super().__init__(id, x, y, width, height)
-    def getValues(self, unitType : str):
+    def __init__(self, id, width = 0, height = 0, x = 0, y = 0):
+        super().__init__(id,width, height, x, y)
+    def fetchValues(self, unitType : str):
         val = UNITS[unitType]
         self.hp = val["hp"]
         self.mspd = val["mspd"]
@@ -13,8 +13,9 @@ class baseUnit(baseModel):
         self.dmg = val["dmg"]
         self.bounty = val["bounty"]
         self.exp = val["exp"]
+    def getListValues(self):
+        return [self.hp, self.mspd, self.aspd, self.dmg, self.bounty, self.exp]
 
-    @abstractmethod
     def move(self):
         pass
     @abstractmethod
@@ -23,6 +24,6 @@ class baseUnit(baseModel):
 
 if __name__ == "__main__":
     test = baseUnit(1)
-    test.getValues('Caveman')
+    test.fetchValues('Caveman')
 
     print(test.hp)
