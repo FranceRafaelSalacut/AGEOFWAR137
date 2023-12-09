@@ -25,6 +25,7 @@ base = STATE.get_base()
 pygame.mixer.music.load(MUSIC_GLORIOUS_MORNING)
 pygame.mixer.music.play()
 
+# TODO: get targets from server
 
 while run:
     # polling for events
@@ -52,21 +53,37 @@ while run:
             print(entity_id)
             entity.kill()
 
+    if type(STATE) == GAME_SCREEN:
+        STATE.passiveGain()
+
     # GUI
     for index, display in enumerate(STATE.display()):
         if display.draw(screen):
             action = display.getValue()
 
             if type(STATE) == GAME_SCREEN:
+                # BUTTONS
+                if action == 'change_target':
+                    STATE.change_target()
+                if action.startswith('target_'):
+                    STATE.selectTarget(action.split('_')[1])
+                    STATE.change_target()
+
+
+
+                unit = None
                 if action == 'train_melee_unit':
                     unit = STATE.train_melee_unit()
-                    all_units.add(unit)
-                if action == 'train_ranged_unit':
+                elif action == 'train_ranged_unit':
                     unit = STATE.train_ranged_unit()
-                    all_units.add(unit)
-                if action == 'train_tank_unit':
+                elif action == 'train_tank_unit':
                     unit = STATE.train_tank_unit()
+                if unit:
                     all_units.add(unit)
+
+                if action == 'upgrade':
+                    STATE.upgrade()
+
 
             if action == "Exit":
                 run = False

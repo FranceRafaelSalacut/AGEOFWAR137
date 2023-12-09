@@ -15,6 +15,7 @@ Caveman = {
     "dmg" : 0,
     "bounty" : 0,
     "exp" : 0,
+    "cost" : 0,
     "img" : 'graphics\stickman.png'
     "imgScale" : (100,100) # width, height
 }
@@ -28,6 +29,7 @@ Melee_Caveman = {
     "dmg" : 1,
     "bounty" : 1,
     "exp" : 1,
+    "cost" : 5,
     "img" : 'graphics/unit_melee/stickman.png',
     "imgScale" : (100,100)
 }
@@ -38,6 +40,7 @@ Melee_Footman = {
     "dmg" : 2,
     "bounty" : 3,
     "exp" : 3,
+    "cost" : 5,
     "img" : 'graphics/stickman.png',
     "imgScale" : (100,100)
 }
@@ -48,6 +51,7 @@ Melee_Soldier = {
     "dmg" : 3,
     "bounty" : 9,
     "exp" : 9,
+    "cost" : 5,
     "img" : 'graphics/stickman.png',
     "imgScale" : (100,100)
 }
@@ -58,6 +62,7 @@ Melee_Robot = {
     "dmg" : 4,
     "bounty" : 27,
     "exp" : 27,
+    "cost" : 5,
     "img" : 'graphics/stickman.png',
     "imgScale" : (100,100)
 }
@@ -69,6 +74,7 @@ Ranged_Unit = {
     "dmg" : 0,
     "bounty" : 0,
     "exp" : 0,
+    "cost" : 5,
     "img" : 'graphics/unit_ranged/ranged_stickman.png',
     "imgScale" : (100,100)
 }
@@ -80,6 +86,7 @@ Tank_Unit = {
     "dmg" : 0,
     "bounty" : 0,
     "exp" : 0,
+    "cost" : 5,
     "img" : 'graphics/unit_tank/tank_stickman.png',
     "imgScale" : (140,200)
 }

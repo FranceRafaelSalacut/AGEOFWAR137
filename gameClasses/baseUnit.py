@@ -14,11 +14,10 @@ class baseUnit(baseModel):
         self.dmg = val["dmg"]
         self.bounty = val["bounty"]
         self.exp = val["exp"]
+        self.cost = val["cost"]
         self.image = pg.image.load(val["img"]).convert_alpha()
         self.image = pg.transform.scale(self.image, val["imgScale"])
         self.rect = self.image.get_rect()
-    def getListValues(self):
-        return [self.hp, self.mspd, self.aspd, self.dmg, self.bounty, self.exp]
 
     def move(self):
         self.rect.centerx += self.mspd
@@ -26,9 +25,3 @@ class baseUnit(baseModel):
     @abstractmethod
     def attack(self):
         pass
-
-if __name__ == "__main__":
-    test = baseUnit(1)
-    test.fetchValues('Caveman')
-
-    print(test.hp)
