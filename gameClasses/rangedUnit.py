@@ -1,73 +1,34 @@
-from .baseUnit import baseUnit
-from .projectile import Projectile
-import pygame as pg
+from baseUnit import baseUnit
+from projectile import Projectile
 
 class rangedUnit(baseUnit):
-    def __init__(self, id, x, y, width, height):
-        self.id = id
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-    def move(self):
-        pass
+    def __init__(self, id, x, y):
+        super().__init__(id, x, y)
     def attack(self):
         pass
-    def die(self):
-        pass
-    
-class Slingshotter(pg.sprite.Sprite, rangedUnit):
-    def __init__(self, id, x, y, width, height):
-        super(Slingshotter, self).__init__()
-        self.image = pg.Surface([width, height])
-        self.image.fill((0,0,0))
-        self.rect = self.image.get_rect()
-        self.rect.center = [x,y]
-        self.hp = 0
-        self.mspd = 0
-        self.aspd = 0
-        self.dmg = 0
-        self.bounty = 0
-        self.exp = 0
-        
-class Archer(pg.sprite.Sprite, rangedUnit):
-    def __init__(self, id, x, y, width, height):
-        super(Archer, self).__init__()
-        self.image = pg.Surface([width, height])
-        self.image.fill((0,0,0))
-        self.rect = self.image.get_rect()
-        self.rect.center = [x,y]
-        self.hp = 0
-        self.mspd = 0
-        self.aspd = 0
-        self.dmg = 0
-        self.bounty = 0
-        self.exp = 0
+class Slingshotter(rangedUnit):
+    def __init__(self, id, x, y):
+        super().__init__(id, x, y)
+        self.fetchValues('Slingshotter')
+class Archer(rangedUnit):
+    def __init__(self, id, x, y):
+        super().__init__(id, x, y)
+        self.fetchValues('Archer')
+class Sniper(rangedUnit):
+    def __init__(self, id, x, y):
+        super().__init__(id, x, y)
+        self.fetchValues('Sniper')
+class Stormtrooper(rangedUnit):
+    def __init__(self, id, x, y):
+        super().__init__(id, x, y)
+        self.fetchValues('Stormtrooper')
 
-class Sniper(pg.sprite.Sprite, rangedUnit):
-    def __init__(self, id, x, y, width, height):
-        super(Sniper, self).__init__()
-        self.image = pg.Surface([width, height])
-        self.image.fill((0,0,0))
-        self.rect = self.image.get_rect()
-        self.rect.center = [x,y]
-        self.hp = 0
-        self.mspd = 0
-        self.aspd = 0
-        self.dmg = 0
-        self.bounty = 0
-        self.exp = 0
-        
-class Stormtrooper(pg.sprite.Sprite, rangedUnit):
-    def __init__(self, id, x, y, width, height):
-        super(Stormtrooper, self).__init__()
-        self.image = pg.Surface([width, height])
-        self.image.fill((0,0,0))
-        self.rect = self.image.get_rect()
-        self.rect.center = [x,y]
-        self.hp = 0
-        self.mspd = 0
-        self.aspd = 0
-        self.dmg = 0
-        self.bounty = 0
-        self.exp = 0
+if __name__ == '__main__':
+    test = Slingshotter(0,0,0)
+    print(test.getListValues())
+    test2 = Archer(0,0,0)
+    print(test2.getListValues())
+    test3 = Sniper(0,0,0)
+    print(test3.getListValues())
+    test4 = Stormtrooper(0,0,0)
+    print(test4.getListValues())

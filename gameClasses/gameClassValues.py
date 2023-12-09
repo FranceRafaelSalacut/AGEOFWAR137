@@ -52,9 +52,35 @@ Melee_Robot = {
     "exp" : 27
 }
 
+Ranged_Unit = {
+    "hp" : 0,
+    "mspd" : 0,
+    "aspd" : 0,
+    "dmg" : 0,
+    "bounty" : 0,
+    "exp" : 0
+}
+
+Tank_Unit = {
+    "hp" : 0,
+    "mspd" : 0,
+    "aspd" : 0,
+    "dmg" : 0,
+    "bounty" : 0,
+    "exp" : 0
+}
+
 UNITS = {
     "Caveman" : Melee_Caveman,
     "Footman" : Melee_Footman,
     "Soldier" : Melee_Soldier,
     "Robot" : Melee_Robot,
+    "Slingshotter" : Ranged_Unit,
+    "Archer" : Ranged_Unit,
+    "Sniper" : Ranged_Unit,
+    "Stormtrooper" : Ranged_Unit,
+    "DinoRider" : Tank_Unit,
+    "Cavalier" : Tank_Unit,
+    "Tank" : Tank_Unit,
+    "Mecha" : Tank_Unit,
 }

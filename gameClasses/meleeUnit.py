@@ -1,5 +1,4 @@
 from baseUnit import baseUnit
-import pygame as pg
 
 
 class meleeUnit(baseUnit):
