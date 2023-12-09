@@ -3,10 +3,10 @@ from mainClasses.text import *
 pygame.init()
 
 
-
+# start_server = Button("Start_Server", Light_Grey, 550, 150, 175, 50, 35)
 class Button():
     def __init__(self, text, color, pos_x, pos_y, height, width, font_size, value = None):
-        self.text = Text(text, 0, 0, font_size)
+        self.text = Text(text, pos_x, pos_y, font_size)
         self.color = color
         self.position = (pos_x, pos_y)
         self.size = (height, width)
@@ -17,10 +17,10 @@ class Button():
     def draw(self, screen):
         action = False
         #Drawing the colored rectangle on the screen
-        pygame.draw.rect(screen, self.color, self.rect )
+        pygame.draw.rect(screen, self.color, self.rect)
 
         #Drawing the text over the rectangle
-        screen.blit(self.text.render(), (self.position))
+        screen.blit(self.text.render(), self.rect.topleft)
 
         #Tracking the mouse movement
         mouse = pygame.mouse.get_pos()
@@ -39,7 +39,7 @@ class Button():
         return self.text.get_text()
     
     def getValue(self):
-        return self.getValue()
+        return self.value
     
     def changeText(self, text):
         self.text = Text(text, 0, 0, 35)

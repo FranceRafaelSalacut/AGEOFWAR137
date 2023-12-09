@@ -9,23 +9,21 @@ from mainClasses.gameclass import *
 pygame.init
 
 
-# GRAPHICS
+# Initializing Buttons
+# parameters are text, color, pos_x, pos_y, width, height, font size, value
 
-# UI
+Button_trainUnit = Button("Unit", Light_Grey, GAME_SCREEN_WIDTH - 175, 50, 50, 50, 20,value = "train_unit")
 
-Display_Text = Text("GAME STARTED", 100, 75, 20)
-button_trainUnit = Button("Train", Light_Grey, 600, 50, 100, 50, 35)
+# parameters are text, center x, center y, Fontsize
+Display_Text = Text("test", GAME_SCREEN_WIDTH - 30, GAME_SCREEN_HEIGHT - 10, 20)
 
 class GAME_SCREEN():
     def __init__(self) -> None:
-        self.to_display = [Display_Text]
-
-    def screen_to_display(self):
-        # Initializing Screen
-        # parameters are height, width, color
-        screen = Screen(GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT, Baby_Blue)
-        surface = screen.returnScreen()
-        return surface
-
-    def display(self):
+        self.game = GameClass()
+        self.to_display = [Display_Text, Button_trainUnit]
+    
+    def train_unit(self):
+        return self.game.train_unit()
+    
+    def display(self):      
         return self.to_display

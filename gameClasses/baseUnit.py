@@ -1,10 +1,10 @@
 from abc import abstractmethod
-from baseModel import baseModel
-from gameClassValues import UNITS
+from .baseModel import baseModel
+from .gameClassValues import UNITS
 
 class baseUnit(baseModel):
-    def __init__(self, id, width = 0, height = 0, x = 0, y = 0):
-        super().__init__(id,width, height, x, y)
+    def __init__(self, id, x = 0, y = 0):
+        super().__init__(id, x, y)
     def fetchValues(self, unitType : str):
         val = UNITS[unitType]
         self.hp = val["hp"]
@@ -17,7 +17,7 @@ class baseUnit(baseModel):
         return [self.hp, self.mspd, self.aspd, self.dmg, self.bounty, self.exp]
 
     def move(self):
-        pass
+        self.rect.centerx += self.mspd
     @abstractmethod
     def attack(self):
         pass

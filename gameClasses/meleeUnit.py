@@ -1,27 +1,27 @@
-from baseUnit import baseUnit
+from .baseUnit import baseUnit
 
 
 class meleeUnit(baseUnit):
-    def __init__(self, id, x, y):
-        super().__init__(id, x, y)
+    def __init__(self, id, x=0, y=0):
+        super().__init__(id, x=x, y=y)
     def attack(self):
         pass
 
 class Caveman(meleeUnit):
-    def __init__(self, id, x, y):
-        super().__init__(id, x, y)
+    def __init__(self, id, x=0, y=0):
+        super().__init__(id, x=x, y=y)
         self.fetchValues('Caveman')
 class Footman(meleeUnit):
-    def __init__(self, id, x, y):
-        super().__init__(id, x, y)
+    def __init__(self, id, x=0, y=0):
+        super().__init__(id, x=x, y=y)
         self.fetchValues('Footman')
 class Soldier(meleeUnit):
-    def __init__(self, id, x, y):
-        super().__init__(id, x, y)
+    def __init__(self, id, x=0, y=0):
+        super().__init__(id, x=x, y=y)
         self.fetchValues('Soldier')
 class Robot(meleeUnit):
-    def __init__(self, id, x, y):
-        super().__init__(id, x, y)
+    def __init__(self, id, x=0, y=0):
+        super().__init__(id, x=x, y=y)
         self.fetchValues('Robot')
 
 

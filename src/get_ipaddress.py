@@ -17,7 +17,7 @@ def getIPAddressAndPort():
 if __name__ == "__main__":
     # print(getIPAdress())
     # print(find_unused_ports('127.0.0.1'))
-    print(getIPAddressAndPort())
+    print('//'.join([str(x) for x in getIPAddressAndPort()]))
     # print(find_unused_ips(101,110)[0])
     # print('.'.join(getIPAdress()[0].split('.')[:-1]))
     pass

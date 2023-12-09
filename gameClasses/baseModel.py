@@ -2,11 +2,10 @@ import pygame as pg
 from abc import abstractmethod
 
 class baseModel(pg.sprite.Sprite):
-    def __init__(self, id, width = 0, height = 0, x = 0, y = 0):
+    def __init__(self, id, x = 0, y = 0, width = 75, height = 75):
         # should only contain sprite stuff
-        pg.sprite.Sprite.__init__(self)
+        super(baseModel, self).__init__()
         self.id = id
-
         self.image = pg.Surface([width, height])
         self.image.fill((0,0,0))
         self.rect = self.image.get_rect()

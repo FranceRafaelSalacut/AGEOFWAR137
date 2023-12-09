@@ -1,25 +1,25 @@
-from baseUnit import baseUnit
+from .baseUnit import baseUnit
 
 class tankUnit(baseUnit):
     def __init__(self, id, x, y):
-        super().__init__(id, x, y)
+        super().__init__(id, x=x, y=y)
     def attack(self):
         pass
 class dinoRider(tankUnit):
-    def __init__(self, id, x, y):
-        super().__init__(id, x, y)
+    def __init__(self, id, x=0, y=0):
+        super().__init__(id, x=x, y=y)
         self.fetchValues('DinoRider')
 class Cavalier(tankUnit):
-    def __init__(self, id, x, y):
-        super().__init__(id, x, y)
+    def __init__(self, id, x=0, y=0):
+        super().__init__(id, x=x, y=y)
         self.fetchValues('Cavalier')
 class Tank(tankUnit):
-    def __init__(self, id, x, y):
-        super().__init__(id, x, y)
+    def __init__(self, id, x=0, y=0):
+        super().__init__(id, x=x, y=y)
         self.fetchValues('Tank')
 class Mecha(tankUnit):
-    def __init__(self, id, x, y):
-        super().__init__(id, x, y)
+    def __init__(self, id, x=0, y=0):
+        super().__init__(id, x=x, y=y)
         self.fetchValues('Mecha')
 
 if __name__ == '__main__':
