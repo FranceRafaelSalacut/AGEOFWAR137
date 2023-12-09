@@ -1,7 +1,7 @@
 import socket 
 import threading 
 from src.get_ipaddress import * 
-from gameClasses.text import *
+from mainClasses.text import *
 
 class Client():
     def __init__(self) -> None:

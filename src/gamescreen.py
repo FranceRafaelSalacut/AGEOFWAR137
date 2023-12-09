@@ -2,10 +2,10 @@ import pygame
 import threading
 import time
 from src.CONSTANTS import *
-from gameClasses.screen import *
-from gameClasses.button import *
-from gameClasses.text import *
-from gameClasses.gameclass import *
+from mainClasses.screen import *
+from mainClasses.button import *
+from mainClasses.text import *
+from mainClasses.gameclass import *
 pygame.init
 
 
@@ -18,11 +18,6 @@ Display_Text = Text("GAME STARTED", 100, 75, 20)
 class GAME_SCREEN():
     def __init__(self) -> None:
         self.to_display = [Display_Text]
-
-    def loadImages(self):
-        self.images = {
-            
-        }
 
     def screen_to_display(self):
         # Initializing Screen

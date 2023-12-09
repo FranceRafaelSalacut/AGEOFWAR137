@@ -2,10 +2,10 @@ import pygame
 import threading
 import time
 from src.CONSTANTS import *
-from gameClasses.screen import *
-from gameClasses.button import *
-from gameClasses.text import *
-from gameClasses.serverclass import *
+from mainClasses.screen import *
+from mainClasses.button import *
+from mainClasses.text import *
+from mainClasses.serverclass import *
 pygame.init
 
 
