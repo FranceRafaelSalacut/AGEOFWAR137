@@ -24,18 +24,19 @@ class UnitFactory(ABC):
         pass
 
 class PrehistoricUnitFactory(pg.sprite.Sprite, UnitFactory):
-    def __init__(self, groups):
+    def __init__(self, groups, screen):
         super().__init__()
         self.x = 0
         self.y = SCREEN_HEIGHT
         self.hp = 0
         self.groups = groups
+        self.screen = screen
 
     def create_melee_unit(self):
-        Caveman(1, (self.x + 20), (self.y - 10), 100, 100, 1, self.groups)
-    
+        Caveman(1, (self.x + 20), (self.y - 10), 100, 100, 1, self.groups, self.screen)
+        
     def create_ranged_unit(self) -> Slingshotter:
-        return Slingshotter(1, (self.x + 20), (self.y - 10), 100, 100, 1, self.groups)
+        return Slingshotter(1, (self.x + 20), (self.y - 10), 100, 100, 1, self.groups, self.screen)
 
     def create_tank_unit(self) -> dinoRider:
         return dinoRider() 
