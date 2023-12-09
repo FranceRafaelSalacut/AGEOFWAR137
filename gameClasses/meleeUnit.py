@@ -18,7 +18,7 @@ class MeleeUnit(baseUnit):
         pass
 
 class Caveman(pg.sprite.Sprite, MeleeUnit):
-    def __init__(self, id, x, y, width, height, direction, groups):
+    def __init__(self, id, x, y, width, height, direction, groups, screen):
         super(Caveman, self).__init__()
         pg.sprite.Sprite.__init__(self, groups) # Init the sprit within this group
         self.groups = groups
@@ -26,17 +26,23 @@ class Caveman(pg.sprite.Sprite, MeleeUnit):
         self.image.fill((255,0,0))
         self.rect = self.image.get_rect()
         self.rect.center = [x,y]
+        self.width = width
+        self.height = height
         self.direction = direction
-        self.hp = 0
+        self.hp = 10
         self.mspd = 2
         self.aspd = 0
         self.dmg = 0
         self.bounty = 0
         self.exp = 0
-
+        self.screen = screen
+        # Health bar    
     def update(self):
         self.rect.centerx += self.mspd
+        self.hp-=0.01 # Comment out/remove. This is just to test if hp bar decrements
         # Kill sprite if it leaves screen
+        pg.draw.rect(self.screen, (255,0,0), (self.rect.left, self.rect.top - 20, self.width, 10)) # NEW
+        pg.draw.rect(self.screen, (0,128,0), (self.rect.left, self.rect.top - 20, self.width - (5 * (10 - self.hp)), 10)) # NEW
         if self.rect.left > SCREEN_WIDTH + 100:
             self.kill()
 
