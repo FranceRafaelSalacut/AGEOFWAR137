@@ -19,6 +19,7 @@ dt = 0 # deltaTime
 run = True
 screen_updated = False
 all_units = pygame.sprite.Group()
+base = STATE.get_base()
 
 # music
 pygame.mixer.music.load(MUSIC_GLORIOUS_MORNING)
@@ -36,22 +37,26 @@ while run:
 
     # Render game here
     # vv===========================================vv
+    if type(STATE) == GAME_SCREEN:
+        screen.blit(base.image, base.rect)
 
     for entity in all_units:
         entity.move()
         screen.blit(entity.image, entity.rect)
         
         if entity.rect.left >= GAME_SCREEN_WIDTH:
-            del entity
-    
+            # TODO: put something here to send entity over to server
+            print(entity.id)
+            entity.kill()
+
     # GUI
     for index, display in enumerate(STATE.display()):
         if display.draw(screen):
             action = display.getValue()
 
             if type(STATE) == GAME_SCREEN:
-                if action == 'train_unit':
-                    unit = STATE.train_unit()
+                if action == 'train_melee_unit':
+                    unit = STATE.train_melee_unit()
                     all_units.add(unit)
 
             if action == "Exit":

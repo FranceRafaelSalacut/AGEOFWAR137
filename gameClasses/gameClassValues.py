@@ -27,7 +27,7 @@ Melee_Caveman = {
     "dmg" : 1,
     "bounty" : 1,
     "exp" : 1,
-    "img" : 'graphics\stickman.png'
+    "img" : 'graphics/unit_melee/stickman.png'
 }
 Melee_Footman = {
     "hp" : 5,
@@ -36,7 +36,7 @@ Melee_Footman = {
     "dmg" : 2,
     "bounty" : 3,
     "exp" : 3,
-    "img" : 'graphics\stickman.png'
+    "img" : 'graphics/stickman.png'
 }
 Melee_Soldier = {
     "hp" : 8,
@@ -45,7 +45,7 @@ Melee_Soldier = {
     "dmg" : 3,
     "bounty" : 9,
     "exp" : 9,
-    "img" : 'graphics\stickman.png'
+    "img" : 'graphics/stickman.png'
 }
 Melee_Robot = {
     "hp" : 12,
@@ -54,7 +54,7 @@ Melee_Robot = {
     "dmg" : 4,
     "bounty" : 27,
     "exp" : 27,
-    "img" : 'graphics\stickman.png'
+    "img" : 'graphics/stickman.png'
 }
 
 Ranged_Unit = {
@@ -64,7 +64,7 @@ Ranged_Unit = {
     "dmg" : 0,
     "bounty" : 0,
     "exp" : 0,
-    "img" : 'graphics\stickman.png'
+    "img" : 'graphics/unit_ranged/ranged_stickman.png'
 }
 
 Tank_Unit = {
@@ -74,7 +74,7 @@ Tank_Unit = {
     "dmg" : 0,
     "bounty" : 0,
     "exp" : 0,
-    "img" : 'graphics\stickman.png'
+    "img" : 'graphics/unit_tank/tank_stickman.png'
 }
 
 UNITS = {
@@ -90,4 +90,16 @@ UNITS = {
     "Cavalier" : Tank_Unit,
     "Tank" : Tank_Unit,
     "Mecha" : Tank_Unit,
+}
+
+
+Base_Cave = {
+    "hp" : 30,
+    "img" : 'graphics/bases/cave.png'
+}
+
+
+
+BUILDINGS = {
+    "Cave" : Base_Cave
 }

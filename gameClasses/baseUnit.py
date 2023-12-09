@@ -1,6 +1,7 @@
 from abc import abstractmethod
 from .baseModel import baseModel
 from .gameClassValues import UNITS
+import pygame as pg
 
 class baseUnit(baseModel):
     def __init__(self, id, x = 0, y = 0):
@@ -13,6 +14,9 @@ class baseUnit(baseModel):
         self.dmg = val["dmg"]
         self.bounty = val["bounty"]
         self.exp = val["exp"]
+        self.image = pg.image.load(val["img"]).convert_alpha()
+        self.image = pg.transform.scale(self.image, (75,75))
+        self.rect = self.image.get_rect()
     def getListValues(self):
         return [self.hp, self.mspd, self.aspd, self.dmg, self.bounty, self.exp]
 
