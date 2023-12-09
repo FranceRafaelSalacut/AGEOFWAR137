@@ -41,8 +41,8 @@ class Caveman(pg.sprite.Sprite, MeleeUnit):
         self.rect.centerx += self.mspd
         self.hp-=0.01 # Comment out/remove. This is just to test if hp bar decrements
         # Kill sprite if it leaves screen
-        pg.draw.rect(self.screen, (255,0,0), (self.rect.left, self.rect.top - 20, self.width, 10)) # NEW
-        pg.draw.rect(self.screen, (0,128,0), (self.rect.left, self.rect.top - 20, self.width - (5 * (10 - self.hp)), 10)) # NEW
+        pg.draw.rect(self.screen, (255,0,0), (self.rect.left, self.rect.top - 20, self.width, 10))
+        pg.draw.rect(self.screen, (0,128,0), (self.rect.left, self.rect.top - 20, self.width - (5 * (10 - self.hp)), 10))
         if self.rect.left > SCREEN_WIDTH + 100:
             self.kill()
 
