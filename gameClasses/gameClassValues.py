@@ -14,7 +14,8 @@ Caveman = {
     "aspd" : 0,
     "dmg" : 0,
     "bounty" : 0,
-    "exp" : 0
+    "exp" : 0,
+    "img" : 'graphics\stickman.png'
 }
 '''
 
@@ -25,7 +26,8 @@ Melee_Caveman = {
     "aspd" : 3,
     "dmg" : 1,
     "bounty" : 1,
-    "exp" : 1
+    "exp" : 1,
+    "img" : 'graphics\stickman.png'
 }
 Melee_Footman = {
     "hp" : 5,
@@ -33,7 +35,8 @@ Melee_Footman = {
     "aspd" : 3,
     "dmg" : 2,
     "bounty" : 3,
-    "exp" : 3
+    "exp" : 3,
+    "img" : 'graphics\stickman.png'
 }
 Melee_Soldier = {
     "hp" : 8,
@@ -41,7 +44,8 @@ Melee_Soldier = {
     "aspd" : 3,
     "dmg" : 3,
     "bounty" : 9,
-    "exp" : 9
+    "exp" : 9,
+    "img" : 'graphics\stickman.png'
 }
 Melee_Robot = {
     "hp" : 12,
@@ -49,7 +53,8 @@ Melee_Robot = {
     "aspd" : 3,
     "dmg" : 4,
     "bounty" : 27,
-    "exp" : 27
+    "exp" : 27,
+    "img" : 'graphics\stickman.png'
 }
 
 Ranged_Unit = {
@@ -58,7 +63,8 @@ Ranged_Unit = {
     "aspd" : 0,
     "dmg" : 0,
     "bounty" : 0,
-    "exp" : 0
+    "exp" : 0,
+    "img" : 'graphics\stickman.png'
 }
 
 Tank_Unit = {
@@ -67,7 +73,8 @@ Tank_Unit = {
     "aspd" : 0,
     "dmg" : 0,
     "bounty" : 0,
-    "exp" : 0
+    "exp" : 0,
+    "img" : 'graphics\stickman.png'
 }
 
 UNITS = {
