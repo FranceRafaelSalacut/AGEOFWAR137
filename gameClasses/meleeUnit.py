@@ -29,7 +29,9 @@ class Caveman(pg.sprite.Sprite, MeleeUnit):
         self.width = width
         self.height = height
         self.direction = direction
+        self.maxhp = 10
         self.hp = 10
+        self.hpratio = self.hp/self.maxhp
         self.mspd = 2
         self.aspd = 0
         self.dmg = 0
@@ -39,13 +41,16 @@ class Caveman(pg.sprite.Sprite, MeleeUnit):
         # Health bar    
     def update(self):
         self.rect.centerx += self.mspd
-        self.hp-=0.01 # Comment out/remove. This is just to test if hp bar decrements
+        self.hp-=0.05 # Comment out/remove. This is just to test if hp bar decrements
         # Kill sprite if it leaves screen
+        self.hpratio = self.hp/self.maxhp        
         pg.draw.rect(self.screen, (255,0,0), (self.rect.left, self.rect.top - 20, self.width, 10))
-        pg.draw.rect(self.screen, (0,128,0), (self.rect.left, self.rect.top - 20, self.width - (5 * (10 - self.hp)), 10))
-        if self.rect.left > SCREEN_WIDTH + 100:
-            self.kill()
-
+        pg.draw.rect(self.screen, (0,128,0), (self.rect.left, self.rect.top - 20, self.width * self.hpratio, 10))
+        if self.rect.left > SCREEN_WIDTH + 100 or self.hp < 0:
+            self.die()
+    def die(self):
+        self.kill()
+        
 class Footman(pg.sprite.Sprite, MeleeUnit):
     def __init__(self, id, x, y, width, height, direction, groups):
         super(Footman, self).__init__()
