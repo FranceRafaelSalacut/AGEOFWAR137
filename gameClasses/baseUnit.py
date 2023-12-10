@@ -9,6 +9,8 @@ class baseUnit(baseModel):
         super().__init__(id, x, y)
         self.movePattern = Movement_None(self)
         self.attackTarget:baseModel = None
+        self.possibleTargets = []
+
     def fetchValues(self, unitType : str):
         val = UNITS[unitType]
         self.hp = val["hp"]
@@ -21,6 +23,9 @@ class baseUnit(baseModel):
         self.image = pg.image.load(val["img"]).convert_alpha()
         self.image = pg.transform.scale(self.image, val["imgScale"])
         self.rect = self.image.get_rect()
+
+    def addPossibleTarget(self, target: baseModel):
+        self.possibleTargets.append(target)
 
     def setMovement(self, movePattern:Movement_None):
         self.movePattern = movePattern
