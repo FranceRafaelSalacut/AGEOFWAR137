@@ -121,4 +121,24 @@ if __name__ == "__main__":
         ('Dustin','192.168.68.103',6490),
         ('Jav','192.168.68.103',8203)
     ]
-    Game(players = targets)
+    Game(playimport sys
+import json
+
+def getArgs():
+    print("In here boyoyoyoy")
+    if len(sys.argv) > 1:
+        temp = sys.argv[1:]
+        print(temp)
+
+        temp = ''.join(temp).replace("'","").replace('{', '{"').replace(':','": "').replace(',','", "').replace('}','"}')
+        print(json.loads(temp))
+
+        address_list = json.loads(temp)
+        for key, value in address_list.items():
+            print(f"key: {key}, value: {value}")
+
+        print("watatata")
+    else:
+        print("No message passed")
+
+getArgs()

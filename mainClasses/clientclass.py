@@ -14,6 +14,17 @@ class Client():
         self.background_thread = None
         self.running = False
         self.found_servers = []
+    
+
+    def waitToStart(self):
+        while self.running:
+            try:
+                message, address = self.socket.recvfrom(1024)
+                if message.decode() == "START":
+                    self.stopwait()
+            except:
+                continue
+        print("Stopped")
 
     def startFinding(self, display:[], connect:[]):
         self.found_servers = []
@@ -58,7 +69,24 @@ class Client():
 
 
     def connect(self, index):
-        connect_message = "connect"
+        connect_message = socket.gethostname()
         print(f"{self.found_servers} == {index}")
         print(f"{self.found_servers[index]}, {type(self.found_servers[index])}")
         self.socket.sendto(connect_message.encode(), self.found_servers[index])
+
+        self.running = True
+        self.background_thread = threading.Thread(target=self.waitToStart)
+        self.background_thread.start()
+
+        self.background_thread.join()
+        return True
+
+    def stopwait(self):
+        print("Got here")
+        self.running = False
+        if self.background_thread:
+            self.background_thread.join()
+
+
+    def close(self):
+        self.socket.close()

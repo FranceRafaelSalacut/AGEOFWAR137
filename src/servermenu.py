@@ -1,6 +1,4 @@
 import pygame
-import threading
-import time
 from src.CONSTANTS import *
 from mainClasses.screen import *
 from mainClasses.button import *
@@ -39,6 +37,12 @@ class SERVER_MENU():
 
     def stop(self):
         self.server.stopServer(Display_Text)
+
+    def getList(self):
+        return self.server.getAdress_list()
+    
+    def close(self):
+        self.server.close()
     
     def startGame(self):
         self.server.startGame()

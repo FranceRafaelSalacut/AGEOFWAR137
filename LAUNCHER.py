@@ -1,4 +1,6 @@
 import pygame
+import os
+import json
 from mainClasses.button import *
 from src.CONSTANTS import *
 from src.startmenu import *
@@ -44,10 +46,16 @@ while run:
                 STATE.stop()
 
             if action == "Connect":
-                STATE.connect(index)
-            
+                if STATE.connect(index):
+                    run = False
+
             if action == "Start_Game":
-                pass
+                print("HERE")
+                print(json.dumps(STATE.getList()))
+                os.system(f"python GAME.py '{json.dumps(STATE.getList())}'")
+                STATE.stop()
+                STATE.close()
+                run = False
 
             if action == "Exit":
                 run = False
