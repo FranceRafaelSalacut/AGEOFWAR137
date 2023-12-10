@@ -22,9 +22,10 @@ class Client():
             try:
                 message, address = self.socket.recvfrom(1024)
                 if message.decode() == "START":
-                    break
+                    self.stopwait()
             except:
                 continue
+        print("Stopped")
 
     def startFinding(self, display:[], connect:[]):
         self.found_servers = []
@@ -78,9 +79,15 @@ class Client():
         self.background_thread = threading.Thread(target=self.waitToStart)
         self.background_thread.start()
 
+        self.background_thread.join()
+        return True
+
     def stopwait(self):
+        print("Got here")
         self.running = False
         if self.background_thread:
             self.background_thread.join()
+
+
     def close(self):
         self.socket.close()
