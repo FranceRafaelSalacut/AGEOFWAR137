@@ -3,8 +3,6 @@ from .baseUnit import baseUnit
 class tankUnit(baseUnit):
     def __init__(self, id, x, y):
         super().__init__(id, x=x, y=y)
-    def attack(self):
-        pass
 class DinoRider(tankUnit):
     def __init__(self, id, x=0, y=0):
         super().__init__(id, x=x, y=y)
