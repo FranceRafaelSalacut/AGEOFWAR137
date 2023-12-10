@@ -39,7 +39,9 @@ class SERVER_MENU():
         self.server.stopServer(Display_Text)
 
     def getList(self):
-        self.server.getAdress_list()
-        
+        return self.server.getAdress_list()
+    
+    def close(self):
+        self.server.close()
 
         
