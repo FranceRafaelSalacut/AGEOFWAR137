@@ -32,9 +32,9 @@ class Server():
                 else:
                     #Limiting the number of clients that connects with server.
                     print(f"Client Connected from {address}: {message}")
-                    self.client_list.append(address)
+                    self.client_list[message] = address[0]
 
-                if len(self.client_list) == 1:
+                if len(self.client_list) == 6:
                     print(f"I am Full, {self.client_list}")
                     break
             except:
