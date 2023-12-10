@@ -12,6 +12,13 @@ class baseBase(baseModel):
         self.expCost = val["expCost"]
         self.image = pg.image.load(val["img"]).convert_alpha()
         self.rect = self.image.get_rect()
+        self.curhp = self.hp
+    
+    def update(self, screen):
+        self.hpratio = self.curhp/self.hp       
+        pg.draw.rect(screen, (255,0,0), (self.rect.left, self.rect.top - 20, self.rect.width, 10))
+        pg.draw.rect(screen, (0,128,0), (self.rect.left, self.rect.top - 20, self.rect.width * self.hpratio, 10))
+        
 
 class Cave(baseBase):
     def __init__(self, id):
