@@ -10,6 +10,8 @@ class baseModel(pg.sprite.Sprite):
         self.image.fill((0,0,0))
         self.rect = self.image.get_rect()
         self.rect.center = [x,y]
+    def getCenter(self):
+        return self.rect.center
 
     @abstractmethod
     def die(self):

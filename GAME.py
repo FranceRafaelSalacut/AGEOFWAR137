@@ -34,9 +34,8 @@ class Game():
         pygame.display.set_caption('TEST') # game/window title
 
         # loop
-        dt = 0 # deltaTime
+        TEST_timer = 0
         run = True
-        screen_updated = False
         all_units = pygame.sprite.Group()
         base = STATE.get_base()
 
@@ -65,10 +64,16 @@ class Game():
                 entity.move()
                 screen.blit(entity.image, entity.rect)
                 
-                if entity.rect.left >= GAME_SCREEN_WIDTH:
+                if type(entity.movePattern) == Movement_Friendly and entity.rect.left >= GAME_SCREEN_WIDTH:
                     # TODO: put something here to send entity over to server
-                    # current IDs are {IP ADDRESS}//{PORT}//{UNIQUE NUMBER}//{UNIT CLASS}
-                    # Ex. 192.168.68.103//51546//1//Slingshotter
+                    # current entity IDs are {IP ADDRESS}//{PORT}//{UNIQUE NUMBER}//{UNIT CLASS}
+                    # NOTE: entity IDs are the ones to be passed, IDs inside unit classes are similar but do not have Unit Class appended
+                    # Ex.
+                    #   Entity ID (the one to be passed through network) 
+                    #       -> 192.168.68.103//51546//1//Slingshotter
+                    #   Unit ID
+                    #       -> 192.168.68.103//51546//1
+
                     entity_id = f'{entity.id}//{type(entity).__name__}'
                     print(entity_id)
                     entity.kill()
@@ -104,11 +109,23 @@ class Game():
 
                     print(action)
 
+            # TEST
+            TEST_timer += 1
+            if TEST_timer > 100:
+                unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
+                all_units.add(unit)
+                TEST_timer = 0 # reset timer to loop
+
+            """
+            TO SPAWN ENEMIES, do:
+                unit = STATE.spawn_enemy('U)
+                all_units.add(unit)
+            """
+
             # ^^===========================================^^
             # flip() the display to put your work on screen
             pygame.display.flip()
-
-            dt = clock.tick(60) / 1000 # limits FPS to 60
+            clock.tick(60)
 
         pygame.quit()
 
