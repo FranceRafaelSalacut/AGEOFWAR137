@@ -15,6 +15,12 @@ class Client():
         self.background_thread = None
         self.running = False
         self.found_servers = []
+    
+
+    def waitToStart(self):
+        message, address = self.socket.recvfrom(1024)
+        if message.decode() == "START":
+            return
 
     def startFinding(self, display:[], connect:[]):
         self.found_servers = []
@@ -64,5 +70,12 @@ class Client():
         print(f"{self.found_servers[index]}, {type(self.found_servers[index])}")
         self.socket.sendto(connect_message.encode(), self.found_servers[index])
 
+        self.running = True
+        self.background_thread = threading.Thread(target=self.waitToStart)
+        self.background_thread.start()
+
+        self.background_thread.join()
+        pygame.quit()
+        
     def close(self):
         self.socket.close()

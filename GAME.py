@@ -14,7 +14,6 @@ def getArgs():
         for key, value in address_list.items():
             print(f"key: {key}, value: {value}")
 
-
         print("watatata")
     else:
         print("No message passed")
