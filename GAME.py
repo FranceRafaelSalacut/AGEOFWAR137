@@ -64,6 +64,7 @@ class Game():
 
             for entity in all_units:
                 entity.move()
+                entity.updateTarget()
                 screen.blit(entity.image, entity.rect)
 
                 # remove entity if they get out of the screen
@@ -105,7 +106,9 @@ class Game():
                         if unit:
                             all_units.add(unit)
                             friendly_units.add(unit)
-                            
+                            for e in enemy_units:
+                                e.addPossibleTarget(unit)
+                                unit.addPossibleTarget(e)
 
                         if action == 'upgrade':
                             base = STATE.upgrade()
@@ -121,6 +124,9 @@ class Game():
                 unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
                 all_units.add(unit)
                 enemy_units.add(unit)
+                for e in friendly_units:
+                    e.addPossibleTarget(unit)
+                    unit.addPossibleTarget(e)
                 TEST_timer = 0 # reset timer to loop
 
             """
