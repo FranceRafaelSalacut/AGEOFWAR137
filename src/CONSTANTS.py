@@ -16,3 +16,10 @@ GAME_END = 6
 # SERVER STUFF
 SERVER_IP = "127.0.0.1"
 PORT = 8000
+
+# COLORS
+Light_Grey = (170,170,170)
+Baby_Blue = (202, 228, 241)
+
+# FONT
+FONT = 'Corbel'
