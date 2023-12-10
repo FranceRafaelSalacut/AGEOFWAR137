@@ -121,7 +121,9 @@ if __name__ == "__main__":
         ('Dustin','192.168.68.103',6490),
         ('Jav','192.168.68.103',8203)
     ]
-    Game(playimport sys
+    Game(players = targets)
+
+import sys
 import json
 
 def getArgs():
