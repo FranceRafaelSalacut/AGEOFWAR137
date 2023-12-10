@@ -18,9 +18,13 @@ class Client():
     
 
     def waitToStart(self):
-        message, address = self.socket.recvfrom(1024)
-        if message.decode() == "START":
-            return
+        while self.running:
+            try:
+                message, address = self.socket.recvfrom(1024)
+                if message.decode() == "START":
+                    break
+            except:
+                continue
 
     def startFinding(self, display:[], connect:[]):
         self.found_servers = []
@@ -74,8 +78,9 @@ class Client():
         self.background_thread = threading.Thread(target=self.waitToStart)
         self.background_thread.start()
 
-        self.background_thread.join()
-        pygame.quit()
-        
+    def stopwait(self):
+        self.running = False
+        if self.background_thread:
+            self.background_thread.join()
     def close(self):
         self.socket.close()

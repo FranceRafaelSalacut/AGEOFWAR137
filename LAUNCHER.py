@@ -50,10 +50,10 @@ while run:
 
             if action == "Start_Game":
                 print("HERE")
-                STATE.stop()
-                STATE.close()
                 print(json.dumps(STATE.getList()))
                 os.system(f"python GAME.py '{json.dumps(STATE.getList())}'")
+                STATE.stop()
+                STATE.close()
                 run = False
 
             if action == "Exit":
