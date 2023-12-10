@@ -3,6 +3,7 @@ from mainClasses.button import *
 from src.CONSTANTS import *
 from src.gamescreen import *
 from gameClasses.unitFactory import *
+from gameClasses.unitQueue import *
 
 class Game():
     def __init__(self, players: list) -> None:
@@ -31,12 +32,15 @@ class Game():
         pygame.init()
         screen = pygame.display.set_mode([GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT])
         clock = pygame.time.Clock()
+        last_time = pygame.time.get_ticks()
         pygame.display.set_caption('TEST') # game/window title
 
         # loop
         TEST_timer = 0
         run = True
         all_units = pygame.sprite.Group()
+        unit_queue = UnitQueue(all_units)
+
         base = STATE.get_base()
 
         # music
@@ -99,7 +103,8 @@ class Game():
                         elif action == 'train_tank_unit':
                             unit = STATE.train_tank_unit()
                         if unit:
-                            all_units.add(unit)
+                            # all_units.add(unit)
+                            unit_queue.add_unit(unit, unit.queueTime)
 
                         if action == 'upgrade':
                             base = STATE.upgrade()
@@ -112,9 +117,9 @@ class Game():
             # TEST
             TEST_timer += 1
             if TEST_timer > 100:
-                unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
-                all_units.add(unit)
-                TEST_timer = 0 # reset timer to loop
+                 unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
+                 all_units.add(unit)
+                 TEST_timer = 0 # reset timer to loop
 
             """
             TO SPAWN ENEMIES, do:
@@ -124,6 +129,12 @@ class Game():
 
             # ^^===========================================^^
             # flip() the display to put your work on screen
+            current_time = pygame.time.get_ticks()
+            delta_time = (current_time - last_time) / 1000.0  # Convert to seconds
+            last_time = current_time
+            unit_queue.update_queue(delta_time)
+            unit_queue.draw(screen)
+
             pygame.display.flip()
             clock.tick(60)
 
