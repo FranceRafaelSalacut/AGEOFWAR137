@@ -57,6 +57,7 @@ class Game():
             # Render game here
             # vv===========================================vv
             if type(STATE) == GAME_SCREEN:
+                base.update(screen)
                 screen.blit(base.image, base.rect)
                 STATE.passiveGain()
 
