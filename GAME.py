@@ -62,6 +62,7 @@ class Game():
 
             for entity in all_units:
                 entity.move()
+                entity.update(screen)
                 screen.blit(entity.image, entity.rect)
                 
                 if type(entity.movePattern) == Movement_Friendly and entity.rect.left >= GAME_SCREEN_WIDTH:
