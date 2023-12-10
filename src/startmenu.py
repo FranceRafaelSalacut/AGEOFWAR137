@@ -1,7 +1,7 @@
 import pygame
 from src.CONSTANTS import *
-from gameClasses.screen import *
-from gameClasses.button import *
+from mainClasses.screen import *
+from mainClasses.button import *
 pygame.init
 
 # Initializing Buttons

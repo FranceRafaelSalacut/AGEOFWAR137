@@ -1,72 +1,33 @@
-from baseUnit import baseUnit
-import pygame as pg
+from .baseUnit import baseUnit
 
 class tankUnit(baseUnit):
-    def __init__(self, id, x, y, width, height):
-        self.id = id
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-    def move(self):
-        pass
+    def __init__(self, id, x, y):
+        super().__init__(id, x=x, y=y)
     def attack(self):
         pass
-    def die(self):
-        pass
-    
-class dinoRider(pg.sprite.Sprite, tankUnit):
-    def __init__(self, id, x, y, width, height):
-        super(dinoRider, self).__init__()
-        self.image = pg.Surface([width, height])
-        self.image.fill((0,0,0))
-        self.rect = self.image.get_rect()
-        self.rect.center = [x,y]
-        self.hp = 0
-        self.mspd = 0
-        self.aspd = 0
-        self.dmg = 0
-        self.bounty = 0
-        self.exp = 0
-        
-class Cavalier(pg.sprite.Sprite, tankUnit):
-    def __init__(self, id, x, y, width, height):
-        super(Cavalier, self).__init__()
-        self.image = pg.Surface([width, height])
-        self.image.fill((0,0,0))
-        self.rect = self.image.get_rect()
-        self.rect.center = [x,y]
-        self.hp = 0
-        self.mspd = 0
-        self.aspd = 0
-        self.dmg = 0
-        self.bounty = 0
-        self.exp = 0
+class DinoRider(tankUnit):
+    def __init__(self, id, x=0, y=0):
+        super().__init__(id, x=x, y=y)
+        self.fetchValues('DinoRider')
+class Cavalier(tankUnit):
+    def __init__(self, id, x=0, y=0):
+        super().__init__(id, x=x, y=y)
+        self.fetchValues('Cavalier')
+class Tank(tankUnit):
+    def __init__(self, id, x=0, y=0):
+        super().__init__(id, x=x, y=y)
+        self.fetchValues('Tank')
+class Mecha(tankUnit):
+    def __init__(self, id, x=0, y=0):
+        super().__init__(id, x=x, y=y)
+        self.fetchValues('Mecha')
 
-class Tank(pg.sprite.Sprite, tankUnit):
-    def __init__(self, id, x, y, width, height):
-        super(Tank, self).__init__()
-        self.image = pg.Surface([width, height])
-        self.image.fill((0,0,0))
-        self.rect = self.image.get_rect()
-        self.rect.center = [x,y]
-        self.hp = 0
-        self.mspd = 0
-        self.aspd = 0
-        self.dmg = 0
-        self.bounty = 0
-        self.exp = 0
-
-class Mecha(pg.sprite.Sprite, tankUnit):
-    def __init__(self, id, x, y, width, height):
-        super(Mecha, self).__init__()
-        self.image = pg.Surface([width, height])
-        self.image.fill((0,0,0))
-        self.rect = self.image.get_rect()
-        self.rect.center = [x,y]
-        self.hp = 0
-        self.mspd = 0
-        self.aspd = 0
-        self.dmg = 0
-        self.bounty = 0
-        self.exp = 0
+if __name__ == '__main__':
+    test = DinoRider(0,0,0)
+    print(test.getListValues())
+    test2 = Cavalier(0,0,0)
+    print(test2.getListValues())
+    test3 = Tank(0,0,0)
+    print(test3.getListValues())
+    test4 = Mecha(0,0,0)
+    print(test4.getListValues())

@@ -1,7 +1,7 @@
 import pygame
 import os
 import json
-from gameClasses.button import *
+from mainClasses.button import *
 from src.CONSTANTS import *
 from src.startmenu import *
 from src.clientmenu import *

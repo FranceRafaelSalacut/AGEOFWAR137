@@ -1,9 +1,9 @@
 import pygame
 from src.CONSTANTS import *
-from gameClasses.screen import *
-from gameClasses.button import *
-from gameClasses.text import *
-from gameClasses.serverclass import *
+from mainClasses.screen import *
+from mainClasses.button import *
+from mainClasses.text import *
+from mainClasses.serverclass import *
 pygame.init
 
 
@@ -43,5 +43,8 @@ class SERVER_MENU():
     
     def close(self):
         self.server.close()
+    
+    def startGame(self):
+        self.server.startGame()
 
         

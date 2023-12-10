@@ -1,9 +1,9 @@
 import pygame
 import time
 from src.CONSTANTS import *
-from gameClasses.screen import *
-from gameClasses.button import *
-from gameClasses.clientclass import *
+from mainClasses.screen import *
+from mainClasses.button import *
+from mainClasses.clientclass import *
 pygame.init
 
 # Initializing Buttons

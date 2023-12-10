@@ -1,12 +1,11 @@
 import socket 
 import threading
 from src.get_ipaddress import * 
-from gameClasses.text import *
+from mainClasses.text import *
 
 class Server():
     def __init__(self) -> None:
-        self.ip_address = getIPAdress()[0]
-        self.port = 5555
+        self.ip_address, self.port = getIPAddressAndPort()
         self.address = (self.ip_address, self.port)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
@@ -14,7 +13,7 @@ class Server():
         self.socket.bind(self.address)
         self.background_thread = None
         self.running = False
-        self.client_list = {socket.gethostname(): self.ip_address}
+        self.client_list = []
 
 
     def Backgroundrun(self):
@@ -32,9 +31,9 @@ class Server():
                 else:
                     #Limiting the number of clients that connects with server.
                     print(f"Client Connected from {address}: {message}")
-                    self.client_list[message] = address[0]
+                    self.client_list.append(address)
 
-                if len(self.client_list) == 6:
+                if len(self.client_list) == 1:
                     print(f"I am Full, {self.client_list}")
                     break
             except:
@@ -64,10 +63,5 @@ class Server():
         
         display.changeText("Server Stopped")
 
-    def getAdress_list(self):
-        message = "START"
-        self.socket.sendto(message.encode(), ('<broadcast>', self.port))
-        return self.client_list
-
-    def close(self):
-        self.socket.close()
+    def startGame(self):
+        pass

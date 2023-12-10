@@ -1,65 +1,63 @@
 from abc import ABC, abstractmethod
-from meleeUnit import Caveman, Footman, Soldier, Robot
-from rangedUnit import Slingshotter, Archer, Sniper, Stormtrooper
-from tankUnit import dinoRider, Cavalier, Tank, Mecha
+from .meleeUnit import meleeUnit, Caveman, Footman, Soldier, Robot
+from .rangedUnit import rangedUnit, Slingshotter, Archer, Sniper, Stormtrooper
+from .tankUnit import tankUnit, DinoRider, Cavalier, Tank, Mecha
 
 
 class UnitFactory(ABC):
 
     @abstractmethod
-    def create_melee_unit(self):
+    def create_melee_unit(self) -> type:
         pass
 
     @abstractmethod
-    def create_ranged_unit(self):
+    def create_ranged_unit(self) -> type:
         pass
 
     @abstractmethod
-    def create_tank_unit(self):
+    def create_tank_unit(self) -> type:
         pass
 
 class PrehistoricUnitFactory(UnitFactory):
 
-    def create_melee_unit(self) -> Caveman:
-        return Caveman()
+    def create_melee_unit(self):
+        return Caveman
     
-    def create_ranged_unit(self) -> Slingshotter:
-        return Slingshotter()
+    def create_ranged_unit(self):
+        return Slingshotter
 
-    def create_tank_unit(self) -> dinoRider:
-        return dinoRider() 
+    def create_tank_unit(self):
+        return DinoRider
 
 class MedievalUnitFactory(UnitFactory):
 
-    def create_melee_unit(self) -> Footman:
-        return Footman()
+    def create_melee_unit(self):
+        return Footman
     
-    def create_ranged_unit(self) -> Archer:
-        return Archer()
+    def create_ranged_unit(self):
+        return Archer
 
-    def create_tank_unit(self) -> Cavalier:
-        return Cavalier()
+    def create_tank_unit(self):
+        return Cavalier
 
 class ModernUnitFactory(UnitFactory):
     
-    def create_melee_unit(self) -> Soldier:
-        return Soldier()
+    def create_melee_unit(self):
+        return Soldier
     
-    def create_ranged_unit(self) -> Sniper:
-        return Sniper()
+    def create_ranged_unit(self):
+        return Sniper
 
-    def create_tank_unit(self) -> Tank:
-        return Tank()
+    def create_tank_unit(self):
+        return Tank
 
 class ScifiUnitFactory(UnitFactory):
 
-    def create_melee_unit(self) -> Robot:
-        return Robot()
+    def create_melee_unit(self):
+        return Robot
     
-    def create_ranged_unit(self) -> Stormtrooper:
-        return Stormtrooper()
+    def create_ranged_unit(self):
+        return Stormtrooper
 
-    def create_tank_unit(self) -> Mecha:
-        return Mecha()
-
- 
+    def create_tank_unit(self):
+        return Mecha
