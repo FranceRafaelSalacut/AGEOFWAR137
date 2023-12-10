@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from .meleeUnit import meleeUnit, Caveman, Footman, Soldier, Robot
 from .rangedUnit import rangedUnit, Slingshotter, Archer, Sniper, Stormtrooper
-from .tankUnit import tankUnit, dinoRider, Cavalier, Tank, Mecha
+from .tankUnit import tankUnit, DinoRider, Cavalier, Tank, Mecha
 
 
 class UnitFactory(ABC):
@@ -27,7 +27,7 @@ class PrehistoricUnitFactory(UnitFactory):
         return Slingshotter
 
     def create_tank_unit(self):
-        return dinoRider
+        return DinoRider
 
 class MedievalUnitFactory(UnitFactory):
 
