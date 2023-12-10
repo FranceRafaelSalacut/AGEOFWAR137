@@ -3,10 +3,7 @@ from gameClasses.baseUnit import *
 from gameClasses.baseBase import *
 from src.CONSTANTS import *
 from src.get_ipaddress import *
-import pygame
 import math
-
-clock = pygame.time.Clock()
 
 # TODO: get targets from server
 targets = [
@@ -28,6 +25,8 @@ class GameClass():
         self.currentTarget = NONE
         self.fetchTargets()
 
+    def addTargets(self, players: list):
+        self.targets = players
     def fetchTargets(self):
         self.targets = targets
     def selectTarget(self, target):

@@ -43,6 +43,8 @@ class GAME_SCREEN():
         self.dropDownTargets : list[Button] = []
         self.get_targets()
 
+    def addTargets(self, players:list):
+        self._game.addTargets(players)
     def get_targets(self):
         for index, target in enumerate(self._game.getTargets()):
             button = Button(f"{target[0]}", Light_Grey, Button_change.rect.left, Button_change.rect.top + (30 * (index + 1)), 100, 30, 20, value = f"target_{target[0]}", show = False)
