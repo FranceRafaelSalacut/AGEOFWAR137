@@ -3,6 +3,8 @@ from mainClasses.button import *
 from src.CONSTANTS import *
 from src.gamescreen import *
 from gameClasses.unitFactory import *
+import sys
+import json
 
 class Game():
     def __init__(self, players: list) -> None:
@@ -130,20 +132,9 @@ class Game():
         pygame.quit()
 
 
-if __name__ == "__main__":
-    targets = [
-        ('GB','192.168.68.103',51546),
-        ('Panpan','192.168.68.103',5922),
-        ('Johannes','192.168.68.103',3159),
-        ('Dustin','192.168.68.103',6490),
-        ('Jav','192.168.68.103',8203)
-    ]
-    Game(players = targets)
-
-import sys
-import json
 
 def getArgs():
+    targets = ()
     print("In here boyoyoyoy")
     if len(sys.argv) > 1:
         temp = sys.argv[1:]
@@ -154,10 +145,30 @@ def getArgs():
 
         address_list = json.loads(temp)
         for key, value in address_list.items():
+            temp_list = (key,value,5555)
+            targets.append(temp_list)
             print(f"key: {key}, value: {value}")
 
         print("watatata")
     else:
         print("No message passed")
+        return NONE
 
-getArgs()
+
+if __name__ == "__main__":
+    '''
+    targets = [
+        ('GB','192.168.68.103',51546),
+        ('Panpan','192.168.68.103',5922),
+        ('Johannes','192.168.68.103',3159),
+        ('Dustin','192.168.68.103',6490),
+        ('Jav','192.168.68.103',8203)
+    ]
+    '''
+    targets = getArgs()
+    # Game(players = targets)
+
+
+
+
+
