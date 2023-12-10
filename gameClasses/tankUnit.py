@@ -5,7 +5,7 @@ class tankUnit(baseUnit):
         super().__init__(id, x=x, y=y)
     def attack(self):
         pass
-class dinoRider(tankUnit):
+class DinoRider(tankUnit):
     def __init__(self, id, x=0, y=0):
         super().__init__(id, x=x, y=y)
         self.fetchValues('DinoRider')
@@ -23,7 +23,7 @@ class Mecha(tankUnit):
         self.fetchValues('Mecha')
 
 if __name__ == '__main__':
-    test = dinoRider(0,0,0)
+    test = DinoRider(0,0,0)
     print(test.getListValues())
     test2 = Cavalier(0,0,0)
     print(test2.getListValues())

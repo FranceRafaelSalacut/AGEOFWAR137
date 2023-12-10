@@ -76,6 +76,8 @@ class GAME_SCREEN():
     
     def passiveGain(self):
         self._game.passiveGain()
+    def spawn_enemy(self, ID:str):
+        return self._game.spawn_enemy_unit(ID)
     
     def update_texts(self):
         exp_text = f'EXP: {str(self._game.get_exp())}'

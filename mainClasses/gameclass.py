@@ -23,6 +23,7 @@ class GameClass():
         self.gold = 0
         self.exp = 0
         self.currentTarget = NONE
+        self.address = ('192.168.68.103',51546) # TODO: set this to client address
         self.fetchTargets()
 
     def addTargets(self, players: list):
@@ -35,7 +36,7 @@ class GameClass():
                 self.currentTarget = t
 
     def generateUnitID(self):
-        id = '//'.join([str(x) for x in getIPAddressAndPort()])
+        id = '//'.join([str(x) for x in self.address])
         id += f'//{self.unitNumber}'
         self.unitNumber += 1
         return id
@@ -73,10 +74,45 @@ class GameClass():
         unit = self.factory.create_tank_unit()(self.generateUnitID())
         return self.train_unit(unit)
     
+    def spawn_enemy_unit(self, ID:str):
+        # NOTE: USE ENTITY ID, NOT UNIT ID; SEE GAME.py's StartGame function
+        # ex. 192.168.68.103//51546//1//Slingshotter
+        ID = ID.split('//')
+        UnitID = '//'.join(ID[:-1])
+        UnitType : type = self.get_unit_type(ID[-1])
+        unit : baseUnit = UnitType(UnitID)
+        unit.rect.bottomleft = (GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT)
+        unit.setMovement(Movement_Enemy(unit))
+        print(f'spawning {unit.id}//{unit.__class__.__name__} at {unit.rect.center}')
+        return unit
+    
+    @staticmethod
+    def get_unit_type(unitType:str) -> type:
+        types = {
+            "Caveman" : Caveman,
+            "Footman" : Footman,
+            "Soldier" : Soldier,
+            "Robot" : Robot,
+            "Slingshotter" : Slingshotter,
+            "Archer" : Archer,
+            "Sniper" : Sniper,
+            "Stormtrooper" : Stormtrooper,
+            "DinoRider" : DinoRider,
+            "Cavalier" : Cavalier,
+            "Tank" : Tank,
+            "Mecha" : Mecha,
+        }
+        if unitType in types:
+            return types[unitType]
+        else:
+            return None
+
+
     def train_unit(self, unit:baseUnit):
         if self.currentTarget != NONE and self.get_gold() >= unit.cost:
             self.gold -= unit.cost
             unit.rect.bottomleft = (0, GAME_SCREEN_HEIGHT)
+            unit.setMovement(Movement_Friendly(unit))
             return unit
         else:
             unit.kill()
