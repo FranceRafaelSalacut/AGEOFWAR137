@@ -34,7 +34,7 @@ class baseUnit(baseModel):
         self.kill()
     
     def update(self, screen):
-        self.curhp -= 0.01
+        #self.curhp -= 0.01 -> Comment out to test sprite dying
         self.hpratio = self.curhp/self.hp       
         pg.draw.rect(screen, (255,0,0), (self.rect.left, self.rect.top - 20, self.rect.width, 10))
         pg.draw.rect(screen, (0,128,0), (self.rect.left, self.rect.top - 20, self.rect.width * self.hpratio, 10))
