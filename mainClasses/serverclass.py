@@ -63,5 +63,9 @@ class Server():
         
         display.changeText("Server Stopped")
 
-    def startGame(self):
-        pass
+    def getAdress_list(self):
+        message = "START"
+        self.socket.sentto(message.encode(), ('<broadcast>', self.port))
+
+    def close(self):
+        self.socket.close()
