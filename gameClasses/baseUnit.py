@@ -18,6 +18,8 @@ class baseUnit(baseModel):
         self.bounty = val["bounty"]
         self.exp = val["exp"]
         self.cost = val["cost"]
+        self.curhp = self.hp
+        self.hpratio = self.curhp/self.hp
         self.image = pg.image.load(val["img"]).convert_alpha()
         self.image = pg.transform.scale(self.image, val["imgScale"])
         self.rect = self.image.get_rect()
@@ -27,7 +29,8 @@ class baseUnit(baseModel):
         
     def move(self):
         self.movePattern.move()
-            
+    
+     
 
     @abstractmethod
     def attack(self):
