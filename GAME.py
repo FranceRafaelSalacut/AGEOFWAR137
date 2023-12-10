@@ -134,7 +134,7 @@ class Game():
 
 
 def getArgs():
-    targets = ()
+    targets = []
     print("In here boyoyoyoy")
     if len(sys.argv) > 1:
         temp = sys.argv[1:]
@@ -149,7 +149,8 @@ def getArgs():
             targets.append(temp_list)
             print(f"key: {key}, value: {value}")
 
-        print("watatata")
+        print(targets)
+        return targets
     else:
         print("No message passed")
         return NONE

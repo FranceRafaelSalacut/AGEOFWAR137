@@ -5,7 +5,8 @@ from mainClasses.text import *
 
 class Server():
     def __init__(self) -> None:
-        self.ip_address, self.port = getIPAddressAndPort()
+        self.ip_address = getIPAdress()[0]
+        self.port = 5555
         self.address = (self.ip_address, self.port)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
@@ -13,7 +14,7 @@ class Server():
         self.socket.bind(self.address)
         self.background_thread = None
         self.running = False
-        self.client_list = []
+        self.client_list = {socket.gethostname(): self.ip_address}
 
 
     def Backgroundrun(self):
@@ -65,7 +66,8 @@ class Server():
 
     def getAdress_list(self):
         message = "START"
-        self.socket.sentto(message.encode(), ('<broadcast>', self.port))
+        self.socket.sendto(message.encode(), ('<broadcast>', self.port))
+        return self.client_list
 
     def close(self):
         self.socket.close()
