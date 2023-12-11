@@ -30,6 +30,7 @@ class baseUnit(baseModel):
         self.exp = val["exp"]
         self.cost = val["cost"]
         self.curhp = self.hp
+        self.queueTime = val["queueTime"]
         self.image = pg.image.load(val["img"]).convert_alpha()
         self.image = pg.transform.scale(self.image, val["imgScale"])
         self.rect = self.image.get_rect()
