@@ -25,7 +25,7 @@ Caveman = {
 Melee_Caveman = {
     "hp" : 3,
     "mspd" : 2,
-    "aspd" : 3,
+    "aspd" : 5,
     "dmg" : 1,
     "bounty" : 1,
     "exp" : 1,
@@ -36,7 +36,7 @@ Melee_Caveman = {
 Melee_Footman = {
     "hp" : 5,
     "mspd" : 2,
-    "aspd" : 3,
+    "aspd" : 5,
     "dmg" : 2,
     "bounty" : 3,
     "exp" : 3,
@@ -47,7 +47,7 @@ Melee_Footman = {
 Melee_Soldier = {
     "hp" : 8,
     "mspd" : 2,
-    "aspd" : 3,
+    "aspd" : 5,
     "dmg" : 3,
     "bounty" : 9,
     "exp" : 9,
@@ -58,13 +58,26 @@ Melee_Soldier = {
 Melee_Robot = {
     "hp" : 12,
     "mspd" : 2,
-    "aspd" : 3,
+    "aspd" : 5,
     "dmg" : 4,
     "bounty" : 27,
     "exp" : 27,
     "cost" : 5,
     "img" : 'graphics/stickman.png',
     "imgScale" : (100,100)
+}
+
+
+Tank_DinoRider = {
+    "hp" : 30,
+    "mspd" : 2,
+    "aspd" : 3,
+    "dmg" : 10,
+    "bounty" : 1,
+    "exp" : 1,
+    "cost" : 5,
+    "img" : 'graphics/unit_tank/tank_stickman.png',
+    "imgScale" : (140,200)
 }
 
 Ranged_Unit = {
@@ -100,7 +113,7 @@ UNITS = {
     "Archer" : Ranged_Unit,
     "Sniper" : Ranged_Unit,
     "Stormtrooper" : Ranged_Unit,
-    "DinoRider" : Tank_Unit,
+    "DinoRider" : Tank_DinoRider,
     "Cavalier" : Tank_Unit,
     "Tank" : Tank_Unit,
     "Mecha" : Tank_Unit,
