@@ -184,8 +184,9 @@ def getArgs():
             print(f"key: {key}, value: {value}")
         
         print(targets)
+        temp = sys.argv[1].encode()
         time.sleep(1)
-        temp_socket.sendto(message.encode(), ('<broadcast>', 5555))
+        temp_socket.sendto(temp, ('<broadcast>', 5555))
 
         temp_socket.close()
 
@@ -197,7 +198,7 @@ def getArgs():
         temp_socket.close()
         print(f"{message.decode()}")
     
-        return message.decode()
+        #return message.decode()
 
 if __name__ == "__main__":
     '''
