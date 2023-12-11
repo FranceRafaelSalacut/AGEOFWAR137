@@ -11,6 +11,7 @@ class baseBase(baseModel):
         self.hp = val["hp"]
         self.expCost = val["expCost"]
         self.image = pg.image.load(val["img"]).convert_alpha()
+        self.image = pg.transform.scale(self.image, val["imgScale"])
         self.rect = self.image.get_rect()
         self.curhp = self.hp
 
