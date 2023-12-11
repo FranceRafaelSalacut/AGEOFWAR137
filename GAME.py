@@ -52,6 +52,10 @@ class Game():
             screen.blit(base.image, base.rect)
             STATE.update_state()
 
+            sorted_sprites = sorted(all_units.sprites(), key=lambda sprite: sprite.rect.bottomleft[1])
+            all_units.empty()
+            all_units.add(sorted_sprites)
+            
             for entity in all_units:
                 STATE.update_unit_target(entity)
                 entity.update(screen)
@@ -104,7 +108,6 @@ class Game():
                             unit = STATE.train_tank_unit()
                         if unit:
                             all_units.add(unit)
-
                         if action == 'upgrade':
                             base = STATE.upgrade()
 
@@ -122,11 +125,11 @@ class Game():
                 TEST_timer = 0 # reset timer to loop
                 # print(enemy_units)
 
-            # if TEST_timerB > 300:
-            #     unit = STATE.spawn_enemy('192.168.68.103//35939//2//DinoRider')
-            #     all_units.add(unit)
-            #     TEST_timerB = 0 # reset timer to loop
-            #     # print(enemy_units)
+            if TEST_timerB > 300:
+                unit = STATE.spawn_enemy('192.168.68.103//35939//2//Caveman')
+                all_units.add(unit)
+                TEST_timerB = 0 # reset timer to loop
+                # print(enemy_units)
 
             """
             TO SPAWN ENEMIES, do:
