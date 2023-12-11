@@ -26,8 +26,8 @@ Text_experience = Text("EXP: 99999",Text_gold.rect.centerx, Text_gold.rect.botto
 Text_currentTarget = Text("Current Target: NULL", Button_change.rect.left - 100, Button_change.rect.centery, 15)
 
 class GAME_SCREEN():
-    def __init__(self) -> None:
-        self._game = GameClass()
+    def __init__(self, players) -> None:
+        self._game = GameClass(players)
         self.to_display = [
             Display_Text,
             Text_train,
@@ -60,6 +60,8 @@ class GAME_SCREEN():
         return self._game.get_exp()
     def get_currentTarget(self):
         return self._game.get_currentTarget()
+    def get_current_target_to_send(self):
+        return self._game.get_target_to_send()
     
     def train_melee_unit(self):
         return self._game.train_melee_unit()

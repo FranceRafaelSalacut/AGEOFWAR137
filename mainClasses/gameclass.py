@@ -6,6 +6,7 @@ from src.get_ipaddress import *
 import math
 
 # TODO: get targets from server
+'''
 targets = [
     ('GB','192.168.68.103',51546),
     ('Panpan','192.168.68.103',5922),
@@ -13,25 +14,31 @@ targets = [
     ('Dustin','192.168.68.103',6490),
     ('Jav','192.168.68.103',8203)
 ]
+'''
+
+targets = [('TEST', 'dfsdf', 5555), ('T123123', 'TE12312SET', 5555)]
 NONE = ('NONE','0',0)
 
 class GameClass():
-    def __init__(self) -> None:
+    def __init__(self, players) -> None:
         self.factory:UnitFactory = PrehistoricUnitFactory()
         self.unitNumber = 1
         self.techLevel = 1
         self.gold = 0
         self.exp = 0
         self.currentTarget = NONE
+        self.players = players
         self.address = ('192.168.68.103',51546) # TODO: set this to client address
         self.fetchTargets()
 
     def addTargets(self, players: list):
         self.targets = players
     def fetchTargets(self):
-        self.targets = targets
+        self.targets = self.players
+        print(targets)
+        print(self.targets)
     def selectTarget(self, target):
-        for t in targets:
+        for t in self.players:
             if target in t:
                 self.currentTarget = t
 
@@ -61,6 +68,8 @@ class GameClass():
         return self.targets
     def get_currentTarget(self):
         return self.currentTarget[0]
+    def get_target_to_send(self):
+        return self.currentTarget
 
     def train_melee_unit(self):
         unit = self.factory.create_melee_unit()(self.generateUnitID())

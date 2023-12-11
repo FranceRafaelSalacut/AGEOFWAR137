@@ -3,6 +3,8 @@ from mainClasses.button import *
 from src.CONSTANTS import *
 from src.gamescreen import *
 from gameClasses.unitFactory import *
+from src.get_ipaddress import *
+from mainClasses.gameclass import *
 import sys
 import json
 import socket
@@ -27,9 +29,17 @@ class Game():
         """
         self.players = players
         self.startGame()
+        self.running = False
+        self.ip_address = getIPAdress()[0]
+        self.port = 5555
+        self.address = (self.ip_address, self.port)
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+        self.socket.settimeout(1)
+        self.socket.bind(self.address)
 
     def startGame(self):
-        STATE = GAME_SCREEN()
+        STATE = GAME_SCREEN(self.players)
         STATE.addTargets(self.players)
         # pygame setup
         pygame.init()
@@ -80,6 +90,7 @@ class Game():
 
                     entity_id = f'{entity.id}//{type(entity).__name__}'
                     print(entity_id)
+                    print(STATE.get_current_target_to_send())
                     entity.kill()
 
             # GUI
@@ -112,7 +123,7 @@ class Game():
                         run = False
 
                     print(action)
-
+                
             '''
             # TEST
             TEST_timer += 1
@@ -141,6 +152,7 @@ def makeSocket():
     address = (ip_address, port)
     temp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     temp_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    temp_socket.bind(address)
 
     return temp_socket
 
@@ -166,13 +178,17 @@ def getArgs():
         temp_socket = makeSocket()
         temp_socket.sendto(message.encode(), ('<broadcast>', 5555))
 
+        temp_socket.close()
+
         return targets
     else:
+        print("No message passed")
         temp_socket = makeSocket()
-        message, address = temp_socket.recvfrom(1024)
-        print(f"{message.decode()}")
-        return NONE
-
+        # message, address = temp_socket.recvfrom(1024)
+        temp_socket.close()
+        # print(f"{message.decode()}")
+    
+        return [('TEST', 'dfsdf', 5555), ('T123123', 'TE12312SET', 5555)]
 
 if __name__ == "__main__":
     '''
@@ -185,7 +201,8 @@ if __name__ == "__main__":
     ]
     '''
     targets = getArgs()
-    # Game(players = targets)
+    
+    Game(players = targets)
 
 
 
