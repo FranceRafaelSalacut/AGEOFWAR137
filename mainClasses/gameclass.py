@@ -23,7 +23,7 @@ class GameClass():
         self.gold = 0
         self.exp = 0
         self.currentTarget = NONE
-        self.address = ('192.168.68.103',51546) # TODO: set this to client address
+        self.address = ('192.168.68.103',9999) # TODO: set this to client address
         self.fetchTargets()
 
     def addTargets(self, players: list):
@@ -118,6 +118,10 @@ class GameClass():
             unit.kill()
             return None
 
+    def killed_unit(self, unit:baseUnit):
+        if unit.owner != '//'.join([str(x) for x in self.address]):
+            self.exp += unit.exp
+            self.gold += unit.bounty
     
     def upgrade(self):
         if self.get_exp() >= self.get_base().expCost:

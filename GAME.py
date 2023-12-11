@@ -20,6 +20,7 @@ class Game():
         TEST_timer = 0
         run = True
         all_units = pygame.sprite.Group()
+        dead_units = pygame.sprite.Group()
         enemy_units = pygame.sprite.Group()
         friendly_units = pygame.sprite.Group()
         base = STATE.get_base()
@@ -47,9 +48,9 @@ class Game():
                 STATE.passiveGain()
 
             for entity in all_units:
-                entity.move()
-                entity.updateTarget()
                 entity.update(screen)
+                if entity.isDead:
+                    dead_units.add(entity)
                 screen.blit(entity.image, entity.rect)
 
                 # remove entity if they get out of the screen
@@ -66,8 +67,12 @@ class Game():
 
                         entity_id = f'{entity.id}//{type(entity).__name__}'
                         print(entity_id)
-                    entity.kill()
+                    dead_units.add(entity)
 
+            for entity in dead_units:
+                if entity.killer:
+                    STATE.killed_unit(entity)
+                entity.kill()
             # GUI
             for index, display in enumerate(STATE.display()):
                 if display.draw(screen):
@@ -105,7 +110,7 @@ class Game():
 
             # TEST
             TEST_timer += 1
-            if TEST_timer > 100:
+            if TEST_timer > 200:
                 unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
                 all_units.add(unit)
                 enemy_units.add(unit)

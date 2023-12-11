@@ -18,6 +18,8 @@ class baseUnit(baseModel):
         self.attackTarget:baseModel = None
         self.state = STATE_MOVING
         self.possibleTargets = pg.sprite.Group()
+        self.isDead = False
+        self.killer:baseModel = None
 
     def fetchValues(self, unitType : str):
         val = UNITS[unitType]
@@ -33,6 +35,8 @@ class baseUnit(baseModel):
         self.image = pg.image.load(val["img"]).convert_alpha()
         self.image = pg.transform.scale(self.image, val["imgScale"])
         self.rect = self.image.get_rect()
+        self.owner = '//'.join(self.id.split('//')[:-1])
+        print(self.owner)
 
     def addPossibleTarget(self, target: baseModel):
         if not self.possibleTargets.has(target):
@@ -42,23 +46,26 @@ class baseUnit(baseModel):
         self.movePattern = movePattern
 
     def move(self):
-        if self.state == STATE_MOVING:
-            self.movePattern.move()
-        elif self.state == STATE_ATTACKING:
-            self.attack()
+        self.movePattern.move()
 
     def updateTarget(self):
         if self.possibleTargets:
             self.attackTarget = min(self.possibleTargets, key=lambda rect: distance_to(self.rect.center, rect.rect.center))
         self.movePattern.move()
-        
+
     def die(self):
         #TODO: add death animation here (if we're gonna use em. Also prolly need to put a delay before calling self.kill())
-        self.kill()
-    
+        self.isDead = True
+
     def update(self, screen):
-        self.curhp -= 0.01 #-> Comment out to test sprite dying
-        self.hpratio = self.curhp/self.hp       
+        self.updateTarget()
+        if self.state == STATE_MOVING:
+            self.move()
+        elif self.state == STATE_ATTACKING:
+            self.attack()
+            if not self.attackTarget or self.attackTarget.isDead:
+                self.state = STATE_MOVING
+        self.hpratio = self.curhp/self.hp
         pg.draw.rect(screen, (255,0,0), (self.rect.left, self.rect.top - 20, self.rect.width, 10))
         pg.draw.rect(screen, (0,128,0), (self.rect.left, self.rect.top - 20, self.rect.width * self.hpratio, 10))
         if self.curhp <= 0:
@@ -67,9 +74,13 @@ class baseUnit(baseModel):
     def attack(self):
         self.attackTimer += self.aspd
         if self.attackTimer > 500:
-            self.attackTarget.hp -= self.dmg
+            self.attackTarget.curhp -= self.dmg
             self.attackTimer = 0
-            print(f'{self.id} attacked {self.attackTarget.id} ({self.attackTarget.hp})')
+            print(f'{self.id} attacked {self.attackTarget.id} ({self.attackTarget.curhp})')
+            if self.attackTarget.curhp <= 0:
+                self.attackTarget.killer = self
+                self.attackTarget = None
+
 class Movement_None():
     def __init__(self, unit:baseUnit) -> None:
         self.unit = unit

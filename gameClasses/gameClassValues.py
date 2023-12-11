@@ -85,8 +85,8 @@ Ranged_Unit = {
     "mspd" : 3,
     "aspd" : 0,
     "dmg" : 0,
-    "bounty" : 0,
-    "exp" : 0,
+    "bounty" : 3,
+    "exp" : 3,
     "cost" : 5,
     "img" : 'graphics/unit_ranged/ranged_stickman.png',
     "imgScale" : (100,100)

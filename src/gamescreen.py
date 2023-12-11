@@ -73,6 +73,9 @@ class GAME_SCREEN():
         for button in self.dropDownTargets:
             button.show = not button.show
 
+    def killed_unit(self, unit:baseModel):
+        self._game.killed_unit(unit)
+
     
     def passiveGain(self):
         self._game.passiveGain()
