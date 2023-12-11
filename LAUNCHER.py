@@ -47,6 +47,7 @@ while run:
 
             if action == "Connect":
                 if STATE.connect(index):
+                    print("here i error brycasda")
                     STATE.close()
                     os.system(f"python GAME.py")
                     run = False

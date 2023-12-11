@@ -187,14 +187,18 @@ def getArgs():
         temp = sys.argv[1].encode()
         time.sleep(1)
         temp_socket.sendto(temp, ('<broadcast>', 5555))
+        temp_socket.sendto(temp, ('<broadcast>', 5555))
+        temp_socket.sendto(temp, ('<broadcast>', 5555))
+        temp_socket.sendto(temp, ('<broadcast>', 5555))
+        temp_socket.sendto(temp, ('<broadcast>', 5555))
 
         temp_socket.close()
 
         return targets
     else:
         print("No message passed")
-        temp_socket = makeSocket()
         message, address = temp_socket.recvfrom(1024)
+        print("GGGGG")
         temp_socket.close()
         print(f"{message.decode()}")
     

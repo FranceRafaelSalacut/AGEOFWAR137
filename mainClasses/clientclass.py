@@ -88,6 +88,6 @@ class Client():
         if self.background_thread:
             self.background_thread.join()
 
-
     def close(self):
         self.socket.close()
+        print("Closed na ba?")
