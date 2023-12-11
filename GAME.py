@@ -28,15 +28,15 @@ class Game():
         ]
         """
         self.players = players
-        self.startGame()
         self.running = False
         self.ip_address = getIPAdress()[0]
         self.port = 5555
         self.address = (self.ip_address, self.port)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-        self.socket.settimeout(1)
+        self.socket.settimeout(0.0001)
         self.socket.bind(self.address)
+        self.startGame()
 
     def startGame(self):
         STATE = GAME_SCREEN(self.players)
@@ -91,6 +91,8 @@ class Game():
                     entity_id = f'{entity.id}//{type(entity).__name__}'
                     print(entity_id)
                     print(STATE.get_current_target_to_send())
+                    message = entity_id.encode()
+                    #self.socket.sendto(message, STATE.get_current_target_to_send()[1], 5555)
                     entity.kill()
 
             # GUI
@@ -123,7 +125,13 @@ class Game():
                         run = False
 
                     print(action)
-                
+            try:
+                message, address = self.socket.recvfrom(1024)
+                unit = STATE.spawn_enemy(message.decode())
+                all_units.add(unit)
+            except:
+                pass
+
             '''
             # TEST
             TEST_timer += 1
@@ -143,7 +151,8 @@ class Game():
             # flip() the display to put your work on screen
             pygame.display.flip()
             clock.tick(60)
-
+        
+        self.socket.close()
         pygame.quit()
 
 def makeSocket():
@@ -188,7 +197,7 @@ def getArgs():
         temp_socket.close()
         # print(f"{message.decode()}")
     
-        return [('TEST', 'dfsdf', 5555), ('T123123', 'TE12312SET', 5555)]
+        return [('TEST', '192.168.12.12', 5555), ('T123123', '192.168.12.12', 5555)]
 
 if __name__ == "__main__":
     '''

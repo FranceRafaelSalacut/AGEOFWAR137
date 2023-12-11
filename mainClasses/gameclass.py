@@ -28,7 +28,7 @@ class GameClass():
         self.exp = 0
         self.currentTarget = NONE
         self.players = players
-        self.address = ('192.168.68.103',51546) # TODO: set this to client address
+        self.address = (getIPAdress()[0],5555) # TODO: set this to client address
         self.fetchTargets()
 
     def addTargets(self, players: list):
