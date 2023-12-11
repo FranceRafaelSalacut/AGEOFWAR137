@@ -154,9 +154,13 @@ BUILDINGS = {
     "Citadel" : Base_Citadel
 }
 
-Projectile = {
+Stone = {
     "vx" : 0,
     "vy" : 0,
-    "img" : 'graphics/unit_tank/tank_stickman.png',
+    "img" : 'graphics/projectiles/stone.png',
     "imgScale" : (50,50)    
+}
+
+PROJECTILES = {
+    "Stone" : Stone
 }
