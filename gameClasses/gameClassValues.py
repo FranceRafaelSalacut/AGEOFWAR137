@@ -68,7 +68,7 @@ Melee_Robot = {
 }
 
 Ranged_Unit = {
-    "hp" : 0,
+    "hp" : 1,
     "mspd" : 3,
     "aspd" : 0,
     "dmg" : 0,
@@ -80,7 +80,7 @@ Ranged_Unit = {
 }
 
 Tank_Unit = {
-    "hp" : 0,
+    "hp" : 1,
     "mspd" : 1,
     "aspd" : 0,
     "dmg" : 0,
