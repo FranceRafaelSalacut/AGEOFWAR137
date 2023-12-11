@@ -161,6 +161,7 @@ def makeSocket():
     address = (ip_address, port)
     temp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     temp_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    temp_socket.settimeout(1)
     temp_socket.bind(address)
 
     return temp_socket
@@ -186,19 +187,24 @@ def getArgs():
         print(targets)
         temp = sys.argv[1].encode()
         time.sleep(1)
-        temp_socket.sendto(temp, ('<broadcast>', 5555))
-        temp_socket.sendto(temp, ('<broadcast>', 5555))
-        temp_socket.sendto(temp, ('<broadcast>', 5555))
-        temp_socket.sendto(temp, ('<broadcast>', 5555))
-        temp_socket.sendto(temp, ('<broadcast>', 5555))
+        while TRUE:
+            temp_socket.sendto(temp, ('<broadcast>', 5555))
+            message, address = temp_socket.recvfrom(1024)
+            if message.decode == "Ress":
+                break
 
         temp_socket.close()
 
         return targets
     else:
         print("No message passed")
-        message, address = temp_socket.recvfrom(1024)
-        print("GGGGG")
+        for x in range(0,5):
+            try: 
+                message, address = temp_socket.recvfrom(1024)
+                print("GGGGG")
+            except:
+                print("tried")
+
         temp_socket.close()
         print(f"{message.decode()}")
     
