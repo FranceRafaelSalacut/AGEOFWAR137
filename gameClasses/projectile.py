@@ -9,7 +9,7 @@ class Projectile(baseModel):
         self.fetchValues('Stone')
         self.unit = unit
         self.movePattern = Movement_None(self)
-        self.damage = self.unit.damage
+        self.dmg = self.unit.dmg
 
     def fetchValues(self, unitType : str):
         val = PROJECTILES[unitType]
@@ -28,4 +28,4 @@ class Projectile(baseModel):
         # unit.Rect.collidepoint
         pass
     def deal_damage(self, unit):
-        unit.curhp -= self.damage
+        unit.curhp -= self.dmg

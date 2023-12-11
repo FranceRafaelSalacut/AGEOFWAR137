@@ -7,15 +7,16 @@ class rangedUnit(baseUnit):
     def attack(self):
         self.attackTimer += self.aspd
         if self.attackTimer > 500:
+            self.create_projectile()
             self.attackTarget.curhp -= self.dmg
             self.attackTimer = 0
             print(f'{self.id} attacked {self.attackTarget.id} ({self.attackTarget.curhp})')
             if self.attackTarget.curhp <= 0:
                 self.attackTarget.killer = self
                 self.attackTarget = None
-
     def create_projectile(self):
-        return Projectile(self)
+        print("HERES A STONE")
+        return Projectile(id = 0, unit = self)
 class Slingshotter(rangedUnit):
     def __init__(self, id, x=0, y=0):
         super().__init__(id, x=x, y=y)
