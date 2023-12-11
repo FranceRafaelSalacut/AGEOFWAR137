@@ -29,7 +29,7 @@ def run_server():
     try:
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # bind the socket to the host and port
-        server.bind((server_ip, port))
+        server.bind(('192.168.1.4', 5555))
         # listen for incoming connections
         server.listen()
         print(f"Listening on {server_ip}:{port}")
