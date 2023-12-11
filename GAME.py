@@ -168,6 +168,7 @@ def makeSocket():
 
 def getArgs():
     targets = []
+    temp_socket = makeSocket()
     print("In here boyoyoyoy")
     if len(sys.argv) > 1:
         temp = sys.argv[1:]
@@ -184,7 +185,6 @@ def getArgs():
         
         print(targets)
         time.sleep(1)
-        temp_socket = makeSocket()
         temp_socket.sendto(message.encode(), ('<broadcast>', 5555))
 
         temp_socket.close()
@@ -193,11 +193,11 @@ def getArgs():
     else:
         print("No message passed")
         temp_socket = makeSocket()
-        # message, address = temp_socket.recvfrom(1024)
+        message, address = temp_socket.recvfrom(1024)
         temp_socket.close()
-        # print(f"{message.decode()}")
+        print(f"{message.decode()}")
     
-        return [('TEST', '192.168.12.12', 5555), ('T123123', '192.168.12.12', 5555)]
+        return message.decode()
 
 if __name__ == "__main__":
     '''
