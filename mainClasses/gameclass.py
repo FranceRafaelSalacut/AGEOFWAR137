@@ -1,6 +1,7 @@
 from gameClasses.unitFactory import *
 from gameClasses.baseUnit import *
 from gameClasses.baseBase import *
+from mainClasses.image import Image
 from src.CONSTANTS import *
 from src.get_ipaddress import *
 import random
@@ -57,7 +58,7 @@ class GameClass():
             base = Camp(0)
         if self.techLevel == 4:
             base = Citadel(0)
-        base.rect.bottomleft = (0, GAME_SCREEN_HEIGHT)
+        base.rect.bottomleft = (0, GAME_SCREEN_HEIGHT-50)
         self.base = base
         return base
         
@@ -135,6 +136,12 @@ class GameClass():
                 for e in g[1]:
                     unit.addPossibleTarget(e)
                     e.addPossibleTarget(unit)
+    
+    def set_enemies_target(self, target:baseModel):
+        for g in self.unitLists:
+            if target.owner != g[0]:
+                for e in g[1]:
+                    e.addPossibleTarget(target)
 
     def killed_unit(self, unit:baseUnit):
         if unit.owner != self.getStringAddress():
@@ -142,9 +149,19 @@ class GameClass():
             self.gold += unit.bounty
     
     def upgrade(self):
-        if self.get_exp() >= self.get_base().expCost:
+        # if self.get_exp() >= self.get_base().expCost:
+        if self.techLevel < 4:
             self.techLevel += 1
         return self.get_base()
+    def get_current_upgrade_bg(self):
+        if self.techLevel == 1:
+            return Image('graphics/backgrounds/background_prehistoric.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)
+        if self.techLevel == 2:
+            return Image('graphics/backgrounds/background_medieval.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)
+        if self.techLevel == 3:
+            return Image('graphics/backgrounds/background_modern.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)
+        if self.techLevel == 4:
+            return Image('graphics/backgrounds/background_scifi.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)
 
     def passiveGain(self):
         self.gold += (1 / 60)

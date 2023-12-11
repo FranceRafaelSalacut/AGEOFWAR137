@@ -55,7 +55,7 @@ class Game():
             sorted_sprites = sorted(all_units.sprites(), key=lambda sprite: sprite.rect.bottomleft[1])
             all_units.empty()
             all_units.add(sorted_sprites)
-            
+
             for entity in all_units:
                 STATE.update_unit_target(entity)
                 entity.update(screen)
@@ -110,6 +110,7 @@ class Game():
                             all_units.add(unit)
                         if action == 'upgrade':
                             base = STATE.upgrade()
+                            Background = STATE.get_bg()
 
                     if action == "Exit":
                         run = False

@@ -93,8 +93,8 @@ Tank_DinoRider = {
     "exp" : 1,
     "cost" : 5,
     "range" : 130,
-    "img" : 'graphics/unit_tank/tank_modern_1_1.png',
-    "imgScale" : (256,128)
+    "img" : 'graphics/unit_tank/tank_prehistoric.png',
+    "imgScale" : (256,185)
 }
 
 Ranged_Unit = {
