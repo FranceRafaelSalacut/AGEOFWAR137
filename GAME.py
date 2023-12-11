@@ -18,11 +18,10 @@ class Game():
 
         # loop
         TEST_timer = 0
+        TEST_timerB = 0
         run = True
         all_units = pygame.sprite.Group()
         dead_units = pygame.sprite.Group()
-        enemy_units = pygame.sprite.Group()
-        friendly_units = pygame.sprite.Group()
         projectiles = pygame.sprite.Group()
         base = STATE.get_base()
 
@@ -46,9 +45,10 @@ class Game():
             if type(STATE) == GAME_SCREEN:
                 base.update(screen)
                 screen.blit(base.image, base.rect)
-                STATE.passiveGain()
+                STATE.update_state()
 
             for entity in all_units:
+                STATE.update_unit_target(entity)
                 entity.update(screen)
                 if entity.isDead:
                     dead_units.add(entity)
@@ -73,6 +73,9 @@ class Game():
             for entity in dead_units:
                 if entity.killer:
                     STATE.killed_unit(entity)
+                    # TODO: pass to specific player this string
+                    entity.get_bounty()
+
                 entity.kill()
             # GUI
             for index, display in enumerate(STATE.display()):
@@ -96,10 +99,6 @@ class Game():
                             unit = STATE.train_tank_unit()
                         if unit:
                             all_units.add(unit)
-                            friendly_units.add(unit)
-                            for e in enemy_units:
-                                e.addPossibleTarget(unit)
-                                unit.addPossibleTarget(e)
 
                         if action == 'upgrade':
                             base = STATE.upgrade()
@@ -111,14 +110,18 @@ class Game():
 
             # TEST
             TEST_timer += 1
-            if TEST_timer > 200:
-                unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
+            TEST_timerB += 1
+            # if TEST_timer > 200:
+            #     unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
+            #     all_units.add(unit)
+            #     TEST_timer = 0 # reset timer to loop
+            #     # print(enemy_units)
+
+            if TEST_timerB > 300:
+                unit = STATE.spawn_enemy('192.168.68.103//35939//2//DinoRider')
                 all_units.add(unit)
-                enemy_units.add(unit)
-                for e in friendly_units:
-                    e.addPossibleTarget(unit)
-                    unit.addPossibleTarget(e)
-                TEST_timer = 0 # reset timer to loop
+                TEST_timerB = 0 # reset timer to loop
+                # print(enemy_units)
 
             """
             TO SPAWN ENEMIES, do:

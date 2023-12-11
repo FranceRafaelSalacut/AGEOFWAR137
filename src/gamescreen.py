@@ -43,8 +43,6 @@ class GAME_SCREEN():
         self.dropDownTargets : list[Button] = []
         self.get_targets()
 
-    def addTargets(self, players:list):
-        self._game.addTargets(players)
     def get_targets(self):
         for index, target in enumerate(self._game.getTargets()):
             button = Button(f"{target[0]}", Light_Grey, Button_change.rect.left, Button_change.rect.top + (30 * (index + 1)), 100, 30, 20, value = f"target_{target[0]}", show = False)
@@ -77,8 +75,13 @@ class GAME_SCREEN():
         self._game.killed_unit(unit)
 
     
-    def passiveGain(self):
+    def update_state(self):
         self._game.passiveGain()
+    def earn_bounty(self, bounty, exp):
+        self._game.gold += bounty
+        self._game.exp += exp
+    def update_unit_target(self, unit:baseModel):
+        self._game.update_unit_targets(unit)
     def spawn_enemy(self, ID:str):
         return self._game.spawn_enemy_unit(ID)
     
