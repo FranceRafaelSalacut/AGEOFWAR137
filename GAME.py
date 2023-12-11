@@ -5,6 +5,8 @@ from src.gamescreen import *
 from gameClasses.unitFactory import *
 import sys
 import json
+import socket
+import time
 
 class Game():
     def __init__(self, players: list) -> None:
@@ -111,12 +113,14 @@ class Game():
 
                     print(action)
 
+            '''
             # TEST
             TEST_timer += 1
             if TEST_timer > 100:
                 unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
                 all_units.add(unit)
                 TEST_timer = 0 # reset timer to loop
+            '''
 
             """
             TO SPAWN ENEMIES, do:
@@ -131,6 +135,14 @@ class Game():
 
         pygame.quit()
 
+def makeSocket():
+    ip_address = getIPAdress()[0]
+    port = 5555
+    address = (ip_address, port)
+    temp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+    temp_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+
+    return temp_socket
 
 
 def getArgs():
@@ -148,11 +160,17 @@ def getArgs():
             temp_list = (key,value,5555)
             targets.append(temp_list)
             print(f"key: {key}, value: {value}")
-
+        
         print(targets)
+        time.sleep(1)
+        temp_socket = makeSocket()
+        temp_socket.sendto(message.encode(), ('<broadcast>', 5555))
+
         return targets
     else:
-        print("No message passed")
+        temp_socket = makeSocket()
+        message, address = temp_socket.recvfrom(1024)
+        print(f"{message.decode()}")
         return NONE
 
 

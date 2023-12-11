@@ -47,6 +47,7 @@ while run:
 
             if action == "Connect":
                 if STATE.connect(index):
+                    os.system(f"python GAME.py")
                     run = False
 
             if action == "Start_Game":
