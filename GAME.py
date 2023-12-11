@@ -187,11 +187,14 @@ def getArgs():
         print(targets)
         time.sleep(1)
         while True:
-            temp_socket.sendto(temp.encode(), ('<broadcast>', 5555))
-            message, address = temp_socket.recvfrom(1024)
-            if message.decode == "Ress":
-                print("Im dying")
-                break
+            try:
+                temp_socket.sendto(temp.encode(), ('<broadcast>', 5555))
+                message, address = temp_socket.recvfrom(1024)
+                if message.decode == "Ress":
+                    print("Im dying")
+                    break
+            except:
+                pass
 
         temp_socket.close()
 
@@ -231,7 +234,7 @@ if __name__ == "__main__":
     ]
     '''
     targets = getArgs()
-    
+    print("im in game")
     Game(players = targets)
 
 
