@@ -20,6 +20,7 @@ class baseUnit(baseModel):
         self.possibleTargets = pg.sprite.Group()
         self.isDead = False
         self.killer:baseModel = None
+        self.owner = '//'.join(self.id.split('//')[:-1])
 
     def fetchValues(self, unitType : str):
         val = UNITS[unitType]
@@ -31,12 +32,11 @@ class baseUnit(baseModel):
         self.bounty = val["bounty"]
         self.exp = val["exp"]
         self.cost = val["cost"]
+        self.range = val["range"]
         self.curhp = self.hp
         self.image = pg.image.load(val["img"]).convert_alpha()
         self.image = pg.transform.scale(self.image, val["imgScale"])
         self.rect = self.image.get_rect()
-        self.owner = '//'.join(self.id.split('//')[:-1])
-        print(self.owner)
 
     def addPossibleTarget(self, target: baseModel):
         if not self.possibleTargets.has(target):
@@ -57,6 +57,9 @@ class baseUnit(baseModel):
         #TODO: add death animation here (if we're gonna use em. Also prolly need to put a delay before calling self.kill())
         self.isDead = True
 
+    def get_bounty(self):
+        return f'{self.id}//GOLD:{self.bounty}//EXP:{self.exp}'
+
     def update(self, screen):
         self.updateTarget()
         if self.state == STATE_MOVING:
@@ -65,21 +68,19 @@ class baseUnit(baseModel):
             self.attack()
             if not self.attackTarget or self.attackTarget.isDead:
                 self.state = STATE_MOVING
-        self.hpratio = self.curhp/self.hp
-        pg.draw.rect(screen, (255,0,0), (self.rect.left, self.rect.top - 20, self.rect.width, 10))
-        pg.draw.rect(screen, (0,128,0), (self.rect.left, self.rect.top - 20, self.rect.width * self.hpratio, 10))
+        self.update_healthBar(screen)
         if self.curhp <= 0:
             self.die()
 
     def attack(self):
         self.attackTimer += self.aspd
-        if self.attackTimer > 500:
+        if self.attackTimer > 500 and self.range > distance_to(self.rect.center, self.attackTarget.rect.center):
             self.attackTarget.curhp -= self.dmg
             self.attackTimer = 0
             print(f'{self.id} attacked {self.attackTarget.id} ({self.attackTarget.curhp})')
-            if self.attackTarget.curhp <= 0:
-                self.attackTarget.killer = self
-                self.attackTarget = None
+        if self.attackTarget.curhp <= 0:
+            self.attackTarget.killer = self
+            self.attackTarget = None
 
 class Movement_None():
     def __init__(self, unit:baseUnit) -> None:
@@ -87,7 +88,7 @@ class Movement_None():
     def move(self):
         pass
     def goTowardsTarget(self):
-        if distance_to(self.unit.rect.center, self.unit.attackTarget.rect.center) > 80:
+        if distance_to(self.unit.rect.center, self.unit.attackTarget.rect.center) > self.unit.range - 30:
             if self.unit.rect.centerx > self.unit.attackTarget.rect.centerx:
                 self.unit.rect.centerx -= self.unit.mspd
             else:

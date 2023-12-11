@@ -29,21 +29,27 @@ class GameClass():
         self.currentTarget = NONE
         self.players = players
         self.address = (getIPAdress()[0],5555) # TODO: set this to client address
+        self.base = None
         self.fetchTargets()
 
-    def addTargets(self, players: list):
-        self.targets = players
     def fetchTargets(self):
         self.targets = self.players
         print(targets)
         print(self.targets)
+        self.unitLists : list[tuple[str,pg.sprite.Group]] = [('//'.join([str(z) for z in x[1:]]),pg.sprite.Group()) for x in self.targets]
+        self.unitLists.append((self.getStringAddress(),pg.sprite.Group()))
+        print(self.unitLists)
+
     def selectTarget(self, target):
         for t in self.players:
             if target in t:
                 self.currentTarget = t
 
+    def getStringAddress(self):
+        return '//'.join([str(x) for x in self.address])
+
     def generateUnitID(self):
-        id = '//'.join([str(x) for x in self.address])
+        id = self.getStringAddress()
         id += f'//{self.unitNumber}'
         self.unitNumber += 1
         return id
@@ -58,6 +64,7 @@ class GameClass():
         if self.techLevel == 4:
             base = Citadel(0)
         base.rect.bottomleft = (0, GAME_SCREEN_HEIGHT)
+        self.base = base
         return base
         
     def get_exp(self):
@@ -92,6 +99,9 @@ class GameClass():
         unit : baseUnit = UnitType(UnitID)
         unit.rect.bottomleft = (GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT)
         unit.setMovement(Movement_Enemy(unit))
+        unit.addPossibleTarget(self.base)
+        self.set_team(unit)
+        
         print(f'spawning {unit.id}//{unit.__class__.__name__} at {unit.rect.center}')
         return unit
     
@@ -113,22 +123,29 @@ class GameClass():
         }
         if unitType in types:
             return types[unitType]
-        else:
-            return None
-
 
     def train_unit(self, unit:baseUnit):
         if self.currentTarget != NONE and self.get_gold() >= unit.cost:
             self.gold -= unit.cost
             unit.rect.bottomleft = (0, GAME_SCREEN_HEIGHT)
             unit.setMovement(Movement_Friendly(unit))
+            self.set_team(unit)
             return unit
         else:
             unit.kill()
             return None
 
+    def set_team(self, unit:baseUnit):
+        for g in self.unitLists:
+            if unit.owner == g[0]:
+                g[1].add(unit)
+            else:
+                for e in g[1]:
+                    unit.addPossibleTarget(e)
+                    e.addPossibleTarget(unit)
+
     def killed_unit(self, unit:baseUnit):
-        if unit.owner != '//'.join([str(x) for x in self.address]):
+        if unit.owner != self.getStringAddress():
             self.exp += unit.exp
             self.gold += unit.bounty
     
@@ -139,3 +156,6 @@ class GameClass():
 
     def passiveGain(self):
         self.gold += (1 / 60)
+
+    def update_unit_targets(self, unit:baseUnit):
+        self.set_team(unit)
