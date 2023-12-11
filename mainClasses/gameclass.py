@@ -24,6 +24,7 @@ class GameClass():
         self.exp = 0
         self.currentTarget = NONE
         self.address = ('192.168.68.103',9999) # TODO: set this to client address
+        self.base = None
         self.fetchTargets()
 
     def fetchTargets(self):
@@ -56,6 +57,7 @@ class GameClass():
         if self.techLevel == 4:
             base = Citadel(0)
         base.rect.bottomleft = (0, GAME_SCREEN_HEIGHT)
+        self.base = base
         return base
         
     def get_exp(self):
@@ -88,7 +90,9 @@ class GameClass():
         unit : baseUnit = UnitType(UnitID)
         unit.rect.bottomleft = (GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT)
         unit.setMovement(Movement_Enemy(unit))
+        unit.addPossibleTarget(self.base)
         self.set_team(unit)
+        
         print(f'spawning {unit.id}//{unit.__class__.__name__} at {unit.rect.center}')
         return unit
     
