@@ -181,9 +181,10 @@ def getArgs():
 
         address_list = json.loads(temp)
         for key, value in address_list.items():
-            temp_list = (key,value,5555)
-            targets.append(temp_list)
-            print(f"key: {key}, value: {value}")
+            if value != temp_socket.ip_address:
+                temp_list = (key,value,5555)
+                targets.append(temp_list)
+                print(f"key: {key}, value: {value}")
         
         print(targets)
         time.sleep(1)
@@ -215,9 +216,10 @@ def getArgs():
 
         address_list = json.loads(temp)
         for key, value in address_list.items():
-            temp_list = (key,value,5555)
-            targets.append(temp_list)
-            print(f"key: {key}, value: {value}")
+            if value != temp_socket.ip_address:
+                temp_list = (key,value,5555)
+                targets.append(temp_list)
+                print(f"key: {key}, value: {value}")
 
         temp_socket.close()
         print(f"{targets}")
