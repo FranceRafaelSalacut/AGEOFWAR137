@@ -5,7 +5,8 @@ from mainClasses.text import *
 
 class Server():
     def __init__(self) -> None:
-        self.ip_address, self.port = getIPAddressAndPort()
+        self.ip_address = getIPAdress()[0]
+        self.port = 5555
         self.address = (self.ip_address, self.port)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
@@ -13,7 +14,7 @@ class Server():
         self.socket.bind(self.address)
         self.background_thread = None
         self.running = False
-        self.client_list = []
+        self.client_list = {socket.gethostname(): self.ip_address}
 
 
     def Backgroundrun(self):
@@ -31,9 +32,9 @@ class Server():
                 else:
                     #Limiting the number of clients that connects with server.
                     print(f"Client Connected from {address}: {message}")
-                    self.client_list.append(address)
+                    self.client_list[message] = address[0]
 
-                if len(self.client_list) == 1:
+                if len(self.client_list) == 6:
                     print(f"I am Full, {self.client_list}")
                     break
             except:
@@ -63,5 +64,15 @@ class Server():
         
         display.changeText("Server Stopped")
 
-    def startGame(self):
-        pass
+    def getAdress_list(self):
+        
+        self.running = False
+        if self.background_thread:
+            self.background_thread.join()
+
+        message = "START"
+        self.socket.sendto(message.encode(), ('<broadcast>', self.port))
+        return self.client_list
+
+    def close(self):
+        self.socket.close()

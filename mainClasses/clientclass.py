@@ -5,7 +5,8 @@ from mainClasses.text import *
 
 class Client():
     def __init__(self) -> None:
-        self.ip_address, self.port = getIPAddressAndPort()
+        self.ip_address = getIPAdress()[0]
+        self.port = 5555
         self.address = (self.ip_address, self.port)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
@@ -87,6 +88,6 @@ class Client():
         if self.background_thread:
             self.background_thread.join()
 
-
     def close(self):
         self.socket.close()
+        print("Closed na ba?")

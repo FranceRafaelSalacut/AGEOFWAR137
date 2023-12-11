@@ -3,13 +3,43 @@ from mainClasses.button import *
 from src.CONSTANTS import *
 from src.gamescreen import *
 from gameClasses.unitFactory import *
+from src.get_ipaddress import *
+from mainClasses.gameclass import *
+import sys
+import json
+import socket
+import time
 
 class Game():
-    def __init__(self) -> None:
+    def __init__(self, players: list) -> None:
+        """
+        MAKE SURE THAT THE PLAYERS LIST FOLLOWS
+            (NAME, IP ADDRESS, PORT)
+        
+        NOTE: Name can just be randomly generated if we dont have time
+        
+        example:
+        players = [
+            ('GB','192.168.68.103',51546),
+            ('Panpan','192.168.68.103',5922),
+            ('Johannes','192.168.68.103',3159),
+            ('Dustin','192.168.68.103',6490),
+            ('Jav','192.168.68.103',8203)
+        ]
+        """
+        self.players = players
+        self.running = False
+        self.ip_address = getIPAdress()[0]
+        self.port = 5555
+        self.address = (self.ip_address, self.port)
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+        self.socket.settimeout(0.0001)
+        self.socket.bind(self.address)
         self.startGame()
 
     def startGame(self):
-        STATE = GAME_SCREEN()
+        STATE = GAME_SCREEN(self.players)
         # pygame setup
         pygame.init()
         screen = pygame.display.set_mode([GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT])
@@ -68,6 +98,10 @@ class Game():
 
                         entity_id = f'{entity.id}//{type(entity).__name__}'
                         print(entity_id)
+                        print(STATE.get_current_target_to_send())
+                        message = entity_id.encode()
+                        self.socket.sendto(message, (STATE.get_current_target_to_send()[1], 5555))
+                        print(STATE.get_current_target_to_send()[1])
                     dead_units.add(entity)
 
             for entity in dead_units:
@@ -108,7 +142,14 @@ class Game():
                         run = False
 
                     print(action)
+            try:
+                message, address = self.socket.recvfrom(1024)
+                unit = STATE.spawn_enemy(message.decode())
+                all_units.add(unit)
+            except:
+                pass
 
+            '''
             # TEST
             TEST_timer += 1
             if TEST_timer > 200:
@@ -119,6 +160,7 @@ class Game():
                     e.addPossibleTarget(unit)
                     unit.addPossibleTarget(e)
                 TEST_timer = 0 # reset timer to loop
+            '''
 
             """
             TO SPAWN ENEMIES, do:
@@ -130,17 +172,25 @@ class Game():
             # flip() the display to put your work on screen
             pygame.display.flip()
             clock.tick(60)
-
+        
+        self.socket.close()
         pygame.quit()
 
+def makeSocket():
+    ip_address = getIPAdress()[0]
+    port = 5555
+    address = (ip_address, port)
+    temp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+    temp_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    temp_socket.settimeout(1)
+    temp_socket.bind(address)
 
-if __name__ == "__main__":
-    Game()
+    return temp_socket
 
-import sys
-import json
 
 def getArgs():
+    targets = []
+    temp_socket = makeSocket()
     print("In here boyoyoyoy")
     if len(sys.argv) > 1:
         temp = sys.argv[1:]
@@ -151,10 +201,66 @@ def getArgs():
 
         address_list = json.loads(temp)
         for key, value in address_list.items():
-            print(f"key: {key}, value: {value}")
+            if value != getIPAdress()[0]:
+                temp_list = (key,value,5555)
+                targets.append(temp_list)
+                print(f"key: {key}, value: {value}")
+        
+        print(targets)
+        time.sleep(1)
+        while True:
+            try:
+                temp_socket.sendto(temp.encode(), ('<broadcast>', 5555))
+                message, address = temp_socket.recvfrom(1024)
+                if message.decode() == "Ress":
+                    print("Im dying")
+                    break
+            except:
+                pass
 
-        print("watatata")
+        temp_socket.close()
+
+        return targets
     else:
         print("No message passed")
+        temp = ""
+        for x in range(0,5):
+            try: 
+                message, address = temp_socket.recvfrom(1024)
+                temp = message
+                print("GGGGG")
+                message = "Ress"
+                temp_socket.sendto(message.encode(), address)
+            except:
+                print("tried")
 
-getArgs()
+        address_list = json.loads(temp)
+        for key, value in address_list.items():
+            if value != getIPAdress()[0]:
+                temp_list = (key,value,5555)
+                targets.append(temp_list)
+                print(f"key: {key}, value: {value}")
+
+        temp_socket.close()
+        print(f"{targets}")
+    
+        return targets
+
+if __name__ == "__main__":
+    '''
+    targets = [
+        ('GB','192.168.68.103',51546),
+        ('Panpan','192.168.68.103',5922),
+        ('Johannes','192.168.68.103',3159),
+        ('Dustin','192.168.68.103',6490),
+        ('Jav','192.168.68.103',8203)
+    ]
+    '''
+    targets = getArgs()
+    print("im in game")
+    Game(players = targets)
+
+
+
+
+

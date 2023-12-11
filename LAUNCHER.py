@@ -47,14 +47,18 @@ while run:
 
             if action == "Connect":
                 if STATE.connect(index):
+                    print("here i error brycasda")
+                    STATE.close()
+                    os.system(f"python GAME.py")
                     run = False
 
             if action == "Start_Game":
                 print("HERE")
                 print(json.dumps(STATE.getList()))
-                os.system(f"python GAME.py '{json.dumps(STATE.getList())}'")
+                message = json.dumps(STATE.getList())
                 STATE.stop()
                 STATE.close()
+                os.system(f"python GAME.py '{message}'")
                 run = False
 
             if action == "Exit":
