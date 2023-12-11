@@ -1,25 +1,11 @@
 import pygame as pg
+from gameClasses.baseModel import baseModel
 
-class Projectile(pg.sprite.Sprite):
-    def __init__(self, x, y, vel, direction):
-        super().__init__()
-        self.x = x
-        self.y = y
-        self.vel = vel
-        self.direction = direction
+class Projectile(baseModel):
+    def __init__(self, id, x = 0, y = 0):
+        super().__init__(id, x, y)
     def draw(self):
         pass
+    def die(self):
+        pass
     
-"""
-class Stone(Projectile):
-    pass
-
-class Arrow(Projectile):
-    pass
-
-class Bullet(Projectile):
-    pass
-
-class Laserbeam(Projectile):
-    pass
-"""
