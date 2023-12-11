@@ -191,6 +191,7 @@ def getArgs():
             temp_socket.sendto(temp, ('<broadcast>', 5555))
             message, address = temp_socket.recvfrom(1024)
             if message.decode == "Ress":
+                print("Im dying")
                 break
 
         temp_socket.close()
@@ -202,6 +203,7 @@ def getArgs():
             try: 
                 message, address = temp_socket.recvfrom(1024)
                 print("GGGGG")
+                temp_socket.sendto("Ress".encode(), address)
             except:
                 print("tried")
 
