@@ -18,6 +18,7 @@ class baseUnit(baseModel):
         self.attackTarget:baseModel = None
         self.state = STATE_MOVING
         self.possibleTargets = pg.sprite.Group()
+        self.direction = self.check_direction()
 
     def fetchValues(self, unitType : str):
         val = UNITS[unitType]
@@ -70,6 +71,9 @@ class baseUnit(baseModel):
             self.attackTarget.hp -= self.dmg
             self.attackTimer = 0
             print(f'{self.id} attacked {self.attackTarget.id} ({self.attackTarget.hp})')
+    
+    def check_direction(self):
+        pass
 class Movement_None():
     def __init__(self, unit:baseUnit) -> None:
         self.unit = unit
