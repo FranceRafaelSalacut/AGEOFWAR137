@@ -11,7 +11,7 @@ class rangedUnit(baseUnit):
             self.attackTimer = 0
             print(f'{self.id} attacked {self.attackTarget.id} ({self.attackTarget.hp})')
     def create_projectile(self):
-        pass
+        return Projectile(self)
 class Slingshotter(rangedUnit):
     def __init__(self, id, x=0, y=0):
         super().__init__(id, x=x, y=y)
