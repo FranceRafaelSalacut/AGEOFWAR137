@@ -127,6 +127,10 @@ class GameClass():
             unit.kill()
             return None
 
+    def killed_unit(self, unit:baseUnit):
+        if unit.owner != '//'.join([str(x) for x in self.address]):
+            self.exp += unit.exp
+            self.gold += unit.bounty
     
     def upgrade(self):
         if self.get_exp() >= self.get_base().expCost:

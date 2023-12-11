@@ -4,9 +4,6 @@ from .baseUnit import baseUnit
 class meleeUnit(baseUnit):
     def __init__(self, id, x=0, y=0):
         super().__init__(id, x=x, y=y)
-    def attack(self):
-        pass
-
 class Caveman(meleeUnit):
     def __init__(self, id, x=0, y=0):
         super().__init__(id, x=x, y=y)

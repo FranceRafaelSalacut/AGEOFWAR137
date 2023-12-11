@@ -39,8 +39,7 @@ class Game():
         self.startGame()
 
     def startGame(self):
-        STATE = GAME_SCREEN(self.players)
-        STATE.addTargets(self.players)
+        STATE = GAME_SCREEN()
         # pygame setup
         pygame.init()
         screen = pygame.display.set_mode([GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT])
@@ -51,6 +50,10 @@ class Game():
         TEST_timer = 0
         run = True
         all_units = pygame.sprite.Group()
+        dead_units = pygame.sprite.Group()
+        enemy_units = pygame.sprite.Group()
+        friendly_units = pygame.sprite.Group()
+        projectiles = pygame.sprite.Group()
         base = STATE.get_base()
 
         # music
@@ -71,31 +74,40 @@ class Game():
             # Render game here
             # vv===========================================vv
             if type(STATE) == GAME_SCREEN:
+                base.update(screen)
                 screen.blit(base.image, base.rect)
                 STATE.passiveGain()
 
             for entity in all_units:
-                entity.move()
+                entity.update(screen)
+                if entity.isDead:
+                    dead_units.add(entity)
                 screen.blit(entity.image, entity.rect)
-                
-                if type(entity.movePattern) == Movement_Friendly and entity.rect.left >= GAME_SCREEN_WIDTH:
-                    # TODO: put something here to send entity over to server
-                    # current entity IDs are {IP ADDRESS}//{PORT}//{UNIQUE NUMBER}//{UNIT CLASS}
-                    # NOTE: entity IDs are the ones to be passed, IDs inside unit classes are similar but do not have Unit Class appended
-                    # Ex.
-                    #   Entity ID (the one to be passed through network) 
-                    #       -> 192.168.68.103//51546//1//Slingshotter
-                    #   Unit ID
-                    #       -> 192.168.68.103//51546//1
 
-                    entity_id = f'{entity.id}//{type(entity).__name__}'
-                    print(entity_id)
+                # remove entity if they get out of the screen
+                if entity.rect.left >= GAME_SCREEN_WIDTH or entity.rect.right <= 0:
+                    if type(entity.movePattern) == Movement_Friendly:
+                        # TODO: put something here to send entity over to server
+                        # current entity IDs are {IP ADDRESS}//{PORT}//{UNIQUE NUMBER}//{UNIT CLASS}
+                        # NOTE: entity IDs are the ones to be passed, IDs inside unit classes are similar but do not have Unit Class appended
+                        # Ex.
+                        #   Entity ID (the one to be passed through network)
+                        #       -> 192.168.68.103//51546//1//Slingshotter
+                        #   Unit ID
+                        #       -> 192.168.68.103//51546//1
+
+                        entity_id = f'{entity.id}//{type(entity).__name__}'
+                        print(entity_id)
                     print(STATE.get_current_target_to_send())
                     message = entity_id.encode()
                     self.socket.sendto(message, (STATE.get_current_target_to_send()[1], 5555))
                     print(STATE.get_current_target_to_send()[1])
-                    entity.kill()
+                    dead_units.add(entity)
 
+            for entity in dead_units:
+                if entity.killer:
+                    STATE.killed_unit(entity)
+                entity.kill()
             # GUI
             for index, display in enumerate(STATE.display()):
                 if display.draw(screen):
@@ -118,6 +130,10 @@ class Game():
                             unit = STATE.train_tank_unit()
                         if unit:
                             all_units.add(unit)
+                            friendly_units.add(unit)
+                            for e in enemy_units:
+                                e.addPossibleTarget(unit)
+                                unit.addPossibleTarget(e)
 
                         if action == 'upgrade':
                             base = STATE.upgrade()
@@ -136,9 +152,13 @@ class Game():
             '''
             # TEST
             TEST_timer += 1
-            if TEST_timer > 100:
+            if TEST_timer > 200:
                 unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
                 all_units.add(unit)
+                enemy_units.add(unit)
+                for e in friendly_units:
+                    e.addPossibleTarget(unit)
+                    unit.addPossibleTarget(e)
                 TEST_timer = 0 # reset timer to loop
             '''
 
