@@ -94,7 +94,7 @@ class GameClass():
         UnitID = '//'.join(ID[:-1])
         UnitType : type = self.get_unit_type(ID[-1])
         unit : baseUnit = UnitType(UnitID)
-        unit.rect.bottomleft = (GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT - random.randint(0,5)*10)
+        unit.rect.bottomleft = (GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT - random.randint(3,10)*6)
         unit.setMovement(Movement_Enemy(unit))
         unit.addPossibleTarget(self.base)
         self.set_team(unit)
@@ -124,7 +124,7 @@ class GameClass():
     def train_unit(self, unit:baseUnit):
         if self.currentTarget != NONE and self.get_gold() >= unit.cost:
             self.gold -= unit.cost
-            unit.rect.bottomleft = (0, GAME_SCREEN_HEIGHT - random.randint(0,10)*5)
+            unit.rect.bottomleft = (0, GAME_SCREEN_HEIGHT - random.randint(3,10)*6)
             unit.setMovement(Movement_Friendly(unit))
             self.set_team(unit)
             return unit

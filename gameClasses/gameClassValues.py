@@ -26,11 +26,11 @@ Caveman = {
 Melee_Caveman = {
     "hp" : 3,
     "mspd" : 2,
-    "aspd" : 5,
+    "aspd" : 10,
     "dmg" : 1,
     "bounty" : 1,
     "exp" : 1,
-    "cost" : 5,
+    "cost" : 3,
     "range" : 100,
     "img" : 'graphics/unit_melee/melee_prehistoric_1.png',
     "imgScale" : (100,100)
@@ -38,7 +38,7 @@ Melee_Caveman = {
 Melee_Footman = {
     "hp" : 5,
     "mspd" : 2,
-    "aspd" : 5,
+    "aspd" : 10,
     "dmg" : 2,
     "bounty" : 3,
     "exp" : 3,
@@ -50,11 +50,11 @@ Melee_Footman = {
 Melee_Soldier = {
     "hp" : 8,
     "mspd" : 2,
-    "aspd" : 5,
+    "aspd" : 10,
     "dmg" : 3,
     "bounty" : 9,
     "exp" : 9,
-    "cost" : 5,
+    "cost" : 7,
     "range" : 100,
     "img" : 'graphics/unit_melee/melee_modern_1_1.png',
     "imgScale" : (100,100)
@@ -62,11 +62,11 @@ Melee_Soldier = {
 Melee_Robot = {
     "hp" : 12,
     "mspd" : 2,
-    "aspd" : 5,
+    "aspd" : 10,
     "dmg" : 4,
     "bounty" : 27,
     "exp" : 27,
-    "cost" : 5,
+    "cost" : 10,
     "range" : 100,
     "img" : 'graphics/unit_melee/melee_scifi_1.png',
     "imgScale" : (100,100)
@@ -74,10 +74,10 @@ Melee_Robot = {
 Ranged_Slingshotter = {
     "hp" : 3,
     "mspd" : 2,
-    "aspd" : 3,
+    "aspd" : 5,
     "dmg" : 1,
-    "bounty" : 1,
-    "exp" : 1,
+    "bounty" : 2,
+    "exp" : 2,
     "cost" : 5,
     "range" : 200,
     "img" : 'graphics/unit_ranged/ranged_prehistoric_1.png',
@@ -85,52 +85,91 @@ Ranged_Slingshotter = {
 }
 Ranged_Archer = {
     "hp" : 5,
-    "mspd" : 3,
-    "aspd" : 3,
+    "mspd" : 2,
+    "aspd" : 5,
     "dmg" : 2,
-    "bounty" : 1,
-    "exp" : 1,
-    "cost" : 5,
-    "range" : 250,
+    "bounty" : 4,
+    "exp" : 4,
+    "cost" : 8,
+    "range" : 300,
     "img" : 'graphics/unit_ranged/ranged_medieval_1.png',
     "imgScale" : (100,100)
 }
 Ranged_Sniper = {
     "hp" : 7,
-    "mspd" : 3,
-    "aspd" : 3,
+    "mspd" : 2,
+    "aspd" : 5,
     "dmg" : 3,
-    "bounty" : 1,
-    "exp" : 1,
-    "cost" : 5,
-    "range" : 300,
+    "bounty" : 16,
+    "exp" : 16,
+    "cost" : 11,
+    "range" : 400,
     "img" : 'graphics/unit_ranged/ranged_modern_1_1.png',
     "imgScale" : (100,100)
 }
 Ranged_Stormtrooper = {
     "hp" : 9,
-    "mspd" : 4,
-    "aspd" : 3,
+    "mspd" : 2,
+    "aspd" : 5,
     "dmg" : 4,
-    "bounty" : 1,
-    "exp" : 1,
-    "cost" : 5,
-    "range" : 350,
+    "bounty" : 32,
+    "exp" : 32,
+    "cost" : 15,
+    "range" : 500,
     "img" : 'graphics/unit_ranged/ranged_scifi_1.png',
     "imgScale" : (100,100)
 }
 
 Tank_DinoRider = {
-    "hp" : 30,
+    "hp" : 15,
     "mspd" : 2,
     "aspd" : 3,
     "dmg" : 3,
-    "bounty" : 1,
-    "exp" : 1,
-    "cost" : 5,
+    "bounty" : 12,
+    "exp" : 12,
+    "cost" : 10,
     "range" : 130,
     "img" : 'graphics/unit_tank/tank_prehistoric.png',
     "imgScale" : (256,185)
+}
+
+Tank_Cavalier = {
+    "hp" : 30,
+    "mspd" : 2,
+    "aspd" : 3,
+    "dmg" : 5,
+    "bounty" : 24,
+    "exp" : 24,
+    "cost" : 15,
+    "range" : 150,
+    "img" : 'graphics/unit_tank/tank_medieval.png',
+    "imgScale" : (168,143)
+}
+
+Tank_Tank = {
+    "hp" : 50,
+    "mspd" : 2,
+    "aspd" : 3,
+    "dmg" : 7,
+    "bounty" : 36,
+    "exp" : 36,
+    "cost" : 20,
+    "range" : 200,
+    "img" : 'graphics/unit_tank/tank_modern.png',
+    "imgScale" : (320,192)
+}
+
+Tank_Mecha = {
+    "hp" : 80,
+    "mspd" : 1,
+    "aspd" : 3,
+    "dmg" : 16,
+    "bounty" : 96,
+    "exp" : 96,
+    "cost" : 60,
+    "range" : 300,
+    "img" : 'graphics/unit_tank/tank_scifi.png',
+    "imgScale" : (390,391)
 }
 
 Ranged_Unit = {
@@ -169,9 +208,9 @@ UNITS = {
     "Sniper" : Ranged_Sniper,
     "Stormtrooper" : Ranged_Stormtrooper,
     "DinoRider" : Tank_DinoRider,
-    "Cavalier" : Tank_Unit,
-    "Tank" : Tank_Unit,
-    "Mecha" : Tank_Unit,
+    "Cavalier" : Tank_Cavalier,
+    "Tank" : Tank_Tank,
+    "Mecha" : Tank_Mecha,
 }
 
 
@@ -182,20 +221,20 @@ Base_Cave = {
     "imgScale" : (256,256)
 }
 Base_Castle = {
-    "hp" : 200,
-    "expCost" : 100,
+    "hp" : 150,
+    "expCost" : 200,
     "img" : 'graphics/bases/bases_medieval.png',
     "imgScale" : (256,256)
 }
 Base_Camp = {
-    "hp" : 300,
-    "expCost" : 100,
+    "hp" : 200,
+    "expCost" : 350,
     "img" : 'graphics/bases/bases_modern_left.png',
     "imgScale" : (256,256)
 }
 Base_Citadel = {
-    "hp" : 400,
-    "expCost" : 100,
+    "hp" : 250,
+    "expCost" : 99999,
     "img" : 'graphics/bases/bases_scifi.png',
     "imgScale" : (256,256)
 }
