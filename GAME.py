@@ -98,10 +98,10 @@ class Game():
 
                         entity_id = f'{entity.id}//{type(entity).__name__}'
                         print(entity_id)
-                    print(STATE.get_current_target_to_send())
-                    message = entity_id.encode()
-                    self.socket.sendto(message, (STATE.get_current_target_to_send()[1], 5555))
-                    print(STATE.get_current_target_to_send()[1])
+                        print(STATE.get_current_target_to_send())
+                        message = entity_id.encode()
+                        self.socket.sendto(message, (STATE.get_current_target_to_send()[1], 5555))
+                        print(STATE.get_current_target_to_send()[1])
                     dead_units.add(entity)
 
             for entity in dead_units:
