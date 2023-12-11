@@ -14,6 +14,11 @@ class baseModel(pg.sprite.Sprite):
         # dont mind this
         self.hp = 0
         self.curhp = self.hp
+        self.isDead = False
+    
+    def die(self):
+        #TODO: add death animation here (if we're gonna use em. Also prolly need to put a delay before calling self.kill())
+        self.kill()
 
     def getCenter(self):
         return self.rect.center
@@ -25,6 +30,8 @@ class baseModel(pg.sprite.Sprite):
         hpratio = self.curhp/self.hp
         pg.draw.rect(screen, (255,0,0), (self.rect.left, self.rect.top - 20, self.rect.width, 10))
         pg.draw.rect(screen, (0,128,0), (self.rect.left, self.rect.top - 20, self.rect.width * hpratio, 10))
+        if self.curhp <= 0:
+            self.die()
 
     @abstractmethod
     def die(self):
