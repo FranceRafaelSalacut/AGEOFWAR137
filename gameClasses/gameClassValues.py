@@ -66,16 +66,15 @@ Melee_Robot = {
     "img" : 'graphics/stickman.png',
     "imgScale" : (100,100)
 }
-
 Ranged_Stoner = {
-    "hp" : 7,
+    "hp" : 3,
     "mspd" : 2,
-    "aspd" : 2,
-    "dmg" : 5,
-    "bounty" : 27,
-    "exp" : 27,
+    "aspd" : 3,
+    "dmg" : 1,
+    "bounty" : 1,
+    "exp" : 1,
     "cost" : 5,
-    "img" : 'graphics/stickman.png',
+    "img" : 'graphics/unit_ranged/ranged_stickman.png',
     "imgScale" : (100,100)
 }
 
@@ -96,8 +95,8 @@ Ranged_Unit = {
     "mspd" : 3,
     "aspd" : 0,
     "dmg" : 0,
-    "bounty" : 0,
-    "exp" : 0,
+    "bounty" : 3,
+    "exp" : 3,
     "cost" : 5,
     "img" : 'graphics/unit_ranged/ranged_stickman.png',
     "imgScale" : (100,100)
