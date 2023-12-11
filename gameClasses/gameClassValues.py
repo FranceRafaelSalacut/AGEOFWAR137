@@ -16,6 +16,7 @@ Caveman = {
     "bounty" : 0,
     "exp" : 0,
     "cost" : 0,
+    "range" : 50,
     "img" : 'graphics\stickman.png'
     "imgScale" : (100,100) # width, height
 }
@@ -30,6 +31,7 @@ Melee_Caveman = {
     "bounty" : 1,
     "exp" : 1,
     "cost" : 5,
+    "range" : 100,
     "img" : 'graphics/unit_melee/stickman.png',
     "imgScale" : (100,100)
 }
@@ -41,6 +43,7 @@ Melee_Footman = {
     "bounty" : 3,
     "exp" : 3,
     "cost" : 5,
+    "range" : 100,
     "img" : 'graphics/stickman.png',
     "imgScale" : (100,100)
 }
@@ -52,6 +55,7 @@ Melee_Soldier = {
     "bounty" : 9,
     "exp" : 9,
     "cost" : 5,
+    "range" : 100,
     "img" : 'graphics/stickman.png',
     "imgScale" : (100,100)
 }
@@ -63,6 +67,7 @@ Melee_Robot = {
     "bounty" : 27,
     "exp" : 27,
     "cost" : 5,
+    "range" : 100,
     "img" : 'graphics/stickman.png',
     "imgScale" : (100,100)
 }
@@ -74,6 +79,7 @@ Ranged_Slingshotter = {
     "bounty" : 1,
     "exp" : 1,
     "cost" : 5,
+    "range" : 200,
     "img" : 'graphics/unit_ranged/ranged_stickman.png',
     "imgScale" : (100,100)
 }
@@ -86,6 +92,7 @@ Tank_DinoRider = {
     "bounty" : 1,
     "exp" : 1,
     "cost" : 5,
+    "range" : 130,
     "img" : 'graphics/unit_tank/tank_stickman.png',
     "imgScale" : (140,200)
 }
@@ -98,6 +105,7 @@ Ranged_Unit = {
     "bounty" : 3,
     "exp" : 3,
     "cost" : 5,
+    "range" : 200,
     "img" : 'graphics/unit_ranged/ranged_stickman.png',
     "imgScale" : (100,100)
 }
@@ -110,6 +118,7 @@ Tank_Unit = {
     "bounty" : 0,
     "exp" : 0,
     "cost" : 5,
+    "range" : 130,
     "img" : 'graphics/unit_tank/tank_stickman.png',
     "imgScale" : (140,200)
 }
