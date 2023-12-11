@@ -66,7 +66,17 @@ Melee_Robot = {
     "img" : 'graphics/stickman.png',
     "imgScale" : (100,100)
 }
-
+Ranged_Slingshotter = {
+    "hp" : 3,
+    "mspd" : 2,
+    "aspd" : 3,
+    "dmg" : 1,
+    "bounty" : 1,
+    "exp" : 1,
+    "cost" : 5,
+    "img" : 'graphics/unit_ranged/ranged_stickman.png',
+    "imgScale" : (100,100)
+}
 
 Tank_DinoRider = {
     "hp" : 30,
@@ -109,7 +119,7 @@ UNITS = {
     "Footman" : Melee_Footman,
     "Soldier" : Melee_Soldier,
     "Robot" : Melee_Robot,
-    "Slingshotter" : Ranged_Unit,
+    "Slingshotter" : Ranged_Slingshotter,
     "Archer" : Ranged_Unit,
     "Sniper" : Ranged_Unit,
     "Stormtrooper" : Ranged_Unit,
