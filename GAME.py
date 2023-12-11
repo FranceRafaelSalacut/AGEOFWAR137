@@ -22,6 +22,7 @@ class Game():
         all_units = pygame.sprite.Group()
         enemy_units = pygame.sprite.Group()
         friendly_units = pygame.sprite.Group()
+        projectiles = pygame.sprite.Group()
         base = STATE.get_base()
 
         # music
