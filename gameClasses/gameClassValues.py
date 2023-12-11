@@ -32,7 +32,7 @@ Melee_Caveman = {
     "exp" : 1,
     "cost" : 5,
     "range" : 100,
-    "img" : 'graphics/unit_melee/stickman.png',
+    "img" : 'graphics/unit_melee/melee_prehistoric_1.png',
     "imgScale" : (100,100)
 }
 Melee_Footman = {
@@ -44,7 +44,7 @@ Melee_Footman = {
     "exp" : 3,
     "cost" : 5,
     "range" : 100,
-    "img" : 'graphics/stickman.png',
+    "img" : 'graphics/unit_melee/melee_medieval_1.png',
     "imgScale" : (100,100)
 }
 Melee_Soldier = {
@@ -56,7 +56,7 @@ Melee_Soldier = {
     "exp" : 9,
     "cost" : 5,
     "range" : 100,
-    "img" : 'graphics/stickman.png',
+    "img" : 'graphics/unit_melee/melee_modern_1.png',
     "imgScale" : (100,100)
 }
 Melee_Robot = {
@@ -68,7 +68,7 @@ Melee_Robot = {
     "exp" : 27,
     "cost" : 5,
     "range" : 100,
-    "img" : 'graphics/stickman.png',
+    "img" : 'graphics/unit_melee/melee_scifi_1.png',
     "imgScale" : (100,100)
 }
 Ranged_Slingshotter = {
@@ -80,7 +80,7 @@ Ranged_Slingshotter = {
     "exp" : 1,
     "cost" : 5,
     "range" : 200,
-    "img" : 'graphics/unit_ranged/ranged_stickman.png',
+    "img" : 'graphics/unit_ranged/ranged_prehistoric_1.png',
     "imgScale" : (100,100)
 }
 
@@ -93,8 +93,8 @@ Tank_DinoRider = {
     "exp" : 1,
     "cost" : 5,
     "range" : 130,
-    "img" : 'graphics/unit_tank/tank_stickman.png',
-    "imgScale" : (140,200)
+    "img" : 'graphics/unit_tank/tank_modern_1_1.png',
+    "imgScale" : (256,128)
 }
 
 Ranged_Unit = {
@@ -142,26 +142,26 @@ UNITS = {
 Base_Cave = {
     "hp" : 100,
     "expCost" : 100,
-    "img" : 'graphics/bases/cave.png',
-    "imgScale" : (100,100)
+    "img" : 'graphics/bases/bases_prehistoric.png',
+    "imgScale" : (256,256)
 }
 Base_Castle = {
     "hp" : 200,
     "expCost" : 100,
-    "img" : 'graphics/bases/cave.png',
-    "imgScale" : (100,100)
+    "img" : 'graphics/bases/bases_medieval.png',
+    "imgScale" : (256,256)
 }
 Base_Camp = {
     "hp" : 300,
     "expCost" : 100,
-    "img" : 'graphics/bases/cave.png',
-    "imgScale" : (100,100)
+    "img" : 'graphics/bases/bases_modern_left.png',
+    "imgScale" : (256,256)
 }
 Base_Citadel = {
     "hp" : 400,
     "expCost" : 100,
-    "img" : 'graphics/bases/cave.png',
-    "imgScale" : (100,100)
+    "img" : 'graphics/bases/bases_scifi.png',
+    "imgScale" : (256,256)
 }
 
 
