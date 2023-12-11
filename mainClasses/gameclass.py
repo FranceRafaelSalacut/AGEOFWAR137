@@ -51,13 +51,17 @@ class GameClass():
     
     def get_base(self):
         base = Cave(0)
+        self.factory = PrehistoricUnitFactory()
         print(self.techLevel)
         if self.techLevel == 2:
             base = Castle(0)
+            self.factory = MedievalUnitFactory()
         if self.techLevel == 3:
             base = Camp(0)
+            self.factory = ModernUnitFactory()
         if self.techLevel == 4:
             base = Citadel(0)
+            self.factory = ScifiUnitFactory()
         base.rect.bottomleft = (0, GAME_SCREEN_HEIGHT-50)
         self.base = base
         return base

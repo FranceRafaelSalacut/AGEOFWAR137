@@ -56,7 +56,7 @@ Melee_Soldier = {
     "exp" : 9,
     "cost" : 5,
     "range" : 100,
-    "img" : 'graphics/unit_melee/melee_modern_1.png',
+    "img" : 'graphics/unit_melee/melee_modern_1_1.png',
     "imgScale" : (100,100)
 }
 Melee_Robot = {
@@ -83,12 +83,48 @@ Ranged_Slingshotter = {
     "img" : 'graphics/unit_ranged/ranged_prehistoric_1.png',
     "imgScale" : (100,100)
 }
+Ranged_Archer = {
+    "hp" : 5,
+    "mspd" : 3,
+    "aspd" : 3,
+    "dmg" : 2,
+    "bounty" : 1,
+    "exp" : 1,
+    "cost" : 5,
+    "range" : 250,
+    "img" : 'graphics/unit_ranged/ranged_medieval_1.png',
+    "imgScale" : (100,100)
+}
+Ranged_Sniper = {
+    "hp" : 7,
+    "mspd" : 3,
+    "aspd" : 3,
+    "dmg" : 3,
+    "bounty" : 1,
+    "exp" : 1,
+    "cost" : 5,
+    "range" : 300,
+    "img" : 'graphics/unit_ranged/ranged_modern_1_1.png',
+    "imgScale" : (100,100)
+}
+Ranged_Stormtrooper = {
+    "hp" : 9,
+    "mspd" : 4,
+    "aspd" : 3,
+    "dmg" : 4,
+    "bounty" : 1,
+    "exp" : 1,
+    "cost" : 5,
+    "range" : 350,
+    "img" : 'graphics/unit_ranged/ranged_scifi_1.png',
+    "imgScale" : (100,100)
+}
 
 Tank_DinoRider = {
     "hp" : 30,
     "mspd" : 2,
     "aspd" : 3,
-    "dmg" : 10,
+    "dmg" : 3,
     "bounty" : 1,
     "exp" : 1,
     "cost" : 5,
@@ -129,9 +165,9 @@ UNITS = {
     "Soldier" : Melee_Soldier,
     "Robot" : Melee_Robot,
     "Slingshotter" : Ranged_Slingshotter,
-    "Archer" : Ranged_Unit,
-    "Sniper" : Ranged_Unit,
-    "Stormtrooper" : Ranged_Unit,
+    "Archer" : Ranged_Archer,
+    "Sniper" : Ranged_Sniper,
+    "Stormtrooper" : Ranged_Stormtrooper,
     "DinoRider" : Tank_DinoRider,
     "Cavalier" : Tank_Unit,
     "Tank" : Tank_Unit,
