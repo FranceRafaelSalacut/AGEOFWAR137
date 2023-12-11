@@ -10,8 +10,21 @@ class baseModel(pg.sprite.Sprite):
         self.image.fill((0,0,0))
         self.rect = self.image.get_rect()
         self.rect.center = [x,y]
+
+        # dont mind this
+        self.hp = 0
+        self.curhp = self.hp
+
     def getCenter(self):
         return self.rect.center
+    
+    def update(self, screen):
+        self.update_healthBar(screen)
+
+    def update_healthBar(self, screen):
+        hpratio = self.curhp/self.hp
+        pg.draw.rect(screen, (255,0,0), (self.rect.left, self.rect.top - 20, self.rect.width, 10))
+        pg.draw.rect(screen, (0,128,0), (self.rect.left, self.rect.top - 20, self.rect.width * hpratio, 10))
 
     @abstractmethod
     def die(self):

@@ -68,9 +68,7 @@ class baseUnit(baseModel):
             self.attack()
             if not self.attackTarget or self.attackTarget.isDead:
                 self.state = STATE_MOVING
-        self.hpratio = self.curhp/self.hp
-        pg.draw.rect(screen, (255,0,0), (self.rect.left, self.rect.top - 20, self.rect.width, 10))
-        pg.draw.rect(screen, (0,128,0), (self.rect.left, self.rect.top - 20, self.rect.width * self.hpratio, 10))
+        self.update_healthBar(screen)
         if self.curhp <= 0:
             self.die()
 
