@@ -92,7 +92,8 @@ class Game():
                     print(entity_id)
                     print(STATE.get_current_target_to_send())
                     message = entity_id.encode()
-                    #self.socket.sendto(message, STATE.get_current_target_to_send()[1], 5555)
+                    self.socket.sendto(message, (STATE.get_current_target_to_send()[1], 5555))
+                    print(STATE.get_current_target_to_send()[1])
                     entity.kill()
 
             # GUI
