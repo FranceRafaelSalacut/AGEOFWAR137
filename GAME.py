@@ -185,7 +185,7 @@ def getArgs():
             print(f"key: {key}, value: {value}")
         
         print(targets)
-        temp = sys.argv[1].encode()
+        temp = sys.argv[1:].encode()
         time.sleep(1)
         while True:
             temp_socket.sendto(temp, ('<broadcast>', 5555))
@@ -199,16 +199,21 @@ def getArgs():
         return targets
     else:
         print("No message passed")
+        temp = ""
         for x in range(0,5):
             try: 
                 message, address = temp_socket.recvfrom(1024)
+                temp = message
                 print("GGGGG")
-                temp_socket.sendto("Ress".encode(), address)
+                return_message = "Ress"
+                temp_socket.sendto(return_message.encode(), address)
             except:
                 print("tried")
-
+        temp = message.decode()
+        temp = ''.join(temp).replace("'","").replace('{', '{"').replace(':','": "').replace(',','", "').replace('}','"}')
+        
         temp_socket.close()
-        print(f"{message.decode()}")
+        print(f"{temp}")
     
         #return message.decode()
 
