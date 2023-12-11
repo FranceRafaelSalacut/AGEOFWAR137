@@ -3,6 +3,7 @@ from mainClasses.button import *
 from src.CONSTANTS import *
 from src.gamescreen import *
 from gameClasses.unitFactory import *
+from mainClasses.image import *
 
 class Game():
     def __init__(self) -> None:
@@ -25,6 +26,10 @@ class Game():
         projectiles = pygame.sprite.Group()
         base = STATE.get_base()
 
+
+        # GAME STUFF
+        # background
+        Background = Image('graphics/backgrounds/background_prehistoric.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)
         # music
         pygame.mixer.music.load(MUSIC_GLORIOUS_MORNING)
         pygame.mixer.music.play()
@@ -42,10 +47,10 @@ class Game():
 
             # Render game here
             # vv===========================================vv
-            if type(STATE) == GAME_SCREEN:
-                base.update(screen)
-                screen.blit(base.image, base.rect)
-                STATE.update_state()
+            Background.draw(screen)
+            base.update(screen)
+            screen.blit(base.image, base.rect)
+            STATE.update_state()
 
             for entity in all_units:
                 STATE.update_unit_target(entity)
@@ -111,17 +116,17 @@ class Game():
             # TEST
             TEST_timer += 1
             TEST_timerB += 1
-            # if TEST_timer > 200:
-            #     unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
-            #     all_units.add(unit)
-            #     TEST_timer = 0 # reset timer to loop
-            #     # print(enemy_units)
-
-            if TEST_timerB > 300:
-                unit = STATE.spawn_enemy('192.168.68.103//35939//2//DinoRider')
+            if TEST_timer > 200:
+                unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
                 all_units.add(unit)
-                TEST_timerB = 0 # reset timer to loop
+                TEST_timer = 0 # reset timer to loop
                 # print(enemy_units)
+
+            # if TEST_timerB > 300:
+            #     unit = STATE.spawn_enemy('192.168.68.103//35939//2//DinoRider')
+            #     all_units.add(unit)
+            #     TEST_timerB = 0 # reset timer to loop
+            #     # print(enemy_units)
 
             """
             TO SPAWN ENEMIES, do:
