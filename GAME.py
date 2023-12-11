@@ -108,7 +108,8 @@ class Game():
                         run = False
 
                     print(action)
-
+            for entity in projectiles:
+                screen.blit(entity.image, entity.rect)
             # TEST
             TEST_timer += 1
             if TEST_timer > 200:
