@@ -153,3 +153,10 @@ BUILDINGS = {
     "Camp" : Base_Camp,
     "Citadel" : Base_Citadel
 }
+
+Projectile = {
+    "vx" : 0,
+    "vy" : 0,
+    "img" : 'graphics/unit_tank/tank_stickman.png',
+    "imgScale" : (50,50)    
+}
