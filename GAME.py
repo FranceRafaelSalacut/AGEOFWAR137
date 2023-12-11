@@ -39,7 +39,7 @@ class Game():
         self.startGame()
 
     def startGame(self):
-        STATE = GAME_SCREEN()
+        STATE = GAME_SCREEN(self.players)
         # pygame setup
         pygame.init()
         screen = pygame.display.set_mode([GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT])
