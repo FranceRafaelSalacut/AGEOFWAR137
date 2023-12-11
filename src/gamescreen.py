@@ -77,6 +77,9 @@ class GAME_SCREEN():
     
     def update_state(self):
         self._game.passiveGain()
+    def earn_bounty(self, bounty, exp):
+        self._game.gold += bounty
+        self._game.exp += exp
     def update_unit_target(self, unit:baseModel):
         self._game.update_unit_targets(unit)
     def spawn_enemy(self, ID:str):

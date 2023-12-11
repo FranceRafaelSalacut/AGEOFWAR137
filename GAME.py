@@ -73,6 +73,9 @@ class Game():
             for entity in dead_units:
                 if entity.killer:
                     STATE.killed_unit(entity)
+                    # TODO: pass to specific player this string
+                    entity.get_bounty()
+
                 entity.kill()
             # GUI
             for index, display in enumerate(STATE.display()):

@@ -57,6 +57,9 @@ class baseUnit(baseModel):
         #TODO: add death animation here (if we're gonna use em. Also prolly need to put a delay before calling self.kill())
         self.isDead = True
 
+    def get_bounty(self):
+        return f'{self.id}//GOLD:{self.bounty}//EXP:{self.exp}'
+
     def update(self, screen):
         self.updateTarget()
         if self.state == STATE_MOVING:
