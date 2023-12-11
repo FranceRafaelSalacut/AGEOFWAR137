@@ -208,7 +208,7 @@ def getArgs():
                 temp = message
                 print("GGGGG")
                 message = "Ress"
-                self.socket.sendto(message.encode(), address)
+                temp_socket.sendto(message.encode(), address)
             except:
                 print("tried")
 
