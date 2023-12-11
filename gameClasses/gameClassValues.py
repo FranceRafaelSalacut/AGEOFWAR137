@@ -67,6 +67,17 @@ Melee_Robot = {
     "imgScale" : (100,100)
 }
 
+Ranged_Stoner = {
+    "hp" : 7,
+    "mspd" : 2,
+    "aspd" : 2,
+    "dmg" : 5,
+    "bounty" : 27,
+    "exp" : 27,
+    "cost" : 5,
+    "img" : 'graphics/stickman.png',
+    "imgScale" : (100,100)
+}
 
 Tank_DinoRider = {
     "hp" : 30,
@@ -109,7 +120,7 @@ UNITS = {
     "Footman" : Melee_Footman,
     "Soldier" : Melee_Soldier,
     "Robot" : Melee_Robot,
-    "Slingshotter" : Ranged_Unit,
+    "Slingshotter" : Ranged_Stoner,
     "Archer" : Ranged_Unit,
     "Sniper" : Ranged_Unit,
     "Stormtrooper" : Ranged_Unit,
@@ -155,8 +166,7 @@ BUILDINGS = {
 }
 
 Stone = {
-    "vx" : 0,
-    "vy" : 0,
+    "unit" : Ranged_Stoner,
     "img" : 'graphics/projectiles/stone.png',
     "imgScale" : (50,50)    
 }
