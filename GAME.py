@@ -187,7 +187,7 @@ def getArgs():
         print(targets)
         temp = sys.argv[1].encode()
         time.sleep(1)
-        while TRUE:
+        while True:
             temp_socket.sendto(temp, ('<broadcast>', 5555))
             message, address = temp_socket.recvfrom(1024)
             if message.decode == "Ress":
