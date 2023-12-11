@@ -32,7 +32,7 @@ class Game():
         Background = Image('graphics/backgrounds/background_prehistoric.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)
         # music
         pygame.mixer.music.load(MUSIC_GLORIOUS_MORNING)
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(loops=-1)
 
         # TODO: get targets from server
 
