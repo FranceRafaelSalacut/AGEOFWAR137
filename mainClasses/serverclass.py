@@ -65,7 +65,11 @@ class Server():
         display.changeText("Server Stopped")
 
     def getAdress_list(self):
-        self.stopServer()
+        
+        self.running = False
+        if self.background_thread:
+            self.background_thread.join()
+
         message = "START"
         self.socket.sendto(message.encode(), ('<broadcast>', self.port))
         return self.client_list
