@@ -5,28 +5,11 @@ from src.gamescreen import *
 from gameClasses.unitFactory import *
 
 class Game():
-    def __init__(self, players: list) -> None:
-        """
-        MAKE SURE THAT THE PLAYERS LIST FOLLOWS
-            (NAME, IP ADDRESS, PORT)
-        
-        NOTE: Name can just be randomly generated if we dont have time
-        
-        example:
-        players = [
-            ('GB','192.168.68.103',51546),
-            ('Panpan','192.168.68.103',5922),
-            ('Johannes','192.168.68.103',3159),
-            ('Dustin','192.168.68.103',6490),
-            ('Jav','192.168.68.103',8203)
-        ]
-        """
-        self.players = players
+    def __init__(self) -> None:
         self.startGame()
 
     def startGame(self):
         STATE = GAME_SCREEN()
-        STATE.addTargets(self.players)
         # pygame setup
         pygame.init()
         screen = pygame.display.set_mode([GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT])
@@ -133,14 +116,7 @@ class Game():
 
 
 if __name__ == "__main__":
-    targets = [
-        ('GB','192.168.68.103',51546),
-        ('Panpan','192.168.68.103',5922),
-        ('Johannes','192.168.68.103',3159),
-        ('Dustin','192.168.68.103',6490),
-        ('Jav','192.168.68.103',8203)
-    ]
-    Game(players = targets)
+    Game()
 
 import sys
 import json
