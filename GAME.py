@@ -185,10 +185,9 @@ def getArgs():
             print(f"key: {key}, value: {value}")
         
         print(targets)
-        temp = sys.argv[1:].encode()
         time.sleep(1)
         while True:
-            temp_socket.sendto(temp, ('<broadcast>', 5555))
+            temp_socket.sendto(temp.encode(), ('<broadcast>', 5555))
             message, address = temp_socket.recvfrom(1024)
             if message.decode == "Ress":
                 print("Im dying")
@@ -209,11 +208,15 @@ def getArgs():
                 temp_socket.sendto(return_message.encode(), address)
             except:
                 print("tried")
-        temp = message.decode()
-        temp = ''.join(temp).replace("'","").replace('{', '{"').replace(':','": "').replace(',','", "').replace('}','"}')
-        
+
+        address_list = json.loads(temp)
+        for key, value in address_list.items():
+            temp_list = (key,value,5555)
+            targets.append(temp_list)
+            print(f"key: {key}, value: {value}")
+
         temp_socket.close()
-        print(f"{temp}")
+        print(f"{targets}")
     
         #return message.decode()
 
