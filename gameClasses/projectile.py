@@ -7,10 +7,11 @@ class Projectile(baseModel):
     def __init__(self, id, unit, x = 0, y = 0):
         super().__init__(id, x, y)
         self.unit = unit
-        self.x = self.unit.rect.centerx
-        self.y = self.unit.rect.centery
+        self.centerx = self.unit.rect.centerx
+        self.centery = self.unit.rect.centery
         self.fetchValues('Stone')
         self.dmg = self.unit.dmg
+        self.direction = self.unit.direction
         
     def fetchValues(self, unitType : str):
         val = PROJECTILES[unitType]
@@ -19,7 +20,10 @@ class Projectile(baseModel):
         self.rect = self.image.get_rect()
             
     def goTowardsTarget(self):
-        self.rect.centerx += 2
+        if self.direction == 1: 
+            self.rect.centerx += 2
+        elif self.direction == -1:
+            self.rect.centerx -= 2
 
     def check_collision(self):
         # unit.Rect.collidepoint
