@@ -4,6 +4,7 @@ from mainClasses.screen import *
 from mainClasses.button import *
 from mainClasses.text import *
 from mainClasses.serverclass import *
+from mainClasses.image import *
 pygame.init
 
 
@@ -21,6 +22,12 @@ class SERVER_MENU():
     def __init__(self) -> None:
         self.server = Server()
         self.to_display = [back, Display_Text, start_server, stop_server, start_game]
+        self.images = [
+
+        ]
+    def load_images(self):
+        for i in self.images:
+            i.load_image()
 
     def screen_to_display(self):
         # Initializing Screen

@@ -4,6 +4,7 @@ from src.CONSTANTS import *
 from mainClasses.screen import *
 from mainClasses.button import *
 from mainClasses.clientclass import *
+from mainClasses.image import *
 pygame.init
 
 # Initializing Buttons
@@ -27,6 +28,11 @@ class CLIENT_MENU():
                            #connect[0], connect[1], connect[2],
                            #connect[3], connect[4], connect[5]
                            ]
+        self.images = [
+        ]
+    def load_images(self):
+        for i in self.images:
+            i.load_image()
 
     def screen_to_display(self):
         # Initializing Screen

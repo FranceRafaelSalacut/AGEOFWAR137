@@ -27,7 +27,7 @@ while run:
         if display.draw(current_screen):
             action = display.getText()
             if action == "Client":
-                STATE = CLIENT_MENU() 
+                STATE = CLIENT_MENU()
 
             if action == "Host":
                 STATE = SERVER_MENU()
