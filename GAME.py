@@ -4,7 +4,8 @@ from src.CONSTANTS import *
 from src.gamescreen import *
 from gameClasses.unitFactory import *
 from mainClasses.image import *
-import asyncio
+from gameClasses.rangedUnit import *
+
 class Game():
     def __init__(self) -> None:
         self.startGame()
@@ -63,10 +64,14 @@ class Game():
                 if not hasLost and not hasWon:
                     STATE.update_unit_target(entity)
                     entity.update(screen)
+                if isinstance(entity, rangedUnit):
+                    # Call a method that returns some value here
+                    if entity.hasShot:
+                        projectiles.add(entity.create_projectile())
                 if entity.isDead:
                     dead_units.add(entity)
                 screen.blit(entity.image, entity.rect)
-
+        
                 # remove entity if they get out of the screen
                 if entity.rect.left >= GAME_SCREEN_WIDTH + 20 or entity.rect.right <= 0:
                     if type(entity.movePattern) == Movement_Friendly:
@@ -82,7 +87,12 @@ class Game():
                         entity_id = f'{entity.id}//{type(entity).__name__}'
                         print(entity_id)
                     dead_units.add(entity)
-
+            for entity in projectiles:
+                screen.blit(entity.image, entity.rect)
+                for unit in all_units:
+                    entity.check_collision(unit)
+                entity.goTowardsTarget() # Update the movement of the projectiles' rect
+                # If bullet leaves screen, kill its sprite
             for entity in dead_units:
                 if entity.killer:
                     STATE.killed_unit(entity)
@@ -144,7 +154,6 @@ class Game():
                         run = False
 
                     print(action)
-
 
             # TEST
 

@@ -25,6 +25,7 @@ class baseUnit(baseModel):
         self.owner = '//'.join(self.id.split('//')[:-1])
         self.isFacing = FACING_RIGHT
         self.position :list = [float(x),float(y)]
+        self.direction = 0
 
     def fetchValues(self, unitType : str):
         val = UNITS[unitType]
@@ -55,6 +56,7 @@ class baseUnit(baseModel):
 
     def setMovement(self, movePattern:Movement_None):
         self.movePattern = movePattern
+        self.setDirection()
 
     def move(self):
         self.movePattern.move()
@@ -105,6 +107,12 @@ class baseUnit(baseModel):
         if self.attackTarget.curhp <= 0:
             self.attackTarget.killer = self
             self.attackTarget = None
+        
+    def setDirection(self):
+        if isinstance(self.movePattern, Movement_Friendly):
+            self.direction = 1
+        elif isinstance(self.movePattern, Movement_Enemy):
+            self.direction = -1
 
 class Movement_None():
     def __init__(self, unit:baseUnit) -> None:
