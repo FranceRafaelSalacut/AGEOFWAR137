@@ -73,7 +73,10 @@ class GameClass():
             return self.base.expCost
         else:
             return 0
-        
+    def is_base_dead(self):
+        if self.base:
+            return self.base.curhp <= 0
+        return False
     def get_exp(self):
         return math.floor(self.exp)
     def get_gold(self):

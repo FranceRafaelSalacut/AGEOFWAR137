@@ -16,6 +16,7 @@ Player_board = Image('graphics/gui/GUI_player_board.png', GAME_SCREEN_WIDTH - 30
 Button_generic_0 = Image('graphics/gui/Button.png', 0, 0, 1, 1)
 Button_generic_1 = Image('graphics/gui/Button.png', 0, 0, 1, 1)
 Button_generic_2 = Image('graphics/gui/Button.png', 0, 0, 1, 1)
+Button_generic_3 = Image('graphics/gui/GUI_select_target.png', 0, 0, 1, 1)
 Button_upgrade_icon = Image('graphics/gui/Button_upgrade.png', 0, 0, 1, 1)
 Select_player_bg = Image('graphics/gui/GUI_select_target.png', GAME_SCREEN_WIDTH//2-150, -50, 350, 100)
 Button_change_target = Image('graphics/gui/Button_pickTarget.png', 0, 0, 1, 1)
@@ -47,6 +48,9 @@ Text_trainMeleeUnit_gold = Text("GOLD", Button_trainMeleeUnit.rect.centerx + 15,
 Gold_icon_melee = Image('graphics/gold_icon.png',Text_trainMeleeUnit_gold.rect.centerx - 5,Text_trainMeleeUnit_gold.rect.centery-5,10,12)
 Text_upgrade_exp = Text("EXP", Button_upgrade.rect.centerx, Button_upgrade.rect.bottom + 20, 30)
 
+dead_screen = Image('graphics/gui/red_overlay.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT, show=False)
+Text_lost = Text("YOU LOST!",GAME_SCREEN_WIDTH//2, GAME_SCREEN_HEIGHT//2,100, show=False)
+Button_lost = Button(Light_Grey, Text_lost.rect.centerx - 100, Text_lost.rect.bottom + 50, 200, 40, 30, text = "EXIT", value = "Exit", image = Button_generic_3, textColor=(255,255,255), show=False)
 class GAME_SCREEN():
     def __init__(self) -> None:
         self._game = GameClass()
@@ -64,6 +68,7 @@ class GAME_SCREEN():
             Select_player_bg,
             Button_change_target,
             Button_upgrade_icon_overlay,
+            dead_screen,
             ]
         self.buttons = [
             Button_trainMeleeUnit,
@@ -71,6 +76,7 @@ class GAME_SCREEN():
             Button_trainTankUnit,
             Button_upgrade,
             Button_change,
+            Button_lost,
         ]
         self.backGround = Background
         self.to_display = [
@@ -96,6 +102,9 @@ class GAME_SCREEN():
             Gold_icon_melee,
             Text_currentTarget_Warning,
             Button_upgrade_icon_overlay,
+            dead_screen,
+            Text_lost,
+            Button_lost,
         ]
 
         self.dropDownTargets : list[Button] = []
@@ -119,6 +128,11 @@ class GAME_SCREEN():
             i.load_image()
         for i in self.buttons:
             i.load_image()
+    def is_base_dead(self):
+        y = self._game.is_base_dead()
+        if y:
+            pass
+        return y
 
     def get_base(self):
         return self._game.base
