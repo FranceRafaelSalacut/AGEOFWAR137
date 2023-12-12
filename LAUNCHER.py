@@ -50,8 +50,8 @@ while run:
             if action == "Reset":
                 STATE.stop()
 
-            if action == "Connect":
-                if STATE.connect():
+            if action.startswith("Connect") :
+                if STATE.connect(action):
                     run = False
 
             if action == "Start_Game":

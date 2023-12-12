@@ -77,7 +77,7 @@ class CLIENT_MENU():
         for idx, address in enumerate(servers):
             if idx == 8:
                 break
-            b = Button(Light_Grey, ServerList.rect.left + 50, ServerList.rect.top + 20 + (idx * 40), 75, 25, 20, text = "Connect", value = "Connect")
+            b = Button(Light_Grey, ServerList.rect.left + 50, ServerList.rect.top + 20 + (idx * 40), 75, 25, 20, text = "Connect", value = f"Connect//{str(address)}")
             t = Text(str(address), b.rect.right + 100, b.rect.centery, 20)
             self.buttonList.append(b)
             self.textList.append(t)
@@ -87,8 +87,10 @@ class CLIENT_MENU():
         self.resetDisplay()
         self.client.stopFinding()
 
-    def connect(self, index):
-        return self.client.connect(index-3)
+    def connect(self,address : str):
+        a = address.split('//')[1].replace("'",'').replace(')','').replace('(','').replace(' ','').split(',')
+        a = (a[0],int(a[1]))
+        return self.client.connect(a)
 
     def animate(self):
         pass
