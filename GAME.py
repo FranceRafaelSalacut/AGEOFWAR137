@@ -3,6 +3,7 @@ from mainClasses.button import *
 from src.CONSTANTS import *
 from src.gamescreen import *
 from gameClasses.unitFactory import *
+from mainClasses.image import *
 
 class Game():
     def __init__(self) -> None:
@@ -23,11 +24,15 @@ class Game():
         all_units = pygame.sprite.Group()
         dead_units = pygame.sprite.Group()
         projectiles = pygame.sprite.Group()
+        STATE.initialize()
         base = STATE.get_base()
+        STATE.load_images()
 
+
+        # GAME STUFF
         # music
         pygame.mixer.music.load(MUSIC_GLORIOUS_MORNING)
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(loops=-1)
 
         # TODO: get targets from server
 
@@ -42,10 +47,14 @@ class Game():
 
             # Render game here
             # vv===========================================vv
-            if type(STATE) == GAME_SCREEN:
-                base.update(screen)
-                screen.blit(base.image, base.rect)
-                STATE.update_state()
+            STATE.backGround.draw(screen)
+            base.update(screen)
+            screen.blit(base.image, base.rect)
+            STATE.update_state()
+
+            sorted_sprites = sorted(all_units.sprites(), key=lambda sprite: sprite.rect.bottomleft[1])
+            all_units.empty()
+            all_units.add(sorted_sprites)
 
             for entity in all_units:
                 STATE.update_unit_target(entity)
@@ -55,7 +64,7 @@ class Game():
                 screen.blit(entity.image, entity.rect)
 
                 # remove entity if they get out of the screen
-                if entity.rect.left >= GAME_SCREEN_WIDTH or entity.rect.right <= 0:
+                if entity.rect.left >= GAME_SCREEN_WIDTH + 20 or entity.rect.right <= 0:
                     if type(entity.movePattern) == Movement_Friendly:
                         # TODO: put something here to send entity over to server
                         # current entity IDs are {IP ADDRESS}//{PORT}//{UNIQUE NUMBER}//{UNIT CLASS}
@@ -99,9 +108,10 @@ class Game():
                             unit = STATE.train_tank_unit()
                         if unit:
                             all_units.add(unit)
-
                         if action == 'upgrade':
-                            base = STATE.upgrade()
+                            upgraded_base = STATE.upgrade()
+                            if upgraded_base:
+                                base = upgraded_base
 
                     if action == "Exit":
                         run = False
@@ -111,11 +121,11 @@ class Game():
             # TEST
             TEST_timer += 1
             TEST_timerB += 1
-            # if TEST_timer > 200:
-            #     unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
-            #     all_units.add(unit)
-            #     TEST_timer = 0 # reset timer to loop
-            #     # print(enemy_units)
+            if TEST_timer > 200:
+                unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
+                all_units.add(unit)
+                TEST_timer = 0 # reset timer to loop
+                # print(enemy_units)
 
             if TEST_timerB > 300:
                 unit = STATE.spawn_enemy('192.168.68.103//35939//2//DinoRider')

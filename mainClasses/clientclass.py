@@ -26,7 +26,7 @@ class Client():
                 continue
         print("Stopped")
 
-    def startFinding(self, display:[], connect:[]):
+    def startFinding(self):
         self.found_servers = []
 
         print(f"Client at {self.address}")
@@ -54,25 +54,17 @@ class Client():
                         print(f"{address} is already discovered")
             except:
                 break
+        return self.found_servers
 
-        for index, address in enumerate(self.found_servers):
-            connect[index+3].changeText(f"{address}")
-            display.append(connect[index])
-            display.append(connect[index+3])
-        print(self.found_servers)
 
-        if len(self.found_servers) == 0:
-            connect[3].changeText("Cant find any Servers :(")
-            display.append(connect[3])
     def stopFinding(self):
         print("unused function")
 
 
-    def connect(self, index):
+    def connect(self, address):
         connect_message = socket.gethostname()
-        print(f"{self.found_servers} == {index}")
-        print(f"{self.found_servers[index]}, {type(self.found_servers[index])}")
-        self.socket.sendto(connect_message.encode(), self.found_servers[index])
+        print(f"{self.found_servers} == {address}")
+        self.socket.sendto(connect_message.encode(), address)
 
         self.running = True
         self.background_thread = threading.Thread(target=self.waitToStart)
