@@ -3,7 +3,7 @@ from src.CONSTANTS import *
 pygame.init()
 
 class Text():
-    def __init__(self, text, pos_x, pos_y, font_size, value = None, color = None) -> None:
+    def __init__(self, text, pos_x, pos_y, font_size, value = None, color = None, show = True) -> None:
         self.text = text
         self.font_size = font_size
         if color:
@@ -14,12 +14,14 @@ class Text():
         self.rect = self.r_text.get_rect()
         self.rect.center = (pos_x, pos_y)
         self.value = value
+        self.show = show
 
     def render(self):
         return self.r_text
     
     def draw(self, screen):
-        screen.blit(self.r_text, self.rect)
+        if self.show:
+            screen.blit(self.r_text, self.rect)
 
     def get_text(self):
         return self.text

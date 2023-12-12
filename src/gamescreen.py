@@ -33,6 +33,8 @@ Text_gold.rect.left = (Button_upgrade.rect.right + 35)
 Text_experience = Text("EXP: 99999",0, Text_gold.rect.bottom + 20, 20, 'text_exp')
 Text_experience.rect.left = (Button_upgrade.rect.right + 35)
 Text_currentTarget = Text("Current Target: NULL", Button_change.rect.left - 100, Button_change.rect.centery, 15)
+Text_currentTarget_Warning = Text("Warning: Cannot train units until target is set", 0, Button_change.rect.centery + 20, 15, color=(255,0,0))
+Text_currentTarget_Warning.rect.left = Text_currentTarget.rect.left
 
 Text_trainTankUnit_gold = Text("GOLD", Button_trainTankUnit.rect.centerx + 15, Button_trainTankUnit.rect.bottom + 10, 20, color=(255,255,0))
 Gold_icon_tank = Image('graphics/gold_icon.png',Text_trainTankUnit_gold.rect.centerx - 5,Text_trainTankUnit_gold.rect.centery-5,10,12)
@@ -85,6 +87,7 @@ class GAME_SCREEN():
             Gold_icon_tank,
             Gold_icon_range,
             Gold_icon_melee,
+            Text_currentTarget_Warning,
         ]
 
         self.dropDownTargets : list[Button] = []
@@ -96,6 +99,7 @@ class GAME_SCREEN():
             self.to_display.append(button)
             self.dropDownTargets.append(button)
     def selectTarget(self, target):
+        Text_currentTarget_Warning.show = False
         self._game.selectTarget(target)
     def initialize(self):
         self.get_unit_costs()
