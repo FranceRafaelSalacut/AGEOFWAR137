@@ -51,7 +51,7 @@ while run:
                 STATE.stop()
 
             if action == "Connect":
-                if STATE.connect(index):
+                if STATE.connect():
                     run = False
 
             if action == "Start_Game":

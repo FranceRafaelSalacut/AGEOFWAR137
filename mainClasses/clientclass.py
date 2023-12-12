@@ -26,8 +26,8 @@ class Client():
                 continue
         print("Stopped")
 
-    def startFinding(self, display:[], connect:[]):
-        self.found_servers = []
+    def startFinding(self):
+        self.found_servers = [('192.168.68.102',5555),('192.168.68.102',5555),('192.168.68.102',5555)]
 
         print(f"Client at {self.address}")
 
@@ -54,21 +54,15 @@ class Client():
                         print(f"{address} is already discovered")
             except:
                 break
+        return self.found_servers
 
-        for index, address in enumerate(self.found_servers):
-            connect[index+3].changeText(f"{address}")
-            display.append(connect[index])
-            display.append(connect[index+3])
-        print(self.found_servers)
 
-        if len(self.found_servers) == 0:
-            connect[3].changeText("Cant find any Servers :(")
-            display.append(connect[3])
     def stopFinding(self):
         print("unused function")
 
 
-    def connect(self, index):
+    def connect(self):
+        index = 0
         connect_message = socket.gethostname()
         print(f"{self.found_servers} == {index}")
         print(f"{self.found_servers[index]}, {type(self.found_servers[index])}")
