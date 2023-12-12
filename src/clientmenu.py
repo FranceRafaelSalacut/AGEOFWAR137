@@ -19,7 +19,7 @@ back = Button(Light_Grey, 50, 150, 100, 50, 35, text = "Back", value = "Back", i
 start_find = Button(Light_Grey, back.rect.left, back.rect.bottom + 10, 180, 50, 35, text = "Find Servers", value = "Find_Servers", image = Button_Generic_2, textColor=(100,100,100))
 stop_find = Button(Light_Grey,  back.rect.left, start_find.rect.bottom + 10, 175, 50, 35, text = "Reset", value = "Reset", image = Button_Generic_3, textColor=(100,100,100))
 
-Placeholder_text = Text("Cant find any Servers :(", Server_text.rect.centerx,ServerList.rect.top + 50, 20, show= False, textColor =(100,100,100))
+Placeholder_text = Text("Cant find any Servers :(", Server_text.rect.centerx,ServerList.rect.top + 50, 20, show= False, color =(100,100,100))
 
 class CLIENT_MENU():
     def __init__(self) -> None:
