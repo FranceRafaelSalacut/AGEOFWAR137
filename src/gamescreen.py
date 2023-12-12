@@ -112,6 +112,7 @@ class GAME_SCREEN():
         Text_currentTarget_Warning.show = False
         self._game.selectTarget(target)
     def initialize(self):
+        self._game.initialize()
         self.get_unit_costs()
     def load_images(self):
         for i in self.images:
@@ -120,8 +121,8 @@ class GAME_SCREEN():
             i.load_image()
 
     def get_base(self):
-        base = self._game.get_base()
-        return base
+        return self._game.base
+
     def get_exp(self):
         return self._game.get_exp()
     def get_currentTarget(self):

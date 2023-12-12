@@ -47,6 +47,11 @@ class baseUnit(baseModel):
         if not self.possibleTargets.has(target):
             self.possibleTargets.add(target)
 
+
+    def removePossibleTarget(self, target: baseModel):
+        if self.possibleTargets.has(target):
+            self.possibleTargets.remove(target)
+
     def setMovement(self, movePattern:Movement_None):
         self.movePattern = movePattern
 

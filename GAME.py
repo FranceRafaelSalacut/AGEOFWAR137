@@ -24,8 +24,8 @@ class Game():
         all_units = pygame.sprite.Group()
         dead_units = pygame.sprite.Group()
         projectiles = pygame.sprite.Group()
-        base = STATE.get_base()
         STATE.initialize()
+        base = STATE.get_base()
         STATE.load_images()
 
 

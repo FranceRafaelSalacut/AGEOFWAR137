@@ -35,6 +35,9 @@ class GameClass():
         self.unitLists.append((self.getStringAddress(),pg.sprite.Group()))
         print(self.unitLists)
 
+    def initialize(self):
+        self.base = self.get_base()
+
     def selectTarget(self, target):
         for t in targets:
             if target in t:
@@ -63,10 +66,12 @@ class GameClass():
             base = Citadel(self.generateUnitID())
             self.factory = ScifiUnitFactory()
         base.rect.bottomleft = (0, GAME_SCREEN_HEIGHT-50)
-        self.base = base
         return base
     def get_required_upgrade_exp(self):
-        return self.base.expCost
+        if self.base:
+            return self.base.expCost
+        else:
+            return 0
         
     def get_exp(self):
         return math.floor(self.exp)
@@ -150,10 +155,17 @@ class GameClass():
                     e.addPossibleTarget(unit)
     
     def set_enemies_target(self, target:baseModel):
+        print(target.owner)
         for g in self.unitLists:
             if target.owner != g[0]:
                 for e in g[1]:
                     e.addPossibleTarget(target)
+    def remove_enemies_target(self, target:baseModel):
+        print(target.owner)
+        for g in self.unitLists:
+            if target.owner != g[0]:
+                for e in g[1]:
+                    e.removePossibleTarget(target)
 
     def killed_unit(self, unit:baseUnit):
         if unit.killer.owner == self.getStringAddress():
@@ -166,6 +178,8 @@ class GameClass():
             if self.techLevel < 4:
                 self.techLevel += 1
             base = self.get_base()
+            self.remove_enemies_target(self.base)
+            self.base = base
             self.set_enemies_target(base)
             return base
         return None
