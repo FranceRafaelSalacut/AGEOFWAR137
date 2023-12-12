@@ -25,8 +25,9 @@ class Projectile(baseModel):
         elif self.direction == -1:
             self.rect.centerx -= 2
 
-    def check_collision(self):
-        # unit.Rect.collidepoint
-        self.kill()
+    def check_collision(self, unit):
+        if self.rect.colliderect(unit.rect) and self.direction != unit.direction:    
+            self.deal_damage(unit)
+            self.kill()
     def deal_damage(self, unit):
         unit.curhp -= self.dmg
