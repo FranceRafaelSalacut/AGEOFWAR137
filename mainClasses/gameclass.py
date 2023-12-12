@@ -27,6 +27,7 @@ class GameClass():
         self.currentTarget = NONE
         self.address = ('192.168.68.103',9999) # TODO: set this to client address
         self.base = None
+        self.done = False
         self.fetchTargets()
 
     def fetchTargets(self):
@@ -75,7 +76,10 @@ class GameClass():
             return 0
     def is_base_dead(self):
         if self.base:
-            return self.base.curhp <= 0
+            x = self.base.curhp <= 0
+            if x:
+                self.done = True
+            return x
         return False
     def get_exp(self):
         return math.floor(self.exp)
@@ -203,7 +207,7 @@ class GameClass():
             return Image('graphics/backgrounds/background_scifi.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)
 
     def passiveGain(self):
-        if not self.is_base_dead():
+        if not self.done:
             self.gold += (1 / 60)
 
     def update_unit_targets(self, unit:baseUnit):
