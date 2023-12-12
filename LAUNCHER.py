@@ -11,6 +11,8 @@ pygame.init()
 run = True
 
 STATE = START_MENU()
+pygame.mixer.music.load(MUSIC_LAUNCHER)
+pygame.mixer.music.play(loops=-1)
 
 screen_updated = False
 
@@ -18,6 +20,7 @@ while run:
 
     if not screen_updated:
         current_screen = STATE.screen_to_display()
+        STATE.load_images()
         screen_updated = True
 
     for index, display in enumerate(STATE.display()):
