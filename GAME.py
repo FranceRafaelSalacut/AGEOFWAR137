@@ -162,6 +162,16 @@ class Game():
                 check = message.decode()
                 if "EXP" in check:
                     print("Im the exp man")
+                    bounty = message.decode()
+                    bounty = bounty.split("//")
+                    gold = bounty[3].split(":")
+                    gold = int(gold[1])
+                    print(f"gold = {gold}")
+                    exp = bounty[4].split(":")
+                    exp = int(exp[1])
+                    print(f"exp = {exp}")
+
+                    STATE.earn_bounty(gold,exp)
                 else:
                     print("Enemy units ahead")
                     unit = STATE.spawn_enemy(message.decode())
@@ -231,14 +241,14 @@ def getArgs():
                 print(f"key: {key}, value: {value}")
         
         print(targets)
-        time.sleep(1)
-        while True:
+        running = True
+        while running:
             try:
                 temp_socket.sendto(temp.encode(), ('<broadcast>', 5555))
                 message, address = temp_socket.recvfrom(1024)
                 if message.decode() == "Ress":
                     print("Im dying")
-                    break
+                    running = False
             except:
                 pass
 
