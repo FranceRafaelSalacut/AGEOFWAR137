@@ -173,7 +173,6 @@ class Game():
             except:
                 pass
 
-            '''
             # TEST
 
             TEST_timerB += 1
