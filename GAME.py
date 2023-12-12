@@ -21,6 +21,8 @@ class Game():
         TEST_timer = 0
         TEST_timerB = 0
         hasLost = False
+        hasWon = False
+        yes = False
         run = True
         all_units = pygame.sprite.Group()
         dead_units = pygame.sprite.Group()
@@ -58,7 +60,7 @@ class Game():
             all_units.add(sorted_sprites)
 
             for entity in all_units:
-                if not hasLost:
+                if not hasLost and not hasWon:
                     STATE.update_unit_target(entity)
                     entity.update(screen)
                 if entity.isDead:
@@ -97,8 +99,18 @@ class Game():
                 time.sleep(2)
                 pygame.mixer.music.load(MUSIC_GAME_OVER)
                 pygame.mixer.music.play(loops=-1)
+                # TODO: SEND SOMETHING TO OTHER PLAYERS THAT THIS PLAYER HAS LOST
+            
+            if not hasWon and yes: # TODO: CHANGE YES TO SOME FUNCTION THAT DETECTS THAT PLAYER IS THE ONLY ONE LEFT
+                hasWon = True
+                STATE.show_win_screen()
+                pygame.mixer.music.stop()
+                sf = pygame.mixer.Sound(SOUND_GAME_OVER)
+                sf.play()
+                time.sleep(2)
+                pygame.mixer.music.load(MUSIC_GAME_OVER)
+                pygame.mixer.music.play(loops=-1)
 
-                # SEND SOMETHING OVER TO OTHER PLAYERS THAT THIS PLAYER HAS LOST
 
             # GUI
             for index, display in enumerate(STATE.display()):
@@ -107,7 +119,7 @@ class Game():
 
                     if type(STATE) == GAME_SCREEN:
                         # BUTTONS
-                        if not hasLost:
+                        if not hasLost and not hasWon:
                             if action == 'change_target':
                                 STATE.change_target()
                             if action.startswith('target_'):
