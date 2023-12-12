@@ -108,11 +108,23 @@ class Game():
                 if entity.killer:
                     STATE.killed_unit(entity)
                     # TODO: pass to specific player this string
+                    killer_id = entity.killer.get_bounty()
+                    killer_id = killer_id.split("//")
+                    killer_id = killer_id[0]
+                    print(f"killer id = {killer_id}")
+
+
                     bounty = entity.get_bounty()
-                    address = bounty.split("//")[0]
-                    print(f"bounty: {bounty} -- address:{address}")
-                    bounty = bounty.encode()
-                    self.socket.sendto(bounty, (address, 5555))
+                    bounty = bounty.split("//")
+                    bounty.pop(0)
+
+                    new_bounty = "//".join(bounty)
+                    new_bounty = killer_id + "//" + new_bounty
+                    print(f"old bounty {entity.get_bounty()}")
+                    print(f"bounty: {new_bounty}")
+
+                    message = new_bounty.encode()
+                    self.socket.sendto(message, (killer_id, 5555))
                     print("sent")
                 entity.kill()
             # GUI
