@@ -26,11 +26,10 @@ class Game():
         projectiles = pygame.sprite.Group()
         base = STATE.get_base()
         STATE.initialize()
+        STATE.load_images()
 
 
         # GAME STUFF
-        # background
-        Background = Image('graphics/backgrounds/background_prehistoric.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)
         # music
         pygame.mixer.music.load(MUSIC_GLORIOUS_MORNING)
         pygame.mixer.music.play(loops=-1)
@@ -48,7 +47,7 @@ class Game():
 
             # Render game here
             # vv===========================================vv
-            Background.draw(screen)
+            STATE.backGround.draw(screen)
             base.update(screen)
             screen.blit(base.image, base.rect)
             STATE.update_state()
@@ -113,7 +112,6 @@ class Game():
                             upgraded_base = STATE.upgrade()
                             if upgraded_base:
                                 base = upgraded_base
-                            Background = STATE.get_bg()
 
                     if action == "Exit":
                         run = False

@@ -6,12 +6,16 @@ from mainClasses.screen import *
 from mainClasses.button import *
 from mainClasses.text import *
 from mainClasses.gameclass import *
+from mainClasses.image import Image
 pygame.init
 
 
-# Initializing Buttons
-# parameters are text, color, pos_x, pos_y, width, height, font size, value, show
+# Initializing GUI
+Background = Image('graphics/backgrounds/background_prehistoric.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)
+Player_board = Image('graphics/gui/GUI_player_board.png', GAME_SCREEN_WIDTH - 300, 0, 100, 100)
 
+
+# parameters are text, color, pos_x, pos_y, width, height, font size, value, show
 Button_trainTankUnit = Button("Tank", Light_Grey, GAME_SCREEN_WIDTH - 75, 50, 50, 50, 20, value = "train_tank_unit")
 Button_trainRangeUnit = Button("Ranged", Light_Grey, Button_trainTankUnit.rect.left - 75, 50, 50, 50, 20, value = "train_ranged_unit")
 Button_trainMeleeUnit = Button("Melee", Light_Grey, Button_trainRangeUnit.rect.left - 75, 50, 50, 50, 20, value = "train_melee_unit")
@@ -33,7 +37,13 @@ Button_upgrade_exp = Text("EXP", Button_upgrade.rect.centerx, Button_upgrade.rec
 class GAME_SCREEN():
     def __init__(self) -> None:
         self._game = GameClass()
+        self.images = [
+            Background,
+            Player_board
+            ]
+        self.backGround = Background
         self.to_display = [
+            Player_board,
             Display_Text,
             Text_train,
             Text_gold,
@@ -49,9 +59,9 @@ class GAME_SCREEN():
             Button_change,
             Button_upgrade_exp
         ]
+
         self.dropDownTargets : list[Button] = []
         self.get_targets()
-        # self.initialize()
 
     def get_targets(self):
         for index, target in enumerate(self._game.getTargets()):
@@ -62,7 +72,9 @@ class GAME_SCREEN():
         self._game.selectTarget(target)
     def initialize(self):
         self.get_unit_costs()
-
+    def load_images(self):
+        for i in self.images:
+            i.load_image()
 
     def get_base(self):
         base = self._game.get_base()
@@ -87,9 +99,11 @@ class GAME_SCREEN():
     def upgrade(self):
         u = self._game.upgrade()
         self.get_unit_costs()
+        self.get_bg()
         return u
     def get_bg(self):
-        return self._game.get_current_upgrade_bg()
+        self.backGround = self._game.get_current_upgrade_bg()
+        self.backGround.load_image()
     def change_target(self):
         for button in self.dropDownTargets:
             button.show = not button.show

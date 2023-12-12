@@ -23,7 +23,7 @@ class GameClass():
         self.unitNumber = 1
         self.techLevel = 1
         self.gold = 0
-        self.exp = 0
+        self.exp = 9999
         self.currentTarget = NONE
         self.address = ('192.168.68.103',9999) # TODO: set this to client address
         self.base = None
