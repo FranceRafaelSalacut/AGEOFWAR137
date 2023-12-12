@@ -160,10 +160,12 @@ class Game():
             try:
                 message, address = self.socket.recvfrom(1024)
                 check = message.decode()
-                check = check.split("//")
-                print(f"checking attention please {check}")
-                unit = STATE.spawn_enemy(message.decode())
-                all_units.add(unit)
+                if "EXP" in check:
+                    print("Im the exp man")
+                else:
+                    print("Enemy units ahead")
+                    unit = STATE.spawn_enemy(message.decode())
+                    all_units.add(unit)
             except:
                 pass
 
