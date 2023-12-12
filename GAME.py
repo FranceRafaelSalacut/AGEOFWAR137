@@ -56,8 +56,8 @@ class Game():
         base = STATE.get_base()
 
         # music
-        pygame.mixer.music.load(MUSIC_GLORIOUS_MORNING)
-        pygame.mixer.music.play()
+        #pygame.mixer.music.load(MUSIC_GLORIOUS_MORNING)
+        #pygame.mixer.music.play()
 
         # TODO: get targets from server
 
@@ -97,19 +97,23 @@ class Game():
                         #       -> 192.168.68.103//51546//1
 
                         entity_id = f'{entity.id}//{type(entity).__name__}'
-                        print(entity_id)
-                        print(STATE.get_current_target_to_send())
+                        #print(entity_id)
+                        #print(STATE.get_current_target_to_send())
                         message = entity_id.encode()
                         self.socket.sendto(message, (STATE.get_current_target_to_send()[1], 5555))
-                        print(STATE.get_current_target_to_send()[1])
+                        #print(STATE.get_current_target_to_send()[1])
                     dead_units.add(entity)
 
             for entity in dead_units:
                 if entity.killer:
                     STATE.killed_unit(entity)
                     # TODO: pass to specific player this string
-                    entity.get_bounty()
-
+                    bounty = entity.get_bounty()
+                    address = bounty.split("//")[0]
+                    print(f"bounty: {bounty} -- address:{address}")
+                    bounty = bounty.encode()
+                    self.socket.sendto(bounty, (address, 5555))
+                    print("sent")
                 entity.kill()
             # GUI
             for index, display in enumerate(STATE.display()):
@@ -143,6 +147,9 @@ class Game():
                     print(action)
             try:
                 message, address = self.socket.recvfrom(1024)
+                check = message.decode()
+                check = check.split("//")
+                print(f"checking attention please {check}")
                 unit = STATE.spawn_enemy(message.decode())
                 all_units.add(unit)
             except:
