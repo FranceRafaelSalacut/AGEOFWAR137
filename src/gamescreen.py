@@ -9,6 +9,14 @@ from mainClasses.gameclass import *
 from mainClasses.image import Image
 pygame.init
 
+def create_ordinal(num):
+    suffixes = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th']  # Ordinal suffixes
+    if 10 <= num % 100 <= 20:  # Special case for 11th, 12th, 13th
+        suffix = 'th'
+    else:
+        suffix = suffixes[num % 10]  # Get the appropriate suffix
+    
+    return f"{num}{suffix}"  # Combine the number and suffix
 
 # Initializing GUI
 Background = Image('graphics/backgrounds/background_prehistoric.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)
@@ -51,6 +59,7 @@ Text_upgrade_exp = Text("EXP", Button_upgrade.rect.centerx, Button_upgrade.rect.
 dead_screen = Image('graphics/gui/red_overlay.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT, show=False)
 Text_lost = Text("YOU LOST!",GAME_SCREEN_WIDTH//2, GAME_SCREEN_HEIGHT//2,100, show=False)
 Button_lost = Button(Light_Grey, Text_lost.rect.centerx - 100, Text_lost.rect.bottom + 50, 200, 40, 30, text = "EXIT", value = "Exit", image = Button_generic_3, textColor=(255,255,255), show=False)
+Text_player_place = Text("Congratulations, you placed nth", Button_lost.rect.centerx, Text_lost.rect.bottom + 20,20,show=False)
 class GAME_SCREEN():
     def __init__(self) -> None:
         self._game = GameClass()
@@ -105,6 +114,7 @@ class GAME_SCREEN():
             dead_screen,
             Text_lost,
             Button_lost,
+            Text_player_place,
         ]
 
         self.dropDownTargets : list[Button] = []
@@ -131,8 +141,17 @@ class GAME_SCREEN():
     def is_base_dead(self):
         y = self._game.is_base_dead()
         if y:
-            pass
+            self.show_lose_screen()
         return y
+    
+    def show_lose_screen(self):
+        dead_screen.show = True
+        Text_lost.show = True
+        Button_lost.show = True
+        Text_player_place.show = True
+        n = len(self._game.getTargets()) + 1
+        Text_player_place.changeText(f"You placed {create_ordinal(n)}")
+
 
     def get_base(self):
         return self._game.base

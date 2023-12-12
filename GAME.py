@@ -4,7 +4,7 @@ from src.CONSTANTS import *
 from src.gamescreen import *
 from gameClasses.unitFactory import *
 from mainClasses.image import *
-
+import asyncio
 class Game():
     def __init__(self) -> None:
         self.startGame()
@@ -57,40 +57,49 @@ class Game():
             all_units.empty()
             all_units.add(sorted_sprites)
 
-            if not hasLost:
-                for entity in all_units:
+            for entity in all_units:
+                if not hasLost:
                     STATE.update_unit_target(entity)
                     entity.update(screen)
-                    if entity.isDead:
-                        dead_units.add(entity)
-                    screen.blit(entity.image, entity.rect)
+                if entity.isDead:
+                    dead_units.add(entity)
+                screen.blit(entity.image, entity.rect)
 
-                    # remove entity if they get out of the screen
-                    if entity.rect.left >= GAME_SCREEN_WIDTH + 20 or entity.rect.right <= 0:
-                        if type(entity.movePattern) == Movement_Friendly:
-                            # TODO: put something here to send entity over to server
-                            # current entity IDs are {IP ADDRESS}//{PORT}//{UNIQUE NUMBER}//{UNIT CLASS}
-                            # NOTE: entity IDs are the ones to be passed, IDs inside unit classes are similar but do not have Unit Class appended
-                            # Ex.
-                            #   Entity ID (the one to be passed through network)
-                            #       -> 192.168.68.103//51546//1//Slingshotter
-                            #   Unit ID
-                            #       -> 192.168.68.103//51546//1
+                # remove entity if they get out of the screen
+                if entity.rect.left >= GAME_SCREEN_WIDTH + 20 or entity.rect.right <= 0:
+                    if type(entity.movePattern) == Movement_Friendly:
+                        # TODO: put something here to send entity over to server
+                        # current entity IDs are {IP ADDRESS}//{PORT}//{UNIQUE NUMBER}//{UNIT CLASS}
+                        # NOTE: entity IDs are the ones to be passed, IDs inside unit classes are similar but do not have Unit Class appended
+                        # Ex.
+                        #   Entity ID (the one to be passed through network)
+                        #       -> 192.168.68.103//51546//1//Slingshotter
+                        #   Unit ID
+                        #       -> 192.168.68.103//51546//1
 
-                            entity_id = f'{entity.id}//{type(entity).__name__}'
-                            print(entity_id)
-                        dead_units.add(entity)
+                        entity_id = f'{entity.id}//{type(entity).__name__}'
+                        print(entity_id)
+                    dead_units.add(entity)
 
-                for entity in dead_units:
-                    if entity.killer:
-                        STATE.killed_unit(entity)
-                        # TODO: pass to specific player this string
-                        entity.get_bounty()
+            for entity in dead_units:
+                if entity.killer:
+                    STATE.killed_unit(entity)
+                    # TODO: pass to specific player this string
+                    entity.get_bounty()
 
-                    entity.kill()
+                entity.kill()
 
-            if STATE.is_base_dead():
+            if STATE.is_base_dead() and not hasLost:
                 hasLost = True
+                pygame.mixer.music.stop()
+                sf = pygame.mixer.Sound(SOUND_GAME_OVER)
+                sf.play()
+                time.sleep(2)
+                pygame.mixer.music.load(MUSIC_GAME_OVER)
+                pygame.mixer.music.play(loops=-1)
+
+                # SEND SOMETHING OVER TO OTHER PLAYERS THAT THIS PLAYER HAS LOST
+
             # GUI
             for index, display in enumerate(STATE.display()):
                 if display.draw(screen):
@@ -118,8 +127,6 @@ class Game():
                                 upgraded_base = STATE.upgrade()
                                 if upgraded_base:
                                     base = upgraded_base
-                        else:
-                            pass
 
                     if action == "Exit":
                         run = False
@@ -131,7 +138,7 @@ class Game():
 
             TEST_timerB += 1
             if TEST_timerB > 100:
-                unit = STATE.spawn_enemy('192.168.68.103//35939//2//DinoRider')
+                unit = STATE.spawn_enemy('192.168.68.103//35939//2//Stormtrooper')
                 all_units.add(unit)
                 TEST_timerB = 0 # reset timer to loop
                 # print(enemy_units)

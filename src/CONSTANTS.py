@@ -16,3 +16,5 @@ FONT = 'Corbel'
 # PATH
 MUSIC_GLORIOUS_MORNING = 'music/gloriousMorning.mp3'
 MUSIC_LAUNCHER = 'music/fieldsOfMemories.mp3'
+MUSIC_GAME_OVER = 'music/gameOver.mp3'
+SOUND_GAME_OVER = 'sound_effects/game_over_sound.mp3'
