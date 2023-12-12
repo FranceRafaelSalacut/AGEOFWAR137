@@ -27,7 +27,7 @@ class GameClass():
         self.unitNumber = 1
         self.techLevel = 1
         self.gold = 0
-        self.exp = 9999
+        self.exp = 0
         self.currentTarget = NONE
         self.players = players
         self.address = (getIPAdress()[0],5555) # TODO: set this to client address
