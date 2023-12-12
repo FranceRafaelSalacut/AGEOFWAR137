@@ -9,7 +9,7 @@ pygame.init
 
 # Initializing 
 Server_text = Text("SERVERS", GAME_SCREEN_WIDTH//2, 30, 50)
-ServerList = Image('graphics/gui/ServerList.png',250,Server_text.rect.bottom + 5,700,400)
+ServerList = Image('graphics/gui/ServerList.png',250,Server_text.rect.bottom + 5,750,500)
 Button_Generic_1 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
 Button_Generic_2 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
 Button_Generic_3 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
@@ -19,11 +19,7 @@ back = Button(Light_Grey, 50, 150, 100, 50, 35, text = "Back", value = "Back", i
 start_find = Button(Light_Grey, back.rect.left, back.rect.bottom + 10, 180, 50, 35, text = "Find Servers", value = "Find_Servers", image = Button_Generic_2, textColor=(100,100,100))
 stop_find = Button(Light_Grey,  back.rect.left, start_find.rect.bottom + 10, 175, 50, 35, text = "Reset", value = "Reset", image = Button_Generic_3, textColor=(100,100,100))
 
-Placeholder_text = Text("Cant find any Servers :(", Server_text.rect.centerx,Server_text.rect.bottom + 20, 20, show= False)
-
-connect = [
-    
-]
+Placeholder_text = Text("Cant find any Servers :(", Server_text.rect.centerx,ServerList.rect.top + 50, 20, show= False, textColor =(100,100,100))
 
 class CLIENT_MENU():
     def __init__(self) -> None:
@@ -66,7 +62,8 @@ class CLIENT_MENU():
         return surface
 
     def resetDisplay(self):
-        connect = []
+        self.buttonList = []
+        self.textList = []
 
     def display(self):
         return self.to_display + self.buttonList + self.textList
@@ -74,14 +71,18 @@ class CLIENT_MENU():
     def start(self):
         self.resetDisplay()
         servers = self.client.startFinding()
-        for idx, address in enumerate(servers):
-            if idx == 8:
-                break
-            b = Button(Light_Grey, ServerList.rect.left + 50, ServerList.rect.top + 20 + (idx * 40), 75, 25, 20, text = "Connect", value = f"Connect//{str(address)}")
-            t = Text(str(address), b.rect.right + 100, b.rect.centery, 20)
-            self.buttonList.append(b)
-            self.textList.append(t)
-        self.load_extra()
+        if servers:
+            Placeholder_text.show = False
+            for idx, address in enumerate(servers):
+                if idx == 8:
+                    break
+                b = Button(Light_Grey, ServerList.rect.left + 50, ServerList.rect.top + 20 + (idx * 40), 75, 25, 20, text = "Connect", value = f"Connect//{str(address)}")
+                t = Text(str(address), b.rect.right + 100, b.rect.centery, 20)
+                self.buttonList.append(b)
+                self.textList.append(t)
+            self.load_extra()
+        else:
+            Placeholder_text.show = True
 
     def stop(self):
         self.resetDisplay()
