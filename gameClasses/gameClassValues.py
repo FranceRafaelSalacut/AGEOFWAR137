@@ -249,7 +249,7 @@ BUILDINGS = {
 }
 
 Stone = {
-    "unit" : Ranged_Stoner,
+    "unit" : Ranged_Slingshotter,
     "img" : 'graphics/projectiles/stone.png',
     "imgScale" : (50,50)    
 }

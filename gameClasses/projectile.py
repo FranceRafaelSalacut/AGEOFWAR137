@@ -9,7 +9,7 @@ class Projectile(baseModel):
         self.unit = unit
         self.fetchValues('Stone')
         self.dmg = self.unit.dmg
-        self.direction = self.unit.direction
+        self.direction = self.unit.isFacing
         self.rect.x = self.unit.rect.x
         self.rect.y = self.unit.rect.y
         
@@ -20,14 +20,15 @@ class Projectile(baseModel):
         self.rect = self.image.get_rect()
         
     def goTowardsTarget(self):
-        if self.direction == 1: 
-            self.rect.centerx += 2
-        elif self.direction == -1:
-            self.rect.centerx -= 2
+        if self.direction == FACING_RIGHT:
+            self.rect.centerx += 5
+        else:
+            self.rect.centerx -= 5
 
     def check_collision(self, unit):
-        if self.rect.colliderect(unit.rect) and self.direction != unit.direction:    
-            self.deal_damage(unit)
-            self.kill()
+        if self.rect.colliderect(unit.rect):
+            if self.unit.owner != unit.owner:
+                self.deal_damage(unit)
+                self.kill()
     def deal_damage(self, unit):
         unit.curhp -= self.dmg

@@ -91,6 +91,8 @@ class Game():
                 screen.blit(entity.image, entity.rect)
                 for unit in all_units:
                     entity.check_collision(unit)
+                entity.check_collision(base)
+                
                 entity.goTowardsTarget() # Update the movement of the projectiles' rect
                 # If bullet leaves screen, kill its sprite
             for entity in dead_units:
@@ -158,17 +160,17 @@ class Game():
             # TEST
 
             TEST_timerB += 1
-            if TEST_timerB > 100:
-                unit = STATE.spawn_enemy('192.168.68.103//35939//2//Stormtrooper')
+            if TEST_timerB > 300:
+                unit = STATE.spawn_enemy('192.168.68.103//35939//2//DinoRider')
                 all_units.add(unit)
                 TEST_timerB = 0 # reset timer to loop
                 # print(enemy_units)
-            # TEST_timer += 1
-            # if TEST_timer > 200:
-            #     unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
-            #     all_units.add(unit)
-            #     TEST_timer = 0 # reset timer to loop
-            #     # print(enemy_units)
+            TEST_timer += 1
+            if TEST_timer > 200:
+                unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
+                all_units.add(unit)
+                TEST_timer = 0 # reset timer to loop
+                # print(enemy_units)
 
             # ^^===========================================^^
             # flip() the display to put your work on screen
