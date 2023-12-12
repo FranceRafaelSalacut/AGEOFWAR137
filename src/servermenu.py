@@ -9,10 +9,10 @@ pygame.init
 
 # Initializing Buttons
 # parameters are text, color, pos_x, pos_y, width, height, font size
-back = Button("Back", Light_Grey, 600, 50, 100, 50, 35)
-start_server = Button("Start_Server", Light_Grey, 550, 150, 175, 50, 35)
-stop_server = Button("Stop_Server", Light_Grey, 550, 250, 175, 50, 35)
-start_game = Button("Start_Game", Light_Grey, 550, 350, 175, 50, 35)
+back = Button(Light_Grey, 600, 50, 100, 50, 35, text = "Back")
+start_server = Button(Light_Grey, 550, 150, 175, 50, 35, text = "Start_Server")
+stop_server = Button(Light_Grey, 550, 250, 175, 50, 35, text = "Stop_Server")
+start_game = Button(Light_Grey, 550, 350, 175, 50, 35, text = "Start_Game")
 
 # parameters are text, center x, center y, Fontsize
 Display_Text = Text("", 100, 75, 20)

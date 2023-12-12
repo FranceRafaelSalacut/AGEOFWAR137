@@ -12,52 +12,79 @@ pygame.init
 
 # Initializing GUI
 Background = Image('graphics/backgrounds/background_prehistoric.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)
-Player_board = Image('graphics/gui/GUI_player_board.png', GAME_SCREEN_WIDTH - 300, 0, 100, 100)
+Player_board = Image('graphics/gui/GUI_player_board.png', GAME_SCREEN_WIDTH - 300, 0, 400, 120)
+Button_generic_0 = Image('graphics/gui/Button.png', 0, 0, 1, 1)
+Button_generic_1 = Image('graphics/gui/Button.png', 0, 0, 1, 1)
+Button_generic_2 = Image('graphics/gui/Button.png', 0, 0, 1, 1)
+Button_upgrade_icon = Image('graphics/gui/Button_upgrade.png', 0, 0, 1, 1)
 
 
-# parameters are text, color, pos_x, pos_y, width, height, font size, value, show
-Button_trainTankUnit = Button("Tank", Light_Grey, GAME_SCREEN_WIDTH - 75, 50, 50, 50, 20, value = "train_tank_unit")
-Button_trainRangeUnit = Button("Ranged", Light_Grey, Button_trainTankUnit.rect.left - 75, 50, 50, 50, 20, value = "train_ranged_unit")
-Button_trainMeleeUnit = Button("Melee", Light_Grey, Button_trainRangeUnit.rect.left - 75, 50, 50, 50, 20, value = "train_melee_unit")
-Button_upgrade = Button("Upgrade", Light_Grey, Button_trainMeleeUnit.rect.left - 120, 50, 100, 50, 30, value = "upgrade")
-Button_change = Button("CHANGE", Light_Grey, Button_upgrade.rect.left - 300, 30, 100, 30, 20, value = "change_target")
+Button_trainTankUnit = Button(Light_Grey, GAME_SCREEN_WIDTH - 75, 30, 50, 50, 15, value = "train_tank_unit", text = "Tank", image= Button_generic_0)
+Button_trainRangeUnit = Button(Light_Grey, Button_trainTankUnit.rect.left - 75, 30, 50, 50, 15, value = "train_ranged_unit", text = "Ranged", image = Button_generic_1)
+Button_trainMeleeUnit = Button(Light_Grey, Button_trainRangeUnit.rect.left - 75, 30, 50, 50, 15, value = "train_melee_unit", text = "Melee", image = Button_generic_2)
+Button_upgrade = Button(Light_Grey, 20 , 10, 80, 80, 60, value = "upgrade", image = Button_upgrade_icon)
+Button_change = Button(Light_Grey, Player_board.rect.left - 300, 30, 100, 30, 20, text = "CHANGE", value = "change_target")
 
-# parameters are text, center x, center y, Fontsize, value
-Display_Text = Text("test", GAME_SCREEN_WIDTH - 30, GAME_SCREEN_HEIGHT - 10, 20)
-Text_train = Text("Train",Button_trainMeleeUnit.rect.left, 20, 30)
-Text_gold = Text("GOLD: 99999",Button_upgrade.rect.left - 100, Button_upgrade.rect.top, 20, 'text_gold')
-Text_experience = Text("EXP: 99999",Text_gold.rect.centerx, Text_gold.rect.bottom + 20, 20, 'text_exp')
+Display_Text = Text("created by the boys", GAME_SCREEN_WIDTH - 30, GAME_SCREEN_HEIGHT - 10, 20)
+GUI_gold_count = Image('graphics/gui/Gold_count.png', Button_upgrade.rect.right, 15, 110, 34)
+GUI_exp_count = Image('graphics/gui/Exp_count.png', Button_upgrade.rect.right,GUI_gold_count.rect.bottom, 110, 34)
+Text_gold = Text("GOLD: 99999",0, GUI_gold_count.rect.top + 20, 20, 'text_gold')
+Text_gold.rect.left = (Button_upgrade.rect.right + 35)
+Text_experience = Text("EXP: 99999",0, Text_gold.rect.bottom + 20, 20, 'text_exp')
+Text_experience.rect.left = (Button_upgrade.rect.right + 35)
 Text_currentTarget = Text("Current Target: NULL", Button_change.rect.left - 100, Button_change.rect.centery, 15)
 
-Button_trainTankUnit_gold = Text("GOLD", Button_trainTankUnit.rect.centerx, Button_trainTankUnit.rect.bottom - 15, 10)
-Button_trainRangeUnit_gold = Text("GOLD", Button_trainRangeUnit.rect.centerx, Button_trainRangeUnit.rect.bottom - 15, 10)
-Button_trainMeleeUnit_gold = Text("GOLD", Button_trainMeleeUnit.rect.centerx, Button_trainMeleeUnit.rect.bottom - 15, 10)
-Button_upgrade_exp = Text("EXP", Button_upgrade.rect.centerx, Button_upgrade.rect.bottom - 10, 10)
+Text_trainTankUnit_gold = Text("GOLD", Button_trainTankUnit.rect.centerx + 15, Button_trainTankUnit.rect.bottom + 10, 20, color=(255,255,0))
+Gold_icon_tank = Image('graphics/gold_icon.png',Text_trainTankUnit_gold.rect.centerx - 5,Text_trainTankUnit_gold.rect.centery-5,10,12)
+Text_trainRangeUnit_gold = Text("GOLD", Button_trainRangeUnit.rect.centerx + 15, Button_trainRangeUnit.rect.bottom + 10, 20, color=(255,255,0))
+Gold_icon_range = Image('graphics/gold_icon.png',Text_trainRangeUnit_gold.rect.centerx - 5,Text_trainRangeUnit_gold.rect.centery-5,10,12)
+Text_trainMeleeUnit_gold = Text("GOLD", Button_trainMeleeUnit.rect.centerx + 15, Button_trainMeleeUnit.rect.bottom + 10, 20, color=(255,255,0))
+Gold_icon_melee = Image('graphics/gold_icon.png',Text_trainMeleeUnit_gold.rect.centerx - 5,Text_trainMeleeUnit_gold.rect.centery-5,10,12)
+Text_upgrade_exp = Text("EXP", Button_upgrade.rect.centerx, Button_upgrade.rect.bottom + 20, 30)
 
 class GAME_SCREEN():
     def __init__(self) -> None:
         self._game = GameClass()
         self.images = [
             Background,
-            Player_board
+            Player_board,
+            Button_generic_0,
+            Button_generic_1,
+            Button_generic_2,
+            Gold_icon_tank,
+            Gold_icon_range,
+            Gold_icon_melee,
+            GUI_gold_count,
+            GUI_exp_count,
             ]
+        self.buttons = [
+            Button_trainMeleeUnit,
+            Button_trainRangeUnit,
+            Button_trainTankUnit,
+            Button_upgrade,
+            Button_change,
+        ]
         self.backGround = Background
         self.to_display = [
             Player_board,
             Display_Text,
-            Text_train,
+            GUI_gold_count,
+            GUI_exp_count,
             Text_gold,
             Text_experience,
             Text_currentTarget,
             Button_trainMeleeUnit,
-            Button_trainMeleeUnit_gold,
+            Text_trainMeleeUnit_gold,
             Button_trainRangeUnit,
-            Button_trainRangeUnit_gold,
+            Text_trainRangeUnit_gold,
             Button_trainTankUnit,
-            Button_trainTankUnit_gold,
+            Text_trainTankUnit_gold,
             Button_upgrade,
             Button_change,
-            Button_upgrade_exp
+            Text_upgrade_exp,
+            Gold_icon_tank,
+            Gold_icon_range,
+            Gold_icon_melee,
         ]
 
         self.dropDownTargets : list[Button] = []
@@ -65,7 +92,7 @@ class GAME_SCREEN():
 
     def get_targets(self):
         for index, target in enumerate(self._game.getTargets()):
-            button = Button(f"{target[0]}", Light_Grey, Button_change.rect.left, Button_change.rect.top + (30 * (index + 1)), 100, 30, 20, value = f"target_{target[0]}", show = False)
+            button = Button(Light_Grey, Button_change.rect.left, Button_change.rect.top + (30 * (index + 1)), 100, 30, 20, value = f"target_{target[0]}", show = False, text = f"{target[0]}")
             self.to_display.append(button)
             self.dropDownTargets.append(button)
     def selectTarget(self, target):
@@ -74,6 +101,8 @@ class GAME_SCREEN():
         self.get_unit_costs()
     def load_images(self):
         for i in self.images:
+            i.load_image()
+        for i in self.buttons:
             i.load_image()
 
     def get_base(self):
@@ -85,10 +114,10 @@ class GAME_SCREEN():
         return self._game.get_currentTarget()
     def get_unit_costs(self):
         costs = self._game.get_unit_costs()
-        Button_upgrade_exp.changeText(str(self._game.get_required_upgrade_exp()))
-        Button_trainMeleeUnit_gold.changeText(costs[0])
-        Button_trainRangeUnit_gold.changeText(costs[1])
-        Button_trainTankUnit_gold.changeText(costs[2])
+        Text_upgrade_exp.changeText(str(self._game.get_required_upgrade_exp()))
+        Text_trainMeleeUnit_gold.changeText(costs[0])
+        Text_trainRangeUnit_gold.changeText(costs[1])
+        Text_trainTankUnit_gold.changeText(costs[2])
     
     def train_melee_unit(self):
         return self._game.train_melee_unit()
@@ -123,8 +152,8 @@ class GAME_SCREEN():
         return self._game.spawn_enemy_unit(ID)
     
     def update_texts(self):
-        exp_text = f'EXP: {str(self._game.get_exp())}'
-        gold_text = f'GOLD: {str(self._game.get_gold())}'
+        exp_text = f'{str(self._game.get_exp())}'
+        gold_text = f'{str(self._game.get_gold())}'
         target_text = f'Current Target: {str(self._game.get_currentTarget())}'
         Text_experience.changeText(exp_text)
         Text_gold.changeText(gold_text)

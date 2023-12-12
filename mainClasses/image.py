@@ -7,11 +7,21 @@ class Image():
         self.dim = (width, height)
         self.show = show
         self.imgPath = image
+        self.rect = pygame.Rect(self.position,self.dim)
         
-    def load_image(self):
+    def load_image(self, rect:pygame.Rect = None, dim = None):
         self.image = pygame.image.load(self.imgPath).convert_alpha()
-        self.image = pygame.transform.scale(self.image, self.dim)
-        self.rect = pygame.Rect(self.position[0],self.position[1], self.dim[0], self.dim[1])
+        if dim:
+            self.image = pygame.transform.scale(self.image, dim)
+        else:
+            self.image = pygame.transform.scale(self.image, self.dim)
+        
+        if rect:
+            coord = rect.topleft
+            self.rect = pygame.Rect(coord,rect.size)
+        else:
+            self.rect = pygame.Rect(self.position,self.dim)
+        
 
     def draw(self, screen):
         if self.show:

@@ -8,18 +8,16 @@ pygame.init
 
 # Initializing Buttons
 # parameters are text, color, pos_x, pos_y, width, height
-back = Button("Back", Light_Grey, 600, 50, 100, 50, 35)
-start_find = Button("Find_Servers", Light_Grey, 550, 150, 180, 50, 35)
-stop_find = Button("Reset", Light_Grey, 550, 250, 175, 50, 35)
+back = Button(Light_Grey, 600, 50, 100, 50, 35, text = "Back")
+start_find = Button(Light_Grey, 550, 150, 180, 50, 35, text = "Find_Servers")
+stop_find = Button(Light_Grey, 550, 250, 175, 50, 35, text = "Reset")
 connect = [
-    Button("Connect", Light_Grey, 50, 50, 75, 25, 20),
-    Button("Connect", Light_Grey, 50, 150, 75, 25, 20),
-    Button("Connect", Light_Grey, 50, 250, 75, 25, 20),
+    Button(Light_Grey, 50, 50, 75, 25, 20, text = "Connect"),
+    Button(Light_Grey, 50, 150, 75, 25, 20, text = "Connect"),
+    Button(Light_Grey, 50, 250, 75, 25, 20, text = "Connect"),
 
     # parameters are text, center x, center y, Fontsize
     Text("Placeholder", 200, 60, 20),
-    Text("Placeholder", 200, 160, 20),
-    Text("Placeholder", 200, 260, 20)
 ]
 
 class CLIENT_MENU():
