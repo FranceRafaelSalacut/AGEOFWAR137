@@ -65,6 +65,8 @@ class GameClass():
         base.rect.bottomleft = (0, GAME_SCREEN_HEIGHT-50)
         self.base = base
         return base
+    def get_required_upgrade_exp(self):
+        return self.base.expCost
         
     def get_exp(self):
         return math.floor(self.exp)
@@ -154,7 +156,7 @@ class GameClass():
                     e.addPossibleTarget(target)
 
     def killed_unit(self, unit:baseUnit):
-        if unit.owner != self.getStringAddress():
+        if unit.killer.owner == self.getStringAddress():
             self.exp += unit.exp
             self.gold += unit.bounty
     
@@ -164,7 +166,8 @@ class GameClass():
             self.exp -= base.expCost
             if self.techLevel < 4:
                 self.techLevel += 1
-        return self.get_base()
+            return self.get_base()
+        return None
     def get_current_upgrade_bg(self):
         if self.techLevel == 1:
             return Image('graphics/backgrounds/background_prehistoric.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)

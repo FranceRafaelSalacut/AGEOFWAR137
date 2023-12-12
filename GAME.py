@@ -110,7 +110,9 @@ class Game():
                         if unit:
                             all_units.add(unit)
                         if action == 'upgrade':
-                            base = STATE.upgrade()
+                            upgraded_base = STATE.upgrade()
+                            if upgraded_base:
+                                base = upgraded_base
                             Background = STATE.get_bg()
 
                     if action == "Exit":

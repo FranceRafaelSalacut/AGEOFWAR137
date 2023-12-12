@@ -66,7 +66,6 @@ class GAME_SCREEN():
 
     def get_base(self):
         base = self._game.get_base()
-        # Button_upgrade_exp.changeText(str(base.expCost))
         return base
     def get_exp(self):
         return self._game.get_exp()
@@ -74,6 +73,7 @@ class GAME_SCREEN():
         return self._game.get_currentTarget()
     def get_unit_costs(self):
         costs = self._game.get_unit_costs()
+        Button_upgrade_exp.changeText(str(self._game.get_required_upgrade_exp()))
         Button_trainMeleeUnit_gold.changeText(costs[0])
         Button_trainRangeUnit_gold.changeText(costs[1])
         Button_trainTankUnit_gold.changeText(costs[2])
