@@ -22,6 +22,8 @@ while run:
         current_screen = STATE.screen_to_display()
         STATE.load_images()
         screen_updated = True
+    
+    STATE.animate()
 
     for index, display in enumerate(STATE.display()):
         if display.draw(current_screen):

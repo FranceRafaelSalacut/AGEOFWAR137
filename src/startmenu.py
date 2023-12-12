@@ -9,14 +9,14 @@ pygame.init
 Background = Image('graphics/main_menu.png',0,0,SCREEN_WIDTH,SCREEN_HEIGHT)
 
 Menu = Image('graphics/gui/Training_board.png',SCREEN_WIDTH - 210,10,200,300)
-Button_Generic_1 = Image('graphics/gui/GUI_menu_button.png',0,0,1,1)
-Button_Generic_2 = Image('graphics/gui/GUI_menu_button.png',0,0,1,1)
-Button_Generic_3 = Image('graphics/gui/GUI_menu_button.png',0,0,1,1)
+Button_Generic_1 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
+Button_Generic_2 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
+Button_Generic_3 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
 
 
-host = Button(Light_Grey, Menu.rect.centerx - 50, Menu.rect.top + 45, 100, 42, 35, text = "Host", image=Button_Generic_1)
-client = Button(Light_Grey, host.rect.left, host.rect.bottom + 10, 100, 50, 35, text ="Client", image=Button_Generic_2)
-exit = Button(Light_Grey, host.rect.left, client.rect.bottom + 10, 100, 50, 35, text = "Exit", image=Button_Generic_3)
+host = Button(Light_Grey, Menu.rect.centerx - 50, Menu.rect.top + 45, 100, 42, 35, text = "Host", image=Button_Generic_1, textColor=(100,100,100))
+client = Button(Light_Grey, host.rect.left, host.rect.bottom + 10, 100, 50, 35, text ="Client", image=Button_Generic_2, textColor=(100,100,100))
+exit = Button(Light_Grey, host.rect.left, client.rect.bottom + 10, 100, 50, 35, text = "Exit", image=Button_Generic_3, textColor=(100,100,100))
 
 class START_MENU():
     def __init__(self) -> None:
@@ -53,3 +53,5 @@ class START_MENU():
     
     def display(self):
         return self.toDisplay
+    def animate(self):
+        pass

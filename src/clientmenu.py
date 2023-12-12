@@ -62,3 +62,6 @@ class CLIENT_MENU():
 
     def connect(self, index):
         return self.client.connect(index-3)
+
+    def animate(self):
+        pass
