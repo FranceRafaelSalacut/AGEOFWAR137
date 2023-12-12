@@ -161,13 +161,16 @@ class GameClass():
             self.gold += unit.bounty
     
     def upgrade(self):
-        base = self.get_base()
-        if self.get_exp() >= base.expCost:
+        if self.isUpgradeable():
+            base = self.get_base()
             self.exp -= base.expCost
             if self.techLevel < 4:
                 self.techLevel += 1
             return self.get_base()
         return None
+    
+    def isUpgradeable(self):
+        return self.get_exp() >= self.base.expCost
     def get_current_upgrade_bg(self):
         if self.techLevel == 1:
             return Image('graphics/backgrounds/background_prehistoric.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)

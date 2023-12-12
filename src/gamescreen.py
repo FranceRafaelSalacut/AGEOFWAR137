@@ -17,22 +17,25 @@ Button_generic_0 = Image('graphics/gui/Button.png', 0, 0, 1, 1)
 Button_generic_1 = Image('graphics/gui/Button.png', 0, 0, 1, 1)
 Button_generic_2 = Image('graphics/gui/Button.png', 0, 0, 1, 1)
 Button_upgrade_icon = Image('graphics/gui/Button_upgrade.png', 0, 0, 1, 1)
-
+Select_player_bg = Image('graphics/gui/GUI_select_target.png', GAME_SCREEN_WIDTH//2-150, -50, 350, 100)
+Button_change_target = Image('graphics/gui/Button_pickTarget.png', 0, 0, 1, 1)
 
 Button_trainTankUnit = Button(Light_Grey, GAME_SCREEN_WIDTH - 75, 30, 50, 50, 15, value = "train_tank_unit", text = "Tank", image= Button_generic_0)
 Button_trainRangeUnit = Button(Light_Grey, Button_trainTankUnit.rect.left - 75, 30, 50, 50, 15, value = "train_ranged_unit", text = "Ranged", image = Button_generic_1)
 Button_trainMeleeUnit = Button(Light_Grey, Button_trainRangeUnit.rect.left - 75, 30, 50, 50, 15, value = "train_melee_unit", text = "Melee", image = Button_generic_2)
 Button_upgrade = Button(Light_Grey, 20 , 10, 80, 80, 60, value = "upgrade", image = Button_upgrade_icon)
-Button_change = Button(Light_Grey, Player_board.rect.left - 300, 30, 100, 30, 20, text = "CHANGE", value = "change_target")
+Button_upgrade_icon_overlay = Image('graphics/gui/Button_upgrade_locked.png', 20, 10, 80, 80)
+Button_change = Button(Light_Grey, Select_player_bg.rect.right - 125, 5, 100, 30, 20, text = "CHANGE", value = "change_target", textColor= (0,0,0),image = Button_change_target)
 
 Display_Text = Text("created by the boys", GAME_SCREEN_WIDTH - 30, GAME_SCREEN_HEIGHT - 10, 20)
+Display_Text.rect.right = GAME_SCREEN_WIDTH - 10
 GUI_gold_count = Image('graphics/gui/Gold_count.png', Button_upgrade.rect.right, 15, 110, 34)
 GUI_exp_count = Image('graphics/gui/Exp_count.png', Button_upgrade.rect.right,GUI_gold_count.rect.bottom, 110, 34)
 Text_gold = Text("GOLD: 99999",0, GUI_gold_count.rect.top + 20, 20, 'text_gold')
 Text_gold.rect.left = (Button_upgrade.rect.right + 35)
 Text_experience = Text("EXP: 99999",0, Text_gold.rect.bottom + 20, 20, 'text_exp')
 Text_experience.rect.left = (Button_upgrade.rect.right + 35)
-Text_currentTarget = Text("Current Target: NULL", Button_change.rect.left - 100, Button_change.rect.centery, 15)
+Text_currentTarget = Text("Current Target: NULL", Select_player_bg.rect.left + 100, Button_change.rect.centery, 15)
 Text_currentTarget_Warning = Text("Warning: Cannot train units until target is set", 0, Button_change.rect.centery + 20, 15, color=(255,0,0))
 Text_currentTarget_Warning.rect.left = Text_currentTarget.rect.left
 
@@ -58,6 +61,9 @@ class GAME_SCREEN():
             Gold_icon_melee,
             GUI_gold_count,
             GUI_exp_count,
+            Select_player_bg,
+            Button_change_target,
+            Button_upgrade_icon_overlay,
             ]
         self.buttons = [
             Button_trainMeleeUnit,
@@ -69,6 +75,7 @@ class GAME_SCREEN():
         self.backGround = Background
         self.to_display = [
             Player_board,
+            Select_player_bg,
             Display_Text,
             GUI_gold_count,
             GUI_exp_count,
@@ -88,6 +95,7 @@ class GAME_SCREEN():
             Gold_icon_range,
             Gold_icon_melee,
             Text_currentTarget_Warning,
+            Button_upgrade_icon_overlay,
         ]
 
         self.dropDownTargets : list[Button] = []
@@ -95,7 +103,9 @@ class GAME_SCREEN():
 
     def get_targets(self):
         for index, target in enumerate(self._game.getTargets()):
-            button = Button(Light_Grey, Button_change.rect.left, Button_change.rect.top + (30 * (index + 1)), 100, 30, 20, value = f"target_{target[0]}", show = False, text = f"{target[0]}")
+            i = Image('graphics/gui/Button_pickTarget.png', 50, 50, 100, 100)
+            button = Button(Light_Grey, Button_change.rect.left, Button_change.rect.top + (30 * (index + 1)), 100, 30, 20, value = f"target_{target[0]}", show = False, text = f"{target[0]}", textColor= (0,0,0), image = i)
+            self.buttons.append(button)
             self.to_display.append(button)
             self.dropDownTargets.append(button)
     def selectTarget(self, target):
@@ -133,6 +143,8 @@ class GAME_SCREEN():
         u = self._game.upgrade()
         self.get_unit_costs()
         self.get_bg()
+        if self._game.techLevel > 3:
+            Text_upgrade_exp.show = False
         return u
     def get_bg(self):
         self.backGround = self._game.get_current_upgrade_bg()
@@ -147,6 +159,11 @@ class GAME_SCREEN():
     
     def update_state(self):
         self._game.passiveGain()
+        if self._game.isUpgradeable():
+            Button_upgrade_icon_overlay.show = False
+        else:
+            Button_upgrade_icon_overlay.show = True
+
     def earn_bounty(self, bounty, exp):
         self._game.gold += bounty
         self._game.exp += exp
