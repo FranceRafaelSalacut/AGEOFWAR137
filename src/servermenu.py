@@ -15,10 +15,10 @@ Button_Generic_3 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
 Button_Generic_4 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
 # Initializing Buttons
 # parameters are text, color, pos_x, pos_y, width, height, font size
-back = Button(Light_Grey, SCREEN_WIDTH - 200, 150, 100, 50, 35, text = "Back", image=Button_Generic_1, textColor=(100,100,100))
-start_server = Button(Light_Grey, back.rect.left, back.rect.bottom + 20, 175, 50, 35, text = "Start_Server", image=Button_Generic_2, textColor=(100,100,100))
-stop_server = Button(Light_Grey, back.rect.left, start_server.rect.bottom + 20, 175, 50, 35, text = "Stop_Server", image=Button_Generic_3, textColor=(100,100,100))
-start_game = Button(Light_Grey, back.rect.left, stop_server.rect.bottom + 20, 175, 50, 35, text = "Start_Game", image=Button_Generic_4, textColor=(100,100,100))
+back = Button(Light_Grey, SCREEN_WIDTH - 200, 250, 100, 50, 35, text = "Back", value = "Back", image=Button_Generic_1, textColor=(100,100,100))
+start_server = Button(Light_Grey, back.rect.left, back.rect.bottom + 20, 175, 50, 35, text = "Start Server", value = "Start_Server", image=Button_Generic_2, textColor=(100,100,100))
+stop_server = Button(Light_Grey, back.rect.left, start_server.rect.bottom + 20, 175, 50, 35, text = "Stop Server", value = "Stop_Server", image=Button_Generic_3, textColor=(100,100,100))
+start_game = Button(Light_Grey, back.rect.left, stop_server.rect.bottom + 20, 175, 50, 35, text = "Start Game", value = "Start_Game", image=Button_Generic_4, textColor=(100,100,100))
 
 # parameters are text, center x, center y, Fontsize
 Display_Text = Text("SERVERS", 150, 150, 20)

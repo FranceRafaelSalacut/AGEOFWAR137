@@ -27,7 +27,7 @@ while run:
 
     for index, display in enumerate(STATE.display()):
         if display.draw(current_screen):
-            action = display.getText()
+            action = display.getValue()
             if action == "Client":
                 STATE = CLIENT_MENU()
 

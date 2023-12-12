@@ -8,10 +8,14 @@ from mainClasses.image import *
 pygame.init
 
 # Initializing Buttons
+Button_Generic_1 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
+Button_Generic_2 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
+Button_Generic_3 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
+
 # parameters are text, color, pos_x, pos_y, width, height
-back = Button(Light_Grey, 600, 50, 100, 50, 35, text = "Back")
-start_find = Button(Light_Grey, 550, 150, 180, 50, 35, text = "Find_Servers")
-stop_find = Button(Light_Grey, 550, 250, 175, 50, 35, text = "Reset")
+back = Button(Light_Grey, 50, 50, 100, 50, 35, text = "Back", value = "Back", image = Button_Generic_1, textColor=(100,100,100))
+start_find = Button(Light_Grey, back.rect.left, back.rect.bottom + 10, 180, 50, 35, text = "Find Servers", value = "Find_Servers", image = Button_Generic_2, textColor=(100,100,100))
+stop_find = Button(Light_Grey,  back.rect.left, start_find.rect.bottom + 10, 175, 50, 35, text = "Reset", value = "Reset", image = Button_Generic_3, textColor=(100,100,100))
 connect = [
     Button(Light_Grey, 50, 50, 75, 25, 20, text = "Connect"),
     Button(Light_Grey, 50, 150, 75, 25, 20, text = "Connect"),
@@ -24,14 +28,25 @@ connect = [
 class CLIENT_MENU():
     def __init__(self) -> None:
         self.client = Client()
-        self.to_display = [back, start_find, stop_find#,
-                           #connect[0], connect[1], connect[2],
-                           #connect[3], connect[4], connect[5]
-                           ]
+        self.buttons = [
+            back,
+            start_find,
+            stop_find
+        ]
         self.images = [
+            Button_Generic_1,
+            Button_Generic_2,
+            Button_Generic_3,
+        ]
+        self.to_display = [
+            back, 
+            start_find, 
+            stop_find
         ]
     def load_images(self):
         for i in self.images:
+            i.load_image()
+        for i in self.buttons:
             i.load_image()
 
     def screen_to_display(self):
@@ -42,10 +57,11 @@ class CLIENT_MENU():
         return surface
     
     def resetDisplay(self):
-        self.to_display = [back, start_find, stop_find#,
-                           #connect[0], connect[1], connect[2],
-                           #connect[3], connect[4], connect[5]
-                           ]
+        self.to_display = [
+            back, 
+            start_find, 
+            stop_find
+        ]
         for x in range(3, len(connect)):
             connect[x].changeText("")
 
