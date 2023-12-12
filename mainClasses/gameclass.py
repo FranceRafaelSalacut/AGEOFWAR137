@@ -73,7 +73,10 @@ class GameClass():
             return self.base.expCost
         else:
             return 0
-        
+    def is_base_dead(self):
+        if self.base:
+            return self.base.curhp <= 0
+        return False
     def get_exp(self):
         return math.floor(self.exp)
     def get_gold(self):
@@ -200,7 +203,8 @@ class GameClass():
             return Image('graphics/backgrounds/background_scifi.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT)
 
     def passiveGain(self):
-        self.gold += (1 / 60)
+        if not self.is_base_dead():
+            self.gold += (1 / 60)
 
     def update_unit_targets(self, unit:baseUnit):
         self.set_team(unit)
