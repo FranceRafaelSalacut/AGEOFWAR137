@@ -105,10 +105,10 @@ class Game():
                 hasWon = True
                 STATE.show_win_screen()
                 pygame.mixer.music.stop()
-                sf = pygame.mixer.Sound(SOUND_GAME_OVER)
+                sf = pygame.mixer.Sound(SOUND_GAME_OVER_WIN)
                 sf.play()
                 time.sleep(2)
-                pygame.mixer.music.load(MUSIC_GAME_OVER)
+                pygame.mixer.music.load(MUSIC_GAME_OVER_WIN)
                 pygame.mixer.music.play(loops=-1)
 
 
