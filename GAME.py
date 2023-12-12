@@ -9,7 +9,8 @@ import sys
 import json
 import socket
 import time
-
+from mainClasses.image import *
+import asyncio
 class Game():
     def __init__(self, players: list) -> None:
         """
@@ -49,15 +50,21 @@ class Game():
         # loop
         TEST_timer = 0
         TEST_timerB = 0
+        hasLost = False
         run = True
         all_units = pygame.sprite.Group()
         dead_units = pygame.sprite.Group()
         projectiles = pygame.sprite.Group()
+        STATE.initialize()
         base = STATE.get_base()
+        STATE.load_images()
 
+
+        # GAME STUFF
         # music
-        #pygame.mixer.music.load(MUSIC_GLORIOUS_MORNING)
-        #pygame.mixer.music.play()
+        pygame.mixer.music.load(MUSIC_GLORIOUS_MORNING)
+        pygame.mixer.music.play(loops=-1)
+        pygame.mixer.music.set_volume(0.5)
 
         # TODO: get targets from server
 
@@ -72,20 +79,25 @@ class Game():
 
             # Render game here
             # vv===========================================vv
-            if type(STATE) == GAME_SCREEN:
-                base.update(screen)
-                screen.blit(base.image, base.rect)
-                STATE.update_state()
+            STATE.backGround.draw(screen)
+            base.update(screen)
+            screen.blit(base.image, base.rect)
+            STATE.update_state()
+
+            sorted_sprites = sorted(all_units.sprites(), key=lambda sprite: sprite.rect.bottomleft[1])
+            all_units.empty()
+            all_units.add(sorted_sprites)
 
             for entity in all_units:
-                STATE.update_unit_target(entity)
-                entity.update(screen)
+                if not hasLost:
+                    STATE.update_unit_target(entity)
+                    entity.update(screen)
                 if entity.isDead:
                     dead_units.add(entity)
                 screen.blit(entity.image, entity.rect)
 
                 # remove entity if they get out of the screen
-                if entity.rect.left >= GAME_SCREEN_WIDTH or entity.rect.right <= 0:
+                if entity.rect.left >= GAME_SCREEN_WIDTH + 20 or entity.rect.right <= 0:
                     if type(entity.movePattern) == Movement_Friendly:
                         # TODO: put something here to send entity over to server
                         # current entity IDs are {IP ADDRESS}//{PORT}//{UNIQUE NUMBER}//{UNIT CLASS}
@@ -127,6 +139,18 @@ class Game():
                     self.socket.sendto(message, (killer_id, 5555))
                     print("sent")
                 entity.kill()
+
+            if STATE.is_base_dead() and not hasLost:
+                hasLost = True
+                pygame.mixer.music.stop()
+                sf = pygame.mixer.Sound(SOUND_GAME_OVER)
+                sf.play()
+                time.sleep(2)
+                pygame.mixer.music.load(MUSIC_GAME_OVER)
+                pygame.mixer.music.play(loops=-1)
+
+                # SEND SOMETHING OVER TO OTHER PLAYERS THAT THIS PLAYER HAS LOST
+
             # GUI
             for index, display in enumerate(STATE.display()):
                 if display.draw(screen):
@@ -134,24 +158,26 @@ class Game():
 
                     if type(STATE) == GAME_SCREEN:
                         # BUTTONS
-                        if action == 'change_target':
-                            STATE.change_target()
-                        if action.startswith('target_'):
-                            STATE.selectTarget(action.split('_')[1])
-                            STATE.change_target()
+                        if not hasLost:
+                            if action == 'change_target':
+                                STATE.change_target()
+                            if action.startswith('target_'):
+                                STATE.selectTarget(action.split('_')[1])
+                                STATE.change_target()
 
-                        unit = None
-                        if action == 'train_melee_unit':
-                            unit = STATE.train_melee_unit()
-                        elif action == 'train_ranged_unit':
-                            unit = STATE.train_ranged_unit()
-                        elif action == 'train_tank_unit':
-                            unit = STATE.train_tank_unit()
-                        if unit:
-                            all_units.add(unit)
-
-                        if action == 'upgrade':
-                            base = STATE.upgrade()
+                            unit = None
+                            if action == 'train_melee_unit':
+                                unit = STATE.train_melee_unit()
+                            elif action == 'train_ranged_unit':
+                                unit = STATE.train_ranged_unit()
+                            elif action == 'train_tank_unit':
+                                unit = STATE.train_tank_unit()
+                            if unit:
+                                all_units.add(unit)
+                            if action == 'upgrade':
+                                upgraded_base = STATE.upgrade()
+                                if upgraded_base:
+                                    base = upgraded_base
 
                     if action == "Exit":
                         run = False
@@ -179,29 +205,21 @@ class Game():
             except:
                 pass
 
-            '''
             # TEST
-            TEST_timer += 1
+
             TEST_timerB += 1
+            if TEST_timerB > 100:
+                unit = STATE.spawn_enemy('192.168.68.103//35939//2//Stormtrooper')
+                all_units.add(unit)
+                TEST_timerB = 0 # reset timer to loop
+                # print(enemy_units)
+            # TEST_timer += 1
             # if TEST_timer > 200:
             #     unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
             #     all_units.add(unit)
             #     TEST_timer = 0 # reset timer to loop
             #     # print(enemy_units)
 
-            if TEST_timerB > 300:
-                unit = STATE.spawn_enemy('192.168.68.103//35939//2//DinoRider')
-                all_units.add(unit)
-                TEST_timerB = 0 # reset timer to loop
-                # print(enemy_units)
-
-            """
-            TO SPAWN ENEMIES, do:
-                unit = STATE.spawn_enemy('U)
-                all_units.add(unit)
-            """
-            '''
-    
             # ^^===========================================^^
             # flip() the display to put your work on screen
             pygame.display.flip()
