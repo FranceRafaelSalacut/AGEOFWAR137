@@ -58,7 +58,6 @@ class baseUnit(baseModel):
 
     def move(self):
         self.movePattern.move()
-        self.update_position()
 
     def update_position(self):
          self.rect.centerx = round(self.position[0])
@@ -89,6 +88,7 @@ class baseUnit(baseModel):
             if not self.attackTarget or self.attackTarget.isDead:
                 self.state = STATE_MOVING
         self.update_healthBar(screen)
+        self.update_position()
         if self.curhp <= 0:
             self.die()
 

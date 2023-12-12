@@ -64,7 +64,7 @@ class Game():
                 screen.blit(entity.image, entity.rect)
 
                 # remove entity if they get out of the screen
-                if entity.rect.left >= GAME_SCREEN_WIDTH or entity.rect.right <= 0:
+                if entity.rect.left >= GAME_SCREEN_WIDTH + 50 or entity.rect.right <= 0:
                     if type(entity.movePattern) == Movement_Friendly:
                         # TODO: put something here to send entity over to server
                         # current entity IDs are {IP ADDRESS}//{PORT}//{UNIQUE NUMBER}//{UNIT CLASS}
