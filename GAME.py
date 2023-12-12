@@ -3,6 +3,7 @@ from mainClasses.button import *
 from src.CONSTANTS import *
 from src.gamescreen import *
 from gameClasses.unitFactory import *
+from gameClasses.rangedUnit import *
 
 class Game():
     def __init__(self) -> None:
@@ -28,7 +29,7 @@ class Game():
 
         # music
         pygame.mixer.music.load(MUSIC_GLORIOUS_MORNING)
-        pygame.mixer.music.play()
+        #pygame.mixer.music.play()
 
         # TODO: get targets from server
 
@@ -50,10 +51,14 @@ class Game():
 
             for entity in all_units:
                 entity.update(screen)
+                if isinstance(entity, rangedUnit):
+                    # Call a method that returns some value here
+                    if entity.hasShot:
+                        projectiles.add(entity.create_projectile())
                 if entity.isDead:
                     dead_units.add(entity)
                 screen.blit(entity.image, entity.rect)
-
+        
                 # remove entity if they get out of the screen
                 if entity.rect.left >= GAME_SCREEN_WIDTH or entity.rect.right <= 0:
                     if type(entity.movePattern) == Movement_Friendly:
@@ -69,7 +74,13 @@ class Game():
                         entity_id = f'{entity.id}//{type(entity).__name__}'
                         print(entity_id)
                     dead_units.add(entity)
-
+            for entity in projectiles:
+                screen.blit(entity.image, entity.rect)
+                    # Need to be able to append projectiles to the sprite group as soon as the unit attacks
+                entity.goTowardsTarget() # Update the movement of the projectiles' rect
+                # If bullt leaves screen, kill its sprite
+                if entity.rect.left >= GAME_SCREEN_WIDTH or entity.rect.right <= 0:
+                    entity.kill()
             for entity in dead_units:
                 if entity.killer:
                     STATE.killed_unit(entity)
@@ -108,8 +119,6 @@ class Game():
                         run = False
 
                     print(action)
-            for entity in projectiles:
-                screen.blit(entity.image, entity.rect)
             # TEST
             TEST_timer += 1
             if TEST_timer > 200:
