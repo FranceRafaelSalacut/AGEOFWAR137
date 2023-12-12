@@ -13,6 +13,9 @@ run = True
 STATE = START_MENU()
 pygame.mixer.music.load(MUSIC_LAUNCHER)
 pygame.mixer.music.play(loops=-1)
+sound_effect = pygame.mixer.Sound(SOUND_INTRO)
+sound_effect.play(-1)
+
 
 screen_updated = False
 
@@ -64,6 +67,7 @@ while run:
                 STATE.stop()
                 STATE.close()
                 pygame.mixer.music.stop()
+                sound_effect.stop()
                 os.system(f"python GAME.py '{message}'")
                 run = False
 
