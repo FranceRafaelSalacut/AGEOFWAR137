@@ -78,9 +78,7 @@ class Game():
                 screen.blit(entity.image, entity.rect)
                     # Need to be able to append projectiles to the sprite group as soon as the unit attacks
                 entity.goTowardsTarget() # Update the movement of the projectiles' rect
-                # If bullt leaves screen, kill its sprite
-                if entity.rect.left >= GAME_SCREEN_WIDTH or entity.rect.right <= 0:
-                    entity.kill()
+                # If bullet leaves screen, kill its sprite
             for entity in dead_units:
                 if entity.killer:
                     STATE.killed_unit(entity)
