@@ -13,10 +13,11 @@ Button_Generic_1 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
 Button_Generic_2 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
 Button_Generic_3 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
 
-
 host = Button(Light_Grey, Menu.rect.centerx - 50, Menu.rect.top + 45, 100, 42, 35, value = "Host", text = "Host", image=Button_Generic_1, textColor=(100,100,100))
 client = Button(Light_Grey, host.rect.left, host.rect.bottom + 10, 100, 50, 35, value = "Client", text ="Client", image=Button_Generic_2, textColor=(100,100,100))
 exit = Button(Light_Grey, host.rect.left, client.rect.bottom + 10, 100, 50, 35, value = "Exit", text = "Exit", image=Button_Generic_3, textColor=(100,100,100))
+
+Logo = Image('graphics/gui/LOGO.png',Menu.rect.left - 400,0,393,333)
 
 class START_MENU():
     def __init__(self) -> None:
@@ -26,6 +27,7 @@ class START_MENU():
             Button_Generic_1,
             Button_Generic_2,
             Button_Generic_3,
+            Logo,
         ]
         self.buttons = [
             host,
@@ -36,9 +38,10 @@ class START_MENU():
             Background,
             Menu,
             host,
-            client, 
-            exit, 
-            ]
+            client,
+            exit,
+            Logo,
+        ]
     def load_images(self):
         for i in self.images:
             i.load_image()

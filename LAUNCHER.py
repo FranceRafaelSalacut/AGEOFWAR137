@@ -13,6 +13,7 @@ run = True
 STATE = START_MENU()
 pygame.mixer.music.load(MUSIC_LAUNCHER)
 pygame.mixer.music.play(loops=-1)
+pygame.mixer.music.set_volume(0.5)
 sound_effect = pygame.mixer.Sound(SOUND_INTRO)
 sound_effect.play(-1)
 

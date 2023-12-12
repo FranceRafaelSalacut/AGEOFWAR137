@@ -64,6 +64,7 @@ class Game():
         # music
         pygame.mixer.music.load(MUSIC_GLORIOUS_MORNING)
         pygame.mixer.music.play(loops=-1)
+        pygame.mixer.music.set_volume(0.5)
 
         # TODO: get targets from server
 
