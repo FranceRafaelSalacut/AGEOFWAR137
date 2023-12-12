@@ -10,7 +10,6 @@ import json
 import socket
 import time
 from mainClasses.image import *
-import asyncio
 class Game():
     def __init__(self, players: list) -> None:
         """
