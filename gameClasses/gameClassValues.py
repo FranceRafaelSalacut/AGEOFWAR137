@@ -218,25 +218,25 @@ Base_Cave = {
     "hp" : 100,
     "expCost" : 300,
     "img" : 'graphics/bases/bases_prehistoric.png',
-    "imgScale" : (256,256)
+    "imgScale" : (400,400)
 }
 Base_Castle = {
     "hp" : 150,
     "expCost" : 500,
     "img" : 'graphics/bases/bases_medieval.png',
-    "imgScale" : (256,256)
+    "imgScale" : (400,400)
 }
 Base_Camp = {
     "hp" : 200,
     "expCost" : 700,
     "img" : 'graphics/bases/bases_modern_left.png',
-    "imgScale" : (256,256)
+    "imgScale" : (400,400)
 }
 Base_Citadel = {
     "hp" : 250,
     "expCost" : 99999,
     "img" : 'graphics/bases/bases_scifi.png',
-    "imgScale" : (256,256)
+    "imgScale" : (400,400)
 }
 
 

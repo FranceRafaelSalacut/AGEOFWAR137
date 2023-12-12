@@ -10,6 +10,7 @@ FACING_LEFT = 0
 FACING_RIGHT = 1
 
 def distance_to(P1, P2):
+    return sqrt((P2[0]-P1[0])**2)
     return sqrt((P2[0] - P1[0])**2 + (P2[1] - P1[1])**2)
 
 class baseUnit(baseModel):

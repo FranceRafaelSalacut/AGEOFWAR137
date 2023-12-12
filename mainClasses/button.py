@@ -22,7 +22,6 @@ class Button():
         
     def load_image(self):
         if self.image:
-            print('what')
             self.image.load_image(self.rect, self.size)
 
     def draw(self, screen):

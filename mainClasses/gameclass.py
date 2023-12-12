@@ -50,17 +50,17 @@ class GameClass():
         return id
     
     def get_base(self):
-        base = Cave(0)
+        base = Cave(self.generateUnitID())
         self.factory = PrehistoricUnitFactory()
         print(self.techLevel)
         if self.techLevel == 2:
-            base = Castle(0)
+            base = Castle(self.generateUnitID())
             self.factory = MedievalUnitFactory()
         if self.techLevel == 3:
-            base = Camp(0)
+            base = Camp(self.generateUnitID())
             self.factory = ModernUnitFactory()
         if self.techLevel == 4:
-            base = Citadel(0)
+            base = Citadel(self.generateUnitID())
             self.factory = ScifiUnitFactory()
         base.rect.bottomleft = (0, GAME_SCREEN_HEIGHT-50)
         self.base = base
@@ -102,7 +102,7 @@ class GameClass():
         UnitID = '//'.join(ID[:-1])
         UnitType : type = self.get_unit_type(ID[-1])
         unit : baseUnit = UnitType(UnitID)
-        unit.rect.bottomleft = (GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT - random.randint(3,10)*6)
+        unit.rect.bottomleft = (GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT - random.randint(5,15)*6)
         unit.setMovement(Movement_Enemy(unit))
         unit.addPossibleTarget(self.base)
         self.set_team(unit)
@@ -132,7 +132,7 @@ class GameClass():
     def train_unit(self, unit:baseUnit):
         if self.currentTarget != NONE and self.get_gold() >= unit.cost:
             self.gold -= unit.cost
-            unit.rect.bottomleft = (0, GAME_SCREEN_HEIGHT - random.randint(3,10)*6)
+            unit.rect.bottomleft = (self.base.rect.centerx, GAME_SCREEN_HEIGHT - random.randint(5,15)*6)
             unit.setMovement(Movement_Friendly(unit))
             self.set_team(unit)
             return unit
@@ -162,11 +162,12 @@ class GameClass():
     
     def upgrade(self):
         if self.isUpgradeable():
-            base = self.get_base()
-            self.exp -= base.expCost
+            self.exp -= self.base.expCost
             if self.techLevel < 4:
                 self.techLevel += 1
-            return self.get_base()
+            base = self.get_base()
+            self.set_enemies_target(base)
+            return base
         return None
     
     def isUpgradeable(self):

@@ -5,6 +5,7 @@ from .gameClassValues import *
 class baseBase(baseModel):
     def __init__(self, id, x = 0, y = 0):
         super().__init__(id)
+        self.owner = '//'.join(self.id.split('//')[:-1])
 
     def fetchValues(self, baseType : str):
         val = BUILDINGS[baseType]
