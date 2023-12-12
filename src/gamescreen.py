@@ -25,6 +25,11 @@ Text_gold = Text("GOLD: 99999",Button_upgrade.rect.left - 100, Button_upgrade.re
 Text_experience = Text("EXP: 99999",Text_gold.rect.centerx, Text_gold.rect.bottom + 20, 20, 'text_exp')
 Text_currentTarget = Text("Current Target: NULL", Button_change.rect.left - 100, Button_change.rect.centery, 15)
 
+Button_trainTankUnit_gold = Text("GOLD", Button_trainTankUnit.rect.centerx, Button_trainTankUnit.rect.bottom - 15, 10)
+Button_trainRangeUnit_gold = Text("GOLD", Button_trainRangeUnit.rect.centerx, Button_trainRangeUnit.rect.bottom - 15, 10)
+Button_trainMeleeUnit_gold = Text("GOLD", Button_trainMeleeUnit.rect.centerx, Button_trainMeleeUnit.rect.bottom - 15, 10)
+Button_upgrade_exp = Text("EXP", Button_upgrade.rect.centerx, Button_upgrade.rect.bottom - 10, 10)
+
 class GAME_SCREEN():
     def __init__(self) -> None:
         self._game = GameClass()
@@ -35,13 +40,18 @@ class GAME_SCREEN():
             Text_experience,
             Text_currentTarget,
             Button_trainMeleeUnit,
+            Button_trainMeleeUnit_gold,
             Button_trainRangeUnit,
+            Button_trainRangeUnit_gold,
             Button_trainTankUnit,
+            Button_trainTankUnit_gold,
             Button_upgrade,
-            Button_change
+            Button_change,
+            Button_upgrade_exp
         ]
         self.dropDownTargets : list[Button] = []
         self.get_targets()
+        # self.initialize()
 
     def get_targets(self):
         for index, target in enumerate(self._game.getTargets()):
@@ -50,14 +60,23 @@ class GAME_SCREEN():
             self.dropDownTargets.append(button)
     def selectTarget(self, target):
         self._game.selectTarget(target)
+    def initialize(self):
+        self.get_unit_costs()
 
 
     def get_base(self):
-        return self._game.get_base()
+        base = self._game.get_base()
+        # Button_upgrade_exp.changeText(str(base.expCost))
+        return base
     def get_exp(self):
         return self._game.get_exp()
     def get_currentTarget(self):
         return self._game.get_currentTarget()
+    def get_unit_costs(self):
+        costs = self._game.get_unit_costs()
+        Button_trainMeleeUnit_gold.changeText(costs[0])
+        Button_trainRangeUnit_gold.changeText(costs[1])
+        Button_trainTankUnit_gold.changeText(costs[2])
     
     def train_melee_unit(self):
         return self._game.train_melee_unit()
@@ -66,7 +85,9 @@ class GAME_SCREEN():
     def train_tank_unit(self):
         return self._game.train_tank_unit()
     def upgrade(self):
-        return self._game.upgrade()
+        u = self._game.upgrade()
+        self.get_unit_costs()
+        return u
     def get_bg(self):
         return self._game.get_current_upgrade_bg()
     def change_target(self):

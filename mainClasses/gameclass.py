@@ -74,6 +74,12 @@ class GameClass():
         return self.targets
     def get_currentTarget(self):
         return self.currentTarget[0]
+    def get_unit_costs(self):
+        a = str(self.factory.create_melee_unit()('0').cost)
+        b = str(self.factory.create_ranged_unit()('0').cost)
+        c = str(self.factory.create_tank_unit()('0').cost)
+        return (a,b,c)
+
 
     def train_melee_unit(self):
         unit = self.factory.create_melee_unit()(self.generateUnitID())
@@ -153,9 +159,11 @@ class GameClass():
             self.gold += unit.bounty
     
     def upgrade(self):
-        # if self.get_exp() >= self.get_base().expCost:
-        if self.techLevel < 4:
-            self.techLevel += 1
+        base = self.get_base()
+        if self.get_exp() >= base.expCost:
+            self.exp -= base.expCost
+            if self.techLevel < 4:
+                self.techLevel += 1
         return self.get_base()
     def get_current_upgrade_bg(self):
         if self.techLevel == 1:
