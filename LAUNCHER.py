@@ -60,6 +60,7 @@ while run:
                 os.system(f"python GAME.py '{json.dumps(STATE.getList())}'")
                 STATE.stop()
                 STATE.close()
+                pygame.mixer.music.stop()
                 run = False
 
             if action == "Exit":
