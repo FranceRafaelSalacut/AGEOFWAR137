@@ -25,7 +25,7 @@ Caveman = {
 
 Melee_Caveman = {
     "hp" : 3,
-    "mspd" : 2,
+    "mspd" : 1,
     "aspd" : 10,
     "dmg" : 1,
     "bounty" : 1,
@@ -37,7 +37,7 @@ Melee_Caveman = {
 }
 Melee_Footman = {
     "hp" : 5,
-    "mspd" : 2,
+    "mspd" : 1,
     "aspd" : 10,
     "dmg" : 2,
     "bounty" : 3,
@@ -49,7 +49,7 @@ Melee_Footman = {
 }
 Melee_Soldier = {
     "hp" : 8,
-    "mspd" : 2,
+    "mspd" : 1,
     "aspd" : 10,
     "dmg" : 3,
     "bounty" : 9,
@@ -61,7 +61,7 @@ Melee_Soldier = {
 }
 Melee_Robot = {
     "hp" : 12,
-    "mspd" : 2,
+    "mspd" : 1,
     "aspd" : 10,
     "dmg" : 4,
     "bounty" : 27,
@@ -73,7 +73,7 @@ Melee_Robot = {
 }
 Ranged_Slingshotter = {
     "hp" : 3,
-    "mspd" : 2,
+    "mspd" : 1.3,
     "aspd" : 5,
     "dmg" : 1,
     "bounty" : 2,
@@ -85,7 +85,7 @@ Ranged_Slingshotter = {
 }
 Ranged_Archer = {
     "hp" : 5,
-    "mspd" : 2,
+    "mspd" : 1.4,
     "aspd" : 5,
     "dmg" : 2,
     "bounty" : 4,
@@ -97,7 +97,7 @@ Ranged_Archer = {
 }
 Ranged_Sniper = {
     "hp" : 7,
-    "mspd" : 2,
+    "mspd" : 1.5,
     "aspd" : 5,
     "dmg" : 3,
     "bounty" : 16,
@@ -109,7 +109,7 @@ Ranged_Sniper = {
 }
 Ranged_Stormtrooper = {
     "hp" : 9,
-    "mspd" : 2,
+    "mspd" : 1.6,
     "aspd" : 5,
     "dmg" : 4,
     "bounty" : 32,
@@ -122,7 +122,7 @@ Ranged_Stormtrooper = {
 
 Tank_DinoRider = {
     "hp" : 15,
-    "mspd" : 2,
+    "mspd" : 0.5,
     "aspd" : 3,
     "dmg" : 3,
     "bounty" : 12,
@@ -135,7 +135,7 @@ Tank_DinoRider = {
 
 Tank_Cavalier = {
     "hp" : 30,
-    "mspd" : 2,
+    "mspd" : 0.5,
     "aspd" : 3,
     "dmg" : 5,
     "bounty" : 24,
@@ -148,7 +148,7 @@ Tank_Cavalier = {
 
 Tank_Tank = {
     "hp" : 50,
-    "mspd" : 2,
+    "mspd" : 0.5,
     "aspd" : 3,
     "dmg" : 7,
     "bounty" : 36,
@@ -161,7 +161,7 @@ Tank_Tank = {
 
 Tank_Mecha = {
     "hp" : 80,
-    "mspd" : 1,
+    "mspd" : 0.5,
     "aspd" : 3,
     "dmg" : 16,
     "bounty" : 96,

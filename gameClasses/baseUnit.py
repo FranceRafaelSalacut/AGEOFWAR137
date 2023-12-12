@@ -24,6 +24,7 @@ class baseUnit(baseModel):
         self.killer:baseModel = None
         self.owner = '//'.join(self.id.split('//')[:-1])
         self.isFacing = FACING_RIGHT
+        self.position :list = [float(x),float(y)]
 
     def fetchValues(self, unitType : str):
         val = UNITS[unitType]
@@ -57,10 +58,14 @@ class baseUnit(baseModel):
 
     def move(self):
         self.movePattern.move()
+        self.update_position()
+
+    def update_position(self):
+         self.rect.centerx = round(self.position[0])
 
     def updateTarget(self):
         if self.possibleTargets:
-            self.attackTarget = min(self.possibleTargets, key=lambda rect: distance_to(self.rect.center, rect.rect.center))
+            self.attackTarget = min(self.possibleTargets, key=lambda unit: distance_to(self.position, unit.position))
         self.movePattern.move()
 
     def die(self):
@@ -89,11 +94,11 @@ class baseUnit(baseModel):
 
     def attack(self):
         self.attackTimer += self.aspd
-        if self.rect.centerx < self.attackTarget.rect.centerx:
+        if self.position[0] < self.attackTarget.position[0]:
             self.isFacing = FACING_RIGHT
         else:
             self.isFacing = FACING_LEFT
-        if self.attackTimer > 500 and self.range > distance_to(self.rect.center, self.attackTarget.rect.center):
+        if self.attackTimer > 500 and self.range > distance_to(self.position, self.attackTarget.position):
             self.attackTarget.curhp -= self.dmg
             self.attackTimer = 0
             print(f'{self.id} attacked {self.attackTarget.id} ({self.attackTarget.curhp})')
@@ -107,19 +112,19 @@ class Movement_None():
     def move(self):
         pass
     def goTowardsTarget(self):
-        if distance_to(self.unit.rect.center, self.unit.attackTarget.rect.center) > self.unit.range - 30:
-            if self.unit.rect.centerx > self.unit.attackTarget.rect.centerx:
-                self.unit.rect.centerx -= self.unit.mspd
+        if distance_to(self.unit.position, self.unit.attackTarget.position) > self.unit.range - 30:
+            if self.unit.position[0] > self.unit.attackTarget.position[0]:
+                self.unit.position[0] -= self.unit.mspd
                 self.unit.isFacing = FACING_LEFT
             else:
-                self.unit.rect.centerx += self.unit.mspd
+                self.unit.position[0] += self.unit.mspd
                 self.unit.isFacing = FACING_RIGHT
         else:
             self.unit.state = STATE_ATTACKING
 class Movement_Friendly(Movement_None):
     def move(self):
         if not self.unit.attackTarget:
-            self.unit.rect.centerx += self.unit.mspd
+            self.unit.position[0] += self.unit.mspd
             self.unit.isFacing = FACING_RIGHT
         else:
             self.goTowardsTarget()
@@ -127,7 +132,8 @@ class Movement_Friendly(Movement_None):
 class Movement_Enemy(Movement_None):
     def move(self):
         if not self.unit.attackTarget:
-            self.unit.rect.centerx -= self.unit.mspd
+            print(self.unit.position)
+            self.unit.position[0] -= self.unit.mspd
             self.isFacing = FACING_LEFT
         else:
             self.goTowardsTarget()

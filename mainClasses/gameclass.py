@@ -66,6 +66,7 @@ class GameClass():
             base = Citadel(self.generateUnitID())
             self.factory = ScifiUnitFactory()
         base.rect.bottomleft = (0, GAME_SCREEN_HEIGHT-50)
+        base.position = list(base.rect.center)
         return base
     def get_required_upgrade_exp(self):
         if self.base:
@@ -108,6 +109,7 @@ class GameClass():
         UnitType : type = self.get_unit_type(ID[-1])
         unit : baseUnit = UnitType(UnitID)
         unit.rect.bottomleft = (GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT - random.randint(5,15)*6)
+        unit.position = list(unit.rect.center)
         unit.setMovement(Movement_Enemy(unit))
         unit.addPossibleTarget(self.base)
         self.set_team(unit)
@@ -138,6 +140,7 @@ class GameClass():
         if self.currentTarget != NONE and self.get_gold() >= unit.cost:
             self.gold -= unit.cost
             unit.rect.bottomleft = (self.base.rect.centerx, GAME_SCREEN_HEIGHT - random.randint(5,15)*6)
+            unit.position = list(unit.rect.center)
             unit.setMovement(Movement_Friendly(unit))
             self.set_team(unit)
             return unit
