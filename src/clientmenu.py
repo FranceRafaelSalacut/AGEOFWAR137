@@ -16,13 +16,11 @@ Button_Generic_3 = Image('graphics/gui/Button_pickTarget.png',0,0,1,1)
 back = Button(Light_Grey, 50, 50, 100, 50, 35, text = "Back", value = "Back", image = Button_Generic_1, textColor=(100,100,100))
 start_find = Button(Light_Grey, back.rect.left, back.rect.bottom + 10, 180, 50, 35, text = "Find Servers", value = "Find_Servers", image = Button_Generic_2, textColor=(100,100,100))
 stop_find = Button(Light_Grey,  back.rect.left, start_find.rect.bottom + 10, 175, 50, 35, text = "Reset", value = "Reset", image = Button_Generic_3, textColor=(100,100,100))
+Server_text = Text("SERVERS", GAME_SCREEN_WIDTH//2, 30, 50)
+Placeholder_text = Text("Cant find any Servers :(", Server_text.rect.centerx,Server_text.rect.bottom + 20, 20, show= False)
+
 connect = [
     Button(Light_Grey, 50, 50, 75, 25, 20, text = "Connect"),
-    Button(Light_Grey, 50, 150, 75, 25, 20, text = "Connect"),
-    Button(Light_Grey, 50, 250, 75, 25, 20, text = "Connect"),
-
-    # parameters are text, center x, center y, Fontsize
-    Text("Placeholder", 200, 60, 20),
 ]
 
 class CLIENT_MENU():
@@ -41,7 +39,9 @@ class CLIENT_MENU():
         self.to_display = [
             back, 
             start_find, 
-            stop_find
+            stop_find,
+            Server_text,
+            Placeholder_text,
         ]
     def load_images(self):
         for i in self.images:
