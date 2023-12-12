@@ -6,11 +6,12 @@ from .gameClassValues import PROJECTILES
 class Projectile(baseModel):
     def __init__(self, id, unit, x = 0, y = 0):
         super().__init__(id, x, y)
-        self.fetchValues('Stone')
         self.unit = unit
-        self.movePattern = Movement_None(self)
+        self.x = self.unit.rect.centerx
+        self.y = self.unit.rect.centery
+        self.fetchValues('Stone')
         self.dmg = self.unit.dmg
-
+        
     def fetchValues(self, unitType : str):
         val = PROJECTILES[unitType]
         self.image = pg.image.load(val["img"]).convert_alpha()
@@ -18,11 +19,7 @@ class Projectile(baseModel):
         self.rect = self.image.get_rect()
             
     def goTowardsTarget(self):
-        if distance_to(self.unit.rect.center, self.unit.attackTarget.rect.center) > 80:
-            if self.unit.rect.centerx > self.unit.attackTarget.rect.centerx:
-                self.unit.rect.centerx -= self.unit.mspd
-            else:
-                self.unit.rect.centerx += self.unit.mspd
+        self.rect.centerx += 2
 
     def check_collision(self):
         # unit.Rect.collidepoint
