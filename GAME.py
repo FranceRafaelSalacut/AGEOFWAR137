@@ -218,7 +218,7 @@ class Game():
                 if "DIED" in check:
                     toRemove = message.decode()
                     toRemove = toRemove.split("//")[1]
-                    self.players.remove(toRemove)
+                    self.players = [item for item in self.players if item[1] != toRemove]
                     print(self.players)
                 elif "EXP" in check:
                     print("Im the exp man")
