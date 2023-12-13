@@ -48,6 +48,7 @@ class GameClass():
 
     def updateTargets(self, targets):
         self.players = targets
+        self.targets = targets
 
     def selectTarget(self, target):
         for t in self.players:

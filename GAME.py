@@ -161,7 +161,7 @@ class Game():
                 # TODO: SEND SOMETHING TO OTHER PLAYERS THAT THIS PLAYER HAS LOST
                 m = f"DIED//{self.ip_address}"
                 for p in self.players:
-                    print(p)
+                    print(m)
                     self.socket.sendto(m.encode(), p[1:])
 
                 hasLost = True
