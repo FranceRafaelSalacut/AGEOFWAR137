@@ -13,6 +13,8 @@ from mainClasses.image import *
 from gameClasses.rangedUnit import *
 from gameClasses.baseUnit import *
 
+queue = []
+
 class Game():
     def __init__(self, players: list) -> None:
         """
@@ -230,16 +232,19 @@ class Game():
 
                 if "EXP" in check:
                     print("Im the exp man")
-                    bounty = message.decode()
-                    bounty = bounty.split("//")
-                    gold = bounty[3].split(":")
-                    gold = int(gold[1])
-                    print(f"gold = {gold}")
-                    exp = bounty[4].split(":")
-                    exp = int(exp[1])
-                    print(f"exp = {exp}")
-
-                    STATE.earn_bounty(gold,exp)
+                    queue.append(message.decode())
+                    for bounty in queue:
+                        bounty = message.decode()
+                        bounty = bounty.split("//")
+                        gold = bounty[3].split(":")
+                        gold = int(gold[1])
+                        print(f"gold = {gold}")
+                        exp = bounty[4].split(":")
+                        exp = int(exp[1])
+                        print(f"exp = {exp}")
+                        if bounty[0] in queue:
+                            queue.remove(bounty)
+                        STATE.earn_bounty(gold,exp)
                     count+=1
                 
                 try:
