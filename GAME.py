@@ -155,6 +155,11 @@ class Game():
                 entity.kill()
 
             if STATE.is_base_dead() and not hasLost:
+                # TODO: SEND SOMETHING TO OTHER PLAYERS THAT THIS PLAYER HAS LOST
+                m = f"DIED//{self.ip_address}"
+                for p in self.players:
+                    self.socket.sendto(m.encode(), (p, 5555))
+
                 hasLost = True
                 pygame.mixer.music.stop()
                 sf = pygame.mixer.Sound(SOUND_GAME_OVER)
@@ -162,11 +167,6 @@ class Game():
                 time.sleep(2)
                 pygame.mixer.music.load(MUSIC_GAME_OVER)
                 pygame.mixer.music.play(loops=-1)
-                # TODO: SEND SOMETHING TO OTHER PLAYERS THAT THIS PLAYER HAS LOST
-                m = f"DIED//{self.ip_address}"
-                m = m.encode()
-                for p in self.players:
-                    self.socket.sendto(m, (p, 5555))
             
             if not hasWon and yes: # TODO: CHANGE YES TO SOME FUNCTION THAT DETECTS THAT PLAYER IS THE ONLY ONE LEFT
                 hasWon = True
