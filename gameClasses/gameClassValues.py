@@ -216,19 +216,19 @@ UNITS = {
 
 Base_Cave = {
     "hp" : 100,
-    "expCost" : 300,
+    "expCost" : 100,
     "img" : 'graphics/bases/bases_prehistoric.png',
     "imgScale" : (400,400)
 }
 Base_Castle = {
     "hp" : 150,
-    "expCost" : 500,
+    "expCost" : 200,
     "img" : 'graphics/bases/bases_medieval.png',
     "imgScale" : (400,400)
 }
 Base_Camp = {
     "hp" : 200,
-    "expCost" : 700,
+    "expCost" : 300,
     "img" : 'graphics/bases/bases_modern_left.png',
     "imgScale" : (400,400)
 }
