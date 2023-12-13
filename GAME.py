@@ -164,6 +164,7 @@ class Game():
                 pygame.mixer.music.play(loops=-1)
                 # TODO: SEND SOMETHING TO OTHER PLAYERS THAT THIS PLAYER HAS LOST
                 m = f"DIED//{self.ip_address}"
+                m = m.encode()
                 for p in self.players:
                     self.socket.sendto(m, (p, 5555))
             
