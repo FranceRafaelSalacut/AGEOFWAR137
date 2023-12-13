@@ -214,6 +214,7 @@ class Game():
 
                     print(action)
             try:
+                count = 0 
                 message, address = self.socket.recvfrom(1024)
                 check = message.decode()
                 if "DIED" in check:
@@ -224,8 +225,10 @@ class Game():
                     if len(self.players) == 0:
                         yes = True
                     print(self.players)
+                    count+=1
+                    
 
-                elif "EXP" in check:
+                if "EXP" in check:
                     print("Im the exp man")
                     bounty = message.decode()
                     bounty = bounty.split("//")
@@ -237,10 +240,14 @@ class Game():
                     print(f"exp = {exp}")
 
                     STATE.earn_bounty(gold,exp)
-                else:
+                    count+=1
+                
+                try:
                     print("Enemy units ahead")
                     unit = STATE.spawn_enemy(message.decode())
                     all_units.add(unit)
+                except:
+                    pass    
             except:
                 pass
             # TEST
