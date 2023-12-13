@@ -131,6 +131,9 @@ class GAME_SCREEN():
             self.buttons.append(button)
             self.to_display.append(button)
             self.dropDownTargets.append(button)
+            
+            for i in self.dropDownTargets:
+                i.load_image()
     
 
     def selectTarget(self, target):
