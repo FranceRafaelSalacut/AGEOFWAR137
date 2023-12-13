@@ -47,7 +47,7 @@ class Game():
         STATE = GAME_SCREEN(self.players)
         # pygame setup
         pygame.init()
-        screen = pygame.display.set_mode([GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT], pygame.FULLSCREEN)
+        screen = pygame.display.set_mode([GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT])
         clock = pygame.time.Clock()
         pygame.display.set_caption('TEST') # game/window title
 
