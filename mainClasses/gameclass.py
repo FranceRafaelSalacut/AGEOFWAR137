@@ -46,6 +46,9 @@ class GameClass():
     def initialize(self):
         self.base = self.get_base()
 
+    def updateTargets(self, targets):
+        self.players = targets
+
     def selectTarget(self, target):
         for t in self.players:
             if target in t:

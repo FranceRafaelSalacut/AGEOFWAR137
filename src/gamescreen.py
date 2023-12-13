@@ -131,9 +131,19 @@ class GAME_SCREEN():
             self.buttons.append(button)
             self.to_display.append(button)
             self.dropDownTargets.append(button)
+    
+
     def selectTarget(self, target):
         Text_currentTarget_Warning.show = False
         self._game.selectTarget(target)
+    def update_targets(self, targets):
+        self._game.updateTargets(targets)
+        for d in self.dropDownTargets:
+            d.show = False
+        self.dropDownTargets = []
+        self.get_targets()
+
+
     def initialize(self):
         self._game.initialize()
         self.get_unit_costs()

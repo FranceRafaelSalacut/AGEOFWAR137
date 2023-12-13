@@ -219,7 +219,11 @@ class Game():
                     toRemove = message.decode()
                     toRemove = toRemove.split("//")[1]
                     self.players = [item for item in self.players if item[1] != toRemove]
+                    STATE.update_targets(self.players)
+                    if len(self.players) == 0:
+                        yes = True
                     print(self.players)
+
                 elif "EXP" in check:
                     print("Im the exp man")
                     bounty = message.decode()
