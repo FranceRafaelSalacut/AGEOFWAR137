@@ -57,9 +57,11 @@ Gold_icon_melee = Image('graphics/gold_icon.png',Text_trainMeleeUnit_gold.rect.c
 Text_upgrade_exp = Text("EXP", Button_upgrade.rect.centerx, Button_upgrade.rect.bottom + 20, 30)
 
 dead_screen = Image('graphics/gui/red_overlay.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT, show=False)
-Text_lost = Text("YOU LOST!",GAME_SCREEN_WIDTH//2, GAME_SCREEN_HEIGHT//2,100, show=False)
-Button_lost = Button(Light_Grey, Text_lost.rect.centerx - 100, Text_lost.rect.bottom + 50, 200, 40, 30, text = "EXIT", value = "Exit", image = Button_generic_3, textColor=(255,255,255), show=False)
-Text_player_place = Text("Congratulations, you placed nth", Button_lost.rect.centerx, Text_lost.rect.bottom + 20,20,show=False)
+win_screen = Image('graphics/gui/gray_overlay.png',0,0,GAME_SCREEN_WIDTH,GAME_SCREEN_HEIGHT, show=False)
+Text_done = Text("YOU LOST!",GAME_SCREEN_WIDTH//2, GAME_SCREEN_HEIGHT//2,100, show=False)
+Button_done = Button(Light_Grey, Text_done.rect.centerx - 100, Text_done.rect.bottom + 50, 200, 40, 30, text = "EXIT", value = "Exit", image = Button_generic_3, textColor=(255,255,255), show=False)
+Text_player_place = Text("Congratulations, you placed nth", Button_done.rect.centerx, Text_done.rect.bottom + 20,20,show=False)
+
 class GAME_SCREEN():
     def __init__(self, players) -> None:
         self._game = GameClass(players)
@@ -78,6 +80,7 @@ class GAME_SCREEN():
             Button_change_target,
             Button_upgrade_icon_overlay,
             dead_screen,
+            win_screen,
             ]
         self.buttons = [
             Button_trainMeleeUnit,
@@ -85,7 +88,7 @@ class GAME_SCREEN():
             Button_trainTankUnit,
             Button_upgrade,
             Button_change,
-            Button_lost,
+            Button_done,
         ]
         self.backGround = Background
         self.to_display = [
@@ -112,8 +115,9 @@ class GAME_SCREEN():
             Text_currentTarget_Warning,
             Button_upgrade_icon_overlay,
             dead_screen,
-            Text_lost,
-            Button_lost,
+            win_screen,
+            Text_done,
+            Button_done,
             Text_player_place,
         ]
 
@@ -143,14 +147,23 @@ class GAME_SCREEN():
         if y:
             self.show_lose_screen()
         return y
-    
     def show_lose_screen(self):
+        self.finish_game()
         dead_screen.show = True
-        Text_lost.show = True
-        Button_lost.show = True
-        Text_player_place.show = True
         n = len(self._game.getTargets()) + 1
         Text_player_place.changeText(f"You placed {create_ordinal(n)}")
+
+    def show_win_screen(self):
+        self.finish_game()
+        self._game.done = True
+        win_screen.show = True
+        Text_done.changeText("YOU WON!")
+        Text_player_place.changeText("You placed 1st!")
+
+    def finish_game(self):
+        Text_done.show = True
+        Button_done.show = True
+        Text_player_place.show = True
 
 
     def get_base(self):
