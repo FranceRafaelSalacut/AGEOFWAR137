@@ -95,3 +95,6 @@ class CLIENT_MENU():
 
     def animate(self):
         pass
+
+    def close(self):
+        self.client.close()

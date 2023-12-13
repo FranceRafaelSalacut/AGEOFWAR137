@@ -8,6 +8,7 @@ import random
 import math
 
 # TODO: get targets from server
+'''
 targets = [
     ('GB','192.168.68.103',51546),
     ('Panpan','192.168.68.103',5922),
@@ -15,23 +16,29 @@ targets = [
     ('Dustin','192.168.68.103',6490),
     ('Jav','192.168.68.103',8203)
 ]
+'''
+
+targets = [('TEST', 'dfsdf', 5555), ('T123123', 'TE12312SET', 5555)]
 NONE = ('NONE','0',0)
 
 class GameClass():
-    def __init__(self) -> None:
+    def __init__(self, players) -> None:
         self.factory:UnitFactory = PrehistoricUnitFactory()
         self.unitNumber = 1
         self.techLevel = 1
-        self.gold = 99999
-        self.exp = 9999
+        self.gold = 0
+        self.exp = 0
         self.currentTarget = NONE
-        self.address = ('192.168.68.103',9999) # TODO: set this to client address
+        self.players = players
+        self.address = (getIPAdress()[0],5555) # TODO: set this to client address
         self.base = None
         self.done = False
         self.fetchTargets()
 
     def fetchTargets(self):
-        self.targets = targets
+        self.targets = self.players
+        print(targets)
+        print(self.targets)
         self.unitLists : list[tuple[str,pg.sprite.Group]] = [('//'.join([str(z) for z in x[1:]]),pg.sprite.Group()) for x in self.targets]
         self.unitLists.append((self.getStringAddress(),pg.sprite.Group()))
         print(self.unitLists)
@@ -39,8 +46,11 @@ class GameClass():
     def initialize(self):
         self.base = self.get_base()
 
+    def updateTargets(self, targets):
+        self.players = targets
+
     def selectTarget(self, target):
-        for t in targets:
+        for t in self.players:
             if target in t:
                 self.currentTarget = t
 
@@ -89,6 +99,8 @@ class GameClass():
         return self.targets
     def get_currentTarget(self):
         return self.currentTarget[0]
+    def get_target_to_send(self):
+        return self.currentTarget
     def get_unit_costs(self):
         a = str(self.factory.create_melee_unit()('0').cost)
         b = str(self.factory.create_ranged_unit()('0').cost)

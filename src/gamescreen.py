@@ -63,8 +63,8 @@ Button_done = Button(Light_Grey, Text_done.rect.centerx - 100, Text_done.rect.bo
 Text_player_place = Text("Congratulations, you placed nth", Button_done.rect.centerx, Text_done.rect.bottom + 20,20,show=False)
 
 class GAME_SCREEN():
-    def __init__(self) -> None:
-        self._game = GameClass()
+    def __init__(self, players) -> None:
+        self._game = GameClass(players)
         self.images = [
             Background,
             Player_board,
@@ -131,9 +131,19 @@ class GAME_SCREEN():
             self.buttons.append(button)
             self.to_display.append(button)
             self.dropDownTargets.append(button)
+    
+
     def selectTarget(self, target):
         Text_currentTarget_Warning.show = False
         self._game.selectTarget(target)
+    def update_targets(self, targets):
+        self._game.updateTargets(targets)
+        for d in self.dropDownTargets:
+            d.show = False
+        self.dropDownTargets = []
+        self.get_targets()
+
+
     def initialize(self):
         self._game.initialize()
         self.get_unit_costs()
@@ -173,6 +183,8 @@ class GAME_SCREEN():
         return self._game.get_exp()
     def get_currentTarget(self):
         return self._game.get_currentTarget()
+    def get_current_target_to_send(self):
+        return self._game.get_target_to_send()
     def get_unit_costs(self):
         costs = self._game.get_unit_costs()
         Text_upgrade_exp.changeText(str(self._game.get_required_upgrade_exp()))

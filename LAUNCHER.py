@@ -13,6 +13,10 @@ run = True
 STATE = START_MENU()
 pygame.mixer.music.load(MUSIC_LAUNCHER)
 pygame.mixer.music.play(loops=-1)
+pygame.mixer.music.set_volume(0.5)
+sound_effect = pygame.mixer.Sound(SOUND_INTRO)
+sound_effect.play(-1)
+
 
 screen_updated = False
 
@@ -52,15 +56,20 @@ while run:
 
             if action.startswith("Connect") :
                 if STATE.connect(action):
+                    print("here i error brycasda")
+                    STATE.close()
+                    os.system(f"python GAME.py")
                     run = False
 
             if action == "Start_Game":
                 print("HERE")
                 print(json.dumps(STATE.getList()))
-                os.system(f"python GAME.py '{json.dumps(STATE.getList())}'")
+                message = json.dumps(STATE.getList())
                 STATE.stop()
                 STATE.close()
                 pygame.mixer.music.stop()
+                sound_effect.stop()
+                os.system(f"python GAME.py '{message}'")
                 run = False
 
             if action == "Exit":
