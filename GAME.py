@@ -163,6 +163,9 @@ class Game():
                 pygame.mixer.music.load(MUSIC_GAME_OVER)
                 pygame.mixer.music.play(loops=-1)
                 # TODO: SEND SOMETHING TO OTHER PLAYERS THAT THIS PLAYER HAS LOST
+                m = f"DIED//{self.ip_address}"
+                for p in self.players:
+                    self.socket.sendto(m, (p, 5555))
             
             if not hasWon and yes: # TODO: CHANGE YES TO SOME FUNCTION THAT DETECTS THAT PLAYER IS THE ONLY ONE LEFT
                 hasWon = True
@@ -210,7 +213,12 @@ class Game():
             try:
                 message, address = self.socket.recvfrom(1024)
                 check = message.decode()
-                if "EXP" in check:
+                if "DIED" in check:
+                    toRemove = message.decode()
+                    toRemove = toRemove.split("//")[1]
+                    self.players.remove(toRemove)
+                    print(self.players)
+                elif "EXP" in check:
                     print("Im the exp man")
                     bounty = message.decode()
                     bounty = bounty.split("//")
