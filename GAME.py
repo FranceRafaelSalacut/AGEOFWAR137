@@ -206,12 +206,12 @@ class Game():
 
             # TEST
 
-            TEST_timerB += 1
-            if TEST_timerB > 100:
-                unit = STATE.spawn_enemy('192.168.68.103//35939//2//Stormtrooper')
-                all_units.add(unit)
-                TEST_timerB = 0 # reset timer to loop
-                # print(enemy_units)
+            # TEST_timerB += 1
+            # if TEST_timerB > 100:
+            #     unit = STATE.spawn_enemy('192.168.68.103//35939//2//Stormtrooper')
+            #     all_units.add(unit)
+            #     TEST_timerB = 0 # reset timer to loop
+            #     # print(enemy_units)
             # TEST_timer += 1
             # if TEST_timer > 200:
             #     unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
