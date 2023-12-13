@@ -42,7 +42,7 @@ Melee_Footman = {
     "dmg" : 2,
     "bounty" : 3,
     "exp" : 3,
-    "cost" : 5,
+    "cost" : 5*2,
     "range" : 100,
     "img" : 'graphics/unit_melee/melee_medieval_1.png',
     "imgScale" : (100,100)
@@ -54,7 +54,7 @@ Melee_Soldier = {
     "dmg" : 3,
     "bounty" : 9,
     "exp" : 9,
-    "cost" : 7,
+    "cost" : 7*2,
     "range" : 100,
     "img" : 'graphics/unit_melee/melee_modern_1_1.png',
     "imgScale" : (100,100)
@@ -66,7 +66,7 @@ Melee_Robot = {
     "dmg" : 4,
     "bounty" : 27,
     "exp" : 27,
-    "cost" : 10,
+    "cost" : 10*2,
     "range" : 100,
     "img" : 'graphics/unit_melee/melee_scifi_1.png',
     "imgScale" : (100,100)
@@ -90,7 +90,7 @@ Ranged_Archer = {
     "dmg" : 2,
     "bounty" : 4,
     "exp" : 4,
-    "cost" : 8,
+    "cost" : 8*2,
     "range" : 300,
     "img" : 'graphics/unit_ranged/ranged_medieval_1.png',
     "imgScale" : (100,100)
@@ -102,7 +102,7 @@ Ranged_Sniper = {
     "dmg" : 3,
     "bounty" : 16,
     "exp" : 16,
-    "cost" : 11,
+    "cost" : 11*2,
     "range" : 400,
     "img" : 'graphics/unit_ranged/ranged_modern_1_1.png',
     "imgScale" : (100,100)
@@ -114,7 +114,7 @@ Ranged_Stormtrooper = {
     "dmg" : 4,
     "bounty" : 32,
     "exp" : 32,
-    "cost" : 15,
+    "cost" : 15*2,
     "range" : 500,
     "img" : 'graphics/unit_ranged/ranged_scifi_1.png',
     "imgScale" : (100,100)
@@ -140,7 +140,7 @@ Tank_Cavalier = {
     "dmg" : 5,
     "bounty" : 24,
     "exp" : 24,
-    "cost" : 15,
+    "cost" : 15*2,
     "range" : 150,
     "img" : 'graphics/unit_tank/tank_medieval.png',
     "imgScale" : (168,143)
@@ -153,7 +153,7 @@ Tank_Tank = {
     "dmg" : 7,
     "bounty" : 36,
     "exp" : 36,
-    "cost" : 20,
+    "cost" : 20*2,
     "range" : 200,
     "img" : 'graphics/unit_tank/tank_modern.png',
     "imgScale" : (320,192)
