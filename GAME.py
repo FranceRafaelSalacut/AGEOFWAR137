@@ -131,8 +131,6 @@ class Game():
                 
                 entity.goTowardsTarget() # Update the movement of the projectiles' rect
                 # If bullet leaves screen, kill its sprite
-                if (entity.rect.left >= GAME_SCREEN_WIDTH + 20 or entity.rect.right <= 0) or (entity.rect.right <= GAME_SCREEN_WIDTH + 20 or entity.rect.left >= 0):
-                    entity.kill()
             for entity in dead_units:
                 if entity.killer:
                     STATE.killed_unit(entity)
