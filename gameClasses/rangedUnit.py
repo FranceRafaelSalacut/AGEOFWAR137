@@ -1,5 +1,6 @@
 from .baseUnit import *
 from .projectile import Projectile
+from gameClasses.baseUnit import *
 import pygame as pg
 
 class rangedUnit(baseUnit):
@@ -18,6 +19,24 @@ class rangedUnit(baseUnit):
         return self.has_shot
     def create_projectile(self):
         return Projectile(id = 0, unit = self)
+    
+    def update(self, screen):
+        self.updateTarget()
+        if self.isFacing == FACING_RIGHT:
+            self.image = self.imageNormal
+        if self.isFacing == FACING_LEFT:
+            self.image = self.imageFlipped
+        if self.state == STATE_MOVING:
+            self.move()
+        elif self.state == STATE_ATTACKING:
+            self.attack()
+            if not self.attackTarget or self.attackTarget.isDead:
+                self.state = STATE_MOVING
+        self.update_healthBar(screen)
+        self.update_position()
+        if self.curhp <= 0:
+            self.die()
+            
 class Slingshotter(rangedUnit):
     def __init__(self, id, x=0, y=0):
         super().__init__(id, x=x, y=y)

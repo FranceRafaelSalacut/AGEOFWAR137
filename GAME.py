@@ -5,6 +5,7 @@ from src.gamescreen import *
 from gameClasses.unitFactory import *
 from mainClasses.image import *
 from gameClasses.rangedUnit import *
+from gameClasses.baseUnit import *
 
 class Game():
     def __init__(self) -> None:
@@ -64,7 +65,7 @@ class Game():
                 if not hasLost and not hasWon:
                     STATE.update_unit_target(entity)
                     entity.update(screen)
-                if isinstance(entity, rangedUnit):
+                if isinstance(entity, rangedUnit) and entity.state == STATE_ATTACKING:
                     # Call a method that returns some value here
                     if entity.hasShot:
                         projectiles.add(entity.create_projectile())
@@ -95,6 +96,8 @@ class Game():
                 
                 entity.goTowardsTarget() # Update the movement of the projectiles' rect
                 # If bullet leaves screen, kill its sprite
+                if (entity.rect.left >= GAME_SCREEN_WIDTH + 20 or entity.rect.right <= 0) or (entity.rect.right <= GAME_SCREEN_WIDTH + 20 or entity.rect.left >= 0):
+                    entity.kill()
             for entity in dead_units:
                 if entity.killer:
                     STATE.killed_unit(entity)
@@ -160,16 +163,10 @@ class Game():
             # TEST
 
             TEST_timerB += 1
-            if TEST_timerB > 300:
+            if TEST_timerB > 800:
                 unit = STATE.spawn_enemy('192.168.68.103//35939//2//DinoRider')
                 all_units.add(unit)
                 TEST_timerB = 0 # reset timer to loop
-                # print(enemy_units)
-            TEST_timer += 1
-            if TEST_timer > 200:
-                unit = STATE.spawn_enemy('192.168.68.103//51546//1//Slingshotter')
-                all_units.add(unit)
-                TEST_timer = 0 # reset timer to loop
                 # print(enemy_units)
 
             # ^^===========================================^^

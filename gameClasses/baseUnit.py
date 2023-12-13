@@ -65,6 +65,10 @@ class baseUnit(baseModel):
     def updateTarget(self):
         if self.possibleTargets:
             self.attackTarget = min(self.possibleTargets, key=lambda unit: distance_to(self.position, unit.position))
+        else:
+            if self.attackTarget and self.attackTarget.curhp <= 0:
+                self.attackTarget = None
+                self.state = STATE_MOVING
         self.movePattern.move()
 
     def die(self):
@@ -80,7 +84,6 @@ class baseUnit(baseModel):
             self.image = self.imageNormal
         if self.isFacing == FACING_LEFT:
             self.image = self.imageFlipped
-
         if self.state == STATE_MOVING:
             self.move()
         elif self.state == STATE_ATTACKING:
